@@ -1,0 +1,4937 @@
+{
+  textStyles: [],
+  pages: [
+    {
+      detectedLanguages: [
+        { languageCode: 'en', confidence: 0.8574678301811218 },
+        { languageCode: 'ha', confidence: 0.022542526945471764 }
+      ],
+      blocks: [
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '0', endIndex: '35' } ],
+              content: ''
+            },
+            confidence: 0.9061121344566345,
+            boundingPoly: {
+              vertices: [
+                { x: 549, y: 345 },
+                { x: 660, y: 345 },
+                { x: 660, y: 360 },
+                { x: 549, y: 360 }
+              ],
+              normalizedVertices: [
+                { x: 0.46134454011917114, y: 0.2048693597316742 },
+                { x: 0.5546218752861023, y: 0.2048693597316742 },
+                { x: 0.5546218752861023, y: 0.21377672255039215 },
+                { x: 0.46134454011917114, y: 0.21377672255039215 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '35', endIndex: '63' } ],
+              content: ''
+            },
+            confidence: 0.9899866580963135,
+            boundingPoly: {
+              vertices: [
+                { x: 407, y: 369 },
+                { x: 776, y: 369 },
+                { x: 776, y: 387 },
+                { x: 407, y: 387 }
+              ],
+              normalizedVertices: [
+                { x: 0.3420168161392212, y: 0.21912114322185516 },
+                { x: 0.6521008610725403, y: 0.21912114322185516 },
+                { x: 0.6521008610725403, y: 0.22980996966362 },
+                { x: 0.3420168161392212, y: 0.22980996966362 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '63', endIndex: '130' } ],
+              content: ''
+            },
+            confidence: 0.9762632250785828,
+            boundingPoly: {
+              vertices: [
+                { x: 297, y: 422 },
+                { x: 889, y: 422 },
+                { x: 889, y: 482 },
+                { x: 297, y: 482 }
+              ],
+              normalizedVertices: [
+                { x: 0.24957983195781708, y: 0.25059381127357483 },
+                { x: 0.7470588088035583, y: 0.25059381127357483 },
+                { x: 0.7470588088035583, y: 0.28622329235076904 },
+                { x: 0.24957983195781708, y: 0.28622329235076904 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '130', endIndex: '186' } ],
+              content: ''
+            },
+            confidence: 0.9769045114517212,
+            boundingPoly: {
+              vertices: [
+                { x: 186, y: 516 },
+                { x: 998, y: 516 },
+                { x: 998, y: 536 },
+                { x: 186, y: 536 }
+              ],
+              normalizedVertices: [
+                { x: 0.1563025265932083, y: 0.30641329288482666 },
+                { x: 0.8386554718017578, y: 0.30641329288482666 },
+                { x: 0.8386554718017578, y: 0.31828978657722473 },
+                { x: 0.1563025265932083, y: 0.31828978657722473 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '186', endIndex: '208' } ],
+              content: ''
+            },
+            confidence: 0.9894933700561523,
+            boundingPoly: {
+              vertices: [
+                { x: 486, y: 571 },
+                { x: 694, y: 571 },
+                { x: 694, y: 592 },
+                { x: 486, y: 592 }
+              ],
+              normalizedVertices: [
+                { x: 0.4084033668041229, y: 0.33907362818717957 },
+                { x: 0.583193302154541, y: 0.33907362818717957 },
+                { x: 0.583193302154541, y: 0.35154393315315247 },
+                { x: 0.4084033668041229, y: 0.35154393315315247 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '208', endIndex: '229' } ],
+              content: ''
+            },
+            confidence: 0.9902775287628174,
+            boundingPoly: {
+              vertices: [
+                { x: 448, y: 623 },
+                { x: 735, y: 623 },
+                { x: 735, y: 640 },
+                { x: 448, y: 640 }
+              ],
+              normalizedVertices: [
+                { x: 0.3764705955982208, y: 0.3699524998664856 },
+                { x: 0.6176470518112183, y: 0.3699524998664856 },
+                { x: 0.6176470518112183, y: 0.3800475001335144 },
+                { x: 0.3764705955982208, y: 0.3800475001335144 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '229', endIndex: '319' } ],
+              content: ''
+            },
+            confidence: 0.9779053330421448,
+            boundingPoly: {
+              vertices: [
+                { x: 324, y: 675 },
+                { x: 860, y: 675 },
+                { x: 860, y: 721 },
+                { x: 324, y: 721 }
+              ],
+              normalizedVertices: [
+                { x: 0.2722689211368561, y: 0.40083134174346924 },
+                { x: 0.7226890921592712, y: 0.40083134174346924 },
+                { x: 0.7226890921592712, y: 0.42814725637435913 },
+                { x: 0.2722689211368561, y: 0.42814725637435913 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '319', endIndex: '395' } ],
+              content: ''
+            },
+            confidence: 0.9868582487106323,
+            boundingPoly: {
+              vertices: [
+                { x: 310, y: 759 },
+                { x: 871, y: 759 },
+                { x: 871, y: 808 },
+                { x: 310, y: 808 }
+              ],
+              normalizedVertices: [
+                { x: 0.26050421595573425, y: 0.4507125914096832 },
+                { x: 0.7319327592849731, y: 0.4507125914096832 },
+                { x: 0.7319327592849731, y: 0.47980996966362 },
+                { x: 0.26050421595573425, y: 0.47980996966362 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '395', endIndex: '568' } ],
+              content: ''
+            },
+            confidence: 0.987331211566925,
+            boundingPoly: {
+              vertices: [
+                { x: 168, y: 842 },
+                { x: 1013, y: 842 },
+                { x: 1013, y: 961 },
+                { x: 168, y: 961 }
+              ],
+              normalizedVertices: [
+                { x: 0.1411764770746231, y: 0.5 },
+                { x: 0.8512604832649231, y: 0.5 },
+                { x: 0.8512604832649231, y: 0.5706650614738464 },
+                { x: 0.1411764770746231, y: 0.5706650614738464 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '568', endIndex: '570' } ],
+              content: ''
+            },
+            confidence: 0.9210802316665649,
+            boundingPoly: {
+              vertices: [
+                { x: 543, y: 1074 },
+                { x: 543, y: 1059 },
+                { x: 551, y: 1059 },
+                { x: 551, y: 1074 }
+              ],
+              normalizedVertices: [
+                { x: 0.4563025236129761, y: 0.6377671957015991 },
+                { x: 0.4563025236129761, y: 0.6288598775863647 },
+                { x: 0.46302521228790283, y: 0.6288598775863647 },
+                { x: 0.46302521228790283, y: 0.6377671957015991 }
+              ]
+            },
+            orientation: 'PAGE_LEFT'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '570', endIndex: '600' } ],
+              content: ''
+            },
+            confidence: 0.9356892704963684,
+            boundingPoly: {
+              vertices: [
+                { x: 560, y: 979 },
+                { x: 682, y: 1011 },
+                { x: 647, y: 1143 },
+                { x: 525, y: 1111 }
+              ],
+              normalizedVertices: [
+                { x: 0.47058823704719543, y: 0.5813539028167725 },
+                { x: 0.5731092691421509, y: 0.6003562808036804 },
+                { x: 0.5436974763870239, y: 0.6787410974502563 },
+                { x: 0.44117647409439087, y: 0.6597387194633484 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '600', endIndex: '647' } ],
+              content: ''
+            },
+            confidence: 0.8525843620300293,
+            boundingPoly: {
+              vertices: [
+                { x: 743, y: 1210 },
+                { x: 999, y: 1207 },
+                { x: 1000, y: 1326 },
+                { x: 744, y: 1329 }
+              ],
+              normalizedVertices: [
+                { x: 0.624369740486145, y: 0.7185273170471191 },
+                { x: 0.8394957780838013, y: 0.7167458534240723 },
+                { x: 0.8403361439704895, y: 0.7874109148979187 },
+                { x: 0.6252101063728333, y: 0.7891923785209656 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        }
+      ],
+      paragraphs: [
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '0', endIndex: '35' } ],
+              content: ''
+            },
+            confidence: 0.9061121344566345,
+            boundingPoly: {
+              vertices: [
+                { x: 549, y: 345 },
+                { x: 660, y: 345 },
+                { x: 660, y: 360 },
+                { x: 549, y: 360 }
+              ],
+              normalizedVertices: [
+                { x: 0.46134454011917114, y: 0.2048693597316742 },
+                { x: 0.5546218752861023, y: 0.2048693597316742 },
+                { x: 0.5546218752861023, y: 0.21377672255039215 },
+                { x: 0.46134454011917114, y: 0.21377672255039215 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '35', endIndex: '63' } ],
+              content: ''
+            },
+            confidence: 0.9899866580963135,
+            boundingPoly: {
+              vertices: [
+                { x: 407, y: 369 },
+                { x: 776, y: 369 },
+                { x: 776, y: 387 },
+                { x: 407, y: 387 }
+              ],
+              normalizedVertices: [
+                { x: 0.3420168161392212, y: 0.21912114322185516 },
+                { x: 0.6521008610725403, y: 0.21912114322185516 },
+                { x: 0.6521008610725403, y: 0.22980996966362 },
+                { x: 0.3420168161392212, y: 0.22980996966362 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '63', endIndex: '130' } ],
+              content: ''
+            },
+            confidence: 0.9762632250785828,
+            boundingPoly: {
+              vertices: [
+                { x: 297, y: 422 },
+                { x: 889, y: 422 },
+                { x: 889, y: 482 },
+                { x: 297, y: 482 }
+              ],
+              normalizedVertices: [
+                { x: 0.24957983195781708, y: 0.25059381127357483 },
+                { x: 0.7470588088035583, y: 0.25059381127357483 },
+                { x: 0.7470588088035583, y: 0.28622329235076904 },
+                { x: 0.24957983195781708, y: 0.28622329235076904 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '130', endIndex: '186' } ],
+              content: ''
+            },
+            confidence: 0.9769045114517212,
+            boundingPoly: {
+              vertices: [
+                { x: 186, y: 516 },
+                { x: 998, y: 516 },
+                { x: 998, y: 536 },
+                { x: 186, y: 536 }
+              ],
+              normalizedVertices: [
+                { x: 0.1563025265932083, y: 0.30641329288482666 },
+                { x: 0.8386554718017578, y: 0.30641329288482666 },
+                { x: 0.8386554718017578, y: 0.31828978657722473 },
+                { x: 0.1563025265932083, y: 0.31828978657722473 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '186', endIndex: '208' } ],
+              content: ''
+            },
+            confidence: 0.9894933700561523,
+            boundingPoly: {
+              vertices: [
+                { x: 486, y: 571 },
+                { x: 694, y: 571 },
+                { x: 694, y: 592 },
+                { x: 486, y: 592 }
+              ],
+              normalizedVertices: [
+                { x: 0.4084033668041229, y: 0.33907362818717957 },
+                { x: 0.583193302154541, y: 0.33907362818717957 },
+                { x: 0.583193302154541, y: 0.35154393315315247 },
+                { x: 0.4084033668041229, y: 0.35154393315315247 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '208', endIndex: '229' } ],
+              content: ''
+            },
+            confidence: 0.9902775287628174,
+            boundingPoly: {
+              vertices: [
+                { x: 448, y: 623 },
+                { x: 735, y: 623 },
+                { x: 735, y: 640 },
+                { x: 448, y: 640 }
+              ],
+              normalizedVertices: [
+                { x: 0.3764705955982208, y: 0.3699524998664856 },
+                { x: 0.6176470518112183, y: 0.3699524998664856 },
+                { x: 0.6176470518112183, y: 0.3800475001335144 },
+                { x: 0.3764705955982208, y: 0.3800475001335144 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '229', endIndex: '319' } ],
+              content: ''
+            },
+            confidence: 0.9779053330421448,
+            boundingPoly: {
+              vertices: [
+                { x: 324, y: 675 },
+                { x: 860, y: 675 },
+                { x: 860, y: 721 },
+                { x: 324, y: 721 }
+              ],
+              normalizedVertices: [
+                { x: 0.2722689211368561, y: 0.40083134174346924 },
+                { x: 0.7226890921592712, y: 0.40083134174346924 },
+                { x: 0.7226890921592712, y: 0.42814725637435913 },
+                { x: 0.2722689211368561, y: 0.42814725637435913 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '319', endIndex: '395' } ],
+              content: ''
+            },
+            confidence: 0.9868582487106323,
+            boundingPoly: {
+              vertices: [
+                { x: 310, y: 759 },
+                { x: 871, y: 759 },
+                { x: 871, y: 808 },
+                { x: 310, y: 808 }
+              ],
+              normalizedVertices: [
+                { x: 0.26050421595573425, y: 0.4507125914096832 },
+                { x: 0.7319327592849731, y: 0.4507125914096832 },
+                { x: 0.7319327592849731, y: 0.47980996966362 },
+                { x: 0.26050421595573425, y: 0.47980996966362 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '395', endIndex: '511' } ],
+              content: ''
+            },
+            confidence: 0.9878467321395874,
+            boundingPoly: {
+              vertices: [
+                { x: 168, y: 842 },
+                { x: 1013, y: 842 },
+                { x: 1013, y: 908 },
+                { x: 168, y: 908 }
+              ],
+              normalizedVertices: [
+                { x: 0.1411764770746231, y: 0.5 },
+                { x: 0.8512604832649231, y: 0.5 },
+                { x: 0.8512604832649231, y: 0.5391923785209656 },
+                { x: 0.1411764770746231, y: 0.5391923785209656 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '511', endIndex: '568' } ],
+              content: ''
+            },
+            confidence: 0.9862314462661743,
+            boundingPoly: {
+              vertices: [
+                { x: 267, y: 938 },
+                { x: 909, y: 938 },
+                { x: 909, y: 961 },
+                { x: 267, y: 961 }
+              ],
+              normalizedVertices: [
+                { x: 0.22436974942684174, y: 0.5570071339607239 },
+                { x: 0.7638655304908752, y: 0.5570071339607239 },
+                { x: 0.7638655304908752, y: 0.5706650614738464 },
+                { x: 0.22436974942684174, y: 0.5706650614738464 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '568', endIndex: '570' } ],
+              content: ''
+            },
+            confidence: 0.9210802316665649,
+            boundingPoly: {
+              vertices: [
+                { x: 543, y: 1074 },
+                { x: 543, y: 1059 },
+                { x: 551, y: 1059 },
+                { x: 551, y: 1074 }
+              ],
+              normalizedVertices: [
+                { x: 0.4563025236129761, y: 0.6377671957015991 },
+                { x: 0.4563025236129761, y: 0.6288598775863647 },
+                { x: 0.46302521228790283, y: 0.6288598775863647 },
+                { x: 0.46302521228790283, y: 0.6377671957015991 }
+              ]
+            },
+            orientation: 'PAGE_LEFT'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '570', endIndex: '585' } ],
+              content: ''
+            },
+            confidence: 0.9222237467765808,
+            boundingPoly: {
+              vertices: [
+                { x: 573, y: 982 },
+                { x: 674, y: 1037 },
+                { x: 647, y: 1087 },
+                { x: 546, y: 1031 }
+              ],
+              normalizedVertices: [
+                { x: 0.4815126061439514, y: 0.5831353664398193 },
+                { x: 0.5663865804672241, y: 0.6157957315444946 },
+                { x: 0.5436974763870239, y: 0.6454869508743286 },
+                { x: 0.4588235318660736, y: 0.6122328042984009 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '585', endIndex: '600' } ],
+              content: ''
+            },
+            confidence: 0.949154794216156,
+            boundingPoly: {
+              vertices: [
+                { x: 551, y: 1071 },
+                { x: 638, y: 1072 },
+                { x: 638, y: 1118 },
+                { x: 551, y: 1117 }
+              ],
+              normalizedVertices: [
+                { x: 0.46302521228790283, y: 0.6359857320785522 },
+                { x: 0.5361344814300537, y: 0.6365795731544495 },
+                { x: 0.5361344814300537, y: 0.6638954877853394 },
+                { x: 0.46302521228790283, y: 0.6633016467094421 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '600', endIndex: '612' } ],
+              content: ''
+            },
+            confidence: 0.5439592003822327,
+            boundingPoly: {
+              vertices: [
+                { x: 743, y: 1213 },
+                { x: 999, y: 1207 },
+                { x: 1000, y: 1255 },
+                { x: 744, y: 1261 }
+              ],
+              normalizedVertices: [
+                { x: 0.624369740486145, y: 0.720308780670166 },
+                { x: 0.8394957780838013, y: 0.7167458534240723 },
+                { x: 0.8403361439704895, y: 0.7452493906021118 },
+                { x: 0.6252101063728333, y: 0.7488123774528503 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '612', endIndex: '647' } ],
+              content: ''
+            },
+            confidence: 0.969649076461792,
+            boundingPoly: {
+              vertices: [
+                { x: 786, y: 1275 },
+                { x: 974, y: 1275 },
+                { x: 974, y: 1327 },
+                { x: 786, y: 1327 }
+              ],
+              normalizedVertices: [
+                { x: 0.6605042219161987, y: 0.7571259140968323 },
+                { x: 0.8184874057769775, y: 0.7571259140968323 },
+                { x: 0.8184874057769775, y: 0.7880047559738159 },
+                { x: 0.6605042219161987, y: 0.7880047559738159 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        }
+      ],
+      lines: [
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '0', endIndex: '35' } ],
+              content: ''
+            },
+            confidence: 0.9061121344566345,
+            boundingPoly: {
+              vertices: [
+                { x: 549, y: 345 },
+                { x: 660, y: 345 },
+                { x: 660, y: 360 },
+                { x: 549, y: 360 }
+              ],
+              normalizedVertices: [
+                { x: 0.46134454011917114, y: 0.2048693597316742 },
+                { x: 0.5546218752861023, y: 0.2048693597316742 },
+                { x: 0.5546218752861023, y: 0.21377672255039215 },
+                { x: 0.46134454011917114, y: 0.21377672255039215 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '35', endIndex: '63' } ],
+              content: ''
+            },
+            confidence: 0.9899866580963135,
+            boundingPoly: {
+              vertices: [
+                { x: 407, y: 369 },
+                { x: 776, y: 369 },
+                { x: 776, y: 387 },
+                { x: 407, y: 387 }
+              ],
+              normalizedVertices: [
+                { x: 0.3420168161392212, y: 0.21912114322185516 },
+                { x: 0.6521008610725403, y: 0.21912114322185516 },
+                { x: 0.6521008610725403, y: 0.22980996966362 },
+                { x: 0.3420168161392212, y: 0.22980996966362 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '63', endIndex: '91' } ],
+              content: ''
+            },
+            confidence: 0.9872496724128723,
+            boundingPoly: {
+              vertices: [
+                { x: 297, y: 422 },
+                { x: 889, y: 422 },
+                { x: 889, y: 449 },
+                { x: 297, y: 449 }
+              ],
+              normalizedVertices: [
+                { x: 0.24957983195781708, y: 0.25059381127357483 },
+                { x: 0.7470588088035583, y: 0.25059381127357483 },
+                { x: 0.7470588088035583, y: 0.26662707328796387 },
+                { x: 0.24957983195781708, y: 0.26662707328796387 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '91', endIndex: '130' } ],
+              content: ''
+            },
+            confidence: 0.9681849479675293,
+            boundingPoly: {
+              vertices: [
+                { x: 311, y: 461 },
+                { x: 870, y: 461 },
+                { x: 870, y: 482 },
+                { x: 311, y: 482 }
+              ],
+              normalizedVertices: [
+                { x: 0.2613445520401001, y: 0.27375295758247375 },
+                { x: 0.7310924530029297, y: 0.27375295758247375 },
+                { x: 0.7310924530029297, y: 0.28622329235076904 },
+                { x: 0.2613445520401001, y: 0.28622329235076904 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '130', endIndex: '186' } ],
+              content: ''
+            },
+            confidence: 0.9769045114517212,
+            boundingPoly: {
+              vertices: [
+                { x: 186, y: 516 },
+                { x: 998, y: 516 },
+                { x: 998, y: 536 },
+                { x: 186, y: 536 }
+              ],
+              normalizedVertices: [
+                { x: 0.1563025265932083, y: 0.30641329288482666 },
+                { x: 0.8386554718017578, y: 0.30641329288482666 },
+                { x: 0.8386554718017578, y: 0.31828978657722473 },
+                { x: 0.1563025265932083, y: 0.31828978657722473 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '186', endIndex: '208' } ],
+              content: ''
+            },
+            confidence: 0.9894933700561523,
+            boundingPoly: {
+              vertices: [
+                { x: 486, y: 571 },
+                { x: 694, y: 571 },
+                { x: 694, y: 592 },
+                { x: 486, y: 592 }
+              ],
+              normalizedVertices: [
+                { x: 0.4084033668041229, y: 0.33907362818717957 },
+                { x: 0.583193302154541, y: 0.33907362818717957 },
+                { x: 0.583193302154541, y: 0.35154393315315247 },
+                { x: 0.4084033668041229, y: 0.35154393315315247 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '208', endIndex: '229' } ],
+              content: ''
+            },
+            confidence: 0.9902775287628174,
+            boundingPoly: {
+              vertices: [
+                { x: 448, y: 623 },
+                { x: 735, y: 623 },
+                { x: 735, y: 640 },
+                { x: 448, y: 640 }
+              ],
+              normalizedVertices: [
+                { x: 0.3764705955982208, y: 0.3699524998664856 },
+                { x: 0.6176470518112183, y: 0.3699524998664856 },
+                { x: 0.6176470518112183, y: 0.3800475001335144 },
+                { x: 0.3764705955982208, y: 0.3800475001335144 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '229', endIndex: '281' } ],
+              content: ''
+            },
+            confidence: 0.9891583919525146,
+            boundingPoly: {
+              vertices: [
+                { x: 326, y: 675 },
+                { x: 850, y: 675 },
+                { x: 850, y: 697 },
+                { x: 326, y: 697 }
+              ],
+              normalizedVertices: [
+                { x: 0.27394959330558777, y: 0.40083134174346924 },
+                { x: 0.7142857313156128, y: 0.40083134174346924 },
+                { x: 0.7142857313156128, y: 0.41389548778533936 },
+                { x: 0.27394959330558777, y: 0.41389548778533936 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '281', endIndex: '319' } ],
+              content: ''
+            },
+            confidence: 0.9631356596946716,
+            boundingPoly: {
+              vertices: [
+                { x: 324, y: 702 },
+                { x: 860, y: 702 },
+                { x: 860, y: 721 },
+                { x: 324, y: 721 }
+              ],
+              normalizedVertices: [
+                { x: 0.2722689211368561, y: 0.4168646037578583 },
+                { x: 0.7226890921592712, y: 0.4168646037578583 },
+                { x: 0.7226890921592712, y: 0.42814725637435913 },
+                { x: 0.2722689211368561, y: 0.42814725637435913 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '319', endIndex: '354' } ],
+              content: ''
+            },
+            confidence: 0.9851273894309998,
+            boundingPoly: {
+              vertices: [
+                { x: 393, y: 759 },
+                { x: 788, y: 759 },
+                { x: 788, y: 782 },
+                { x: 393, y: 782 }
+              ],
+              normalizedVertices: [
+                { x: 0.33025211095809937, y: 0.4507125914096832 },
+                { x: 0.6621848940849304, y: 0.4507125914096832 },
+                { x: 0.6621848940849304, y: 0.4643705487251282 },
+                { x: 0.33025211095809937, y: 0.4643705487251282 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '354', endIndex: '395' } ],
+              content: ''
+            },
+            confidence: 0.9882525205612183,
+            boundingPoly: {
+              vertices: [
+                { x: 310, y: 789 },
+                { x: 871, y: 789 },
+                { x: 871, y: 808 },
+                { x: 310, y: 808 }
+              ],
+              normalizedVertices: [
+                { x: 0.26050421595573425, y: 0.46852731704711914 },
+                { x: 0.7319327592849731, y: 0.46852731704711914 },
+                { x: 0.7319327592849731, y: 0.47980996966362 },
+                { x: 0.26050421595573425, y: 0.47980996966362 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '395', endIndex: '446' } ],
+              content: ''
+            },
+            confidence: 0.9856135249137878,
+            boundingPoly: {
+              vertices: [
+                { x: 336, y: 842 },
+                { x: 843, y: 842 },
+                { x: 843, y: 865 },
+                { x: 336, y: 865 }
+              ],
+              normalizedVertices: [
+                { x: 0.2823529541492462, y: 0.5 },
+                { x: 0.7084033489227295, y: 0.5 },
+                { x: 0.7084033489227295, y: 0.5136579275131226 },
+                { x: 0.2823529541492462, y: 0.5136579275131226 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '446', endIndex: '511' } ],
+              content: ''
+            },
+            confidence: 0.9895836114883423,
+            boundingPoly: {
+              vertices: [
+                { x: 168, y: 886 },
+                { x: 1013, y: 886 },
+                { x: 1013, y: 908 },
+                { x: 168, y: 908 }
+              ],
+              normalizedVertices: [
+                { x: 0.1411764770746231, y: 0.5261282920837402 },
+                { x: 0.8512604832649231, y: 0.5261282920837402 },
+                { x: 0.8512604832649231, y: 0.5391923785209656 },
+                { x: 0.1411764770746231, y: 0.5391923785209656 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '511', endIndex: '568' } ],
+              content: ''
+            },
+            confidence: 0.9862314462661743,
+            boundingPoly: {
+              vertices: [
+                { x: 267, y: 938 },
+                { x: 909, y: 938 },
+                { x: 909, y: 961 },
+                { x: 267, y: 961 }
+              ],
+              normalizedVertices: [
+                { x: 0.22436974942684174, y: 0.5570071339607239 },
+                { x: 0.7638655304908752, y: 0.5570071339607239 },
+                { x: 0.7638655304908752, y: 0.5706650614738464 },
+                { x: 0.22436974942684174, y: 0.5706650614738464 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '568', endIndex: '570' } ],
+              content: ''
+            },
+            confidence: 0.9210802316665649,
+            boundingPoly: {
+              vertices: [
+                { x: 543, y: 1074 },
+                { x: 543, y: 1059 },
+                { x: 551, y: 1059 },
+                { x: 551, y: 1074 }
+              ],
+              normalizedVertices: [
+                { x: 0.4563025236129761, y: 0.6377671957015991 },
+                { x: 0.4563025236129761, y: 0.6288598775863647 },
+                { x: 0.46302521228790283, y: 0.6288598775863647 },
+                { x: 0.46302521228790283, y: 0.6377671957015991 }
+              ]
+            },
+            orientation: 'PAGE_LEFT'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '570', endIndex: '585' } ],
+              content: ''
+            },
+            confidence: 0.9222237467765808,
+            boundingPoly: {
+              vertices: [
+                { x: 573, y: 982 },
+                { x: 674, y: 1037 },
+                { x: 647, y: 1087 },
+                { x: 546, y: 1031 }
+              ],
+              normalizedVertices: [
+                { x: 0.4815126061439514, y: 0.5831353664398193 },
+                { x: 0.5663865804672241, y: 0.6157957315444946 },
+                { x: 0.5436974763870239, y: 0.6454869508743286 },
+                { x: 0.4588235318660736, y: 0.6122328042984009 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '585', endIndex: '589' } ],
+              content: ''
+            },
+            confidence: 0.9729459881782532,
+            boundingPoly: {
+              vertices: [
+                { x: 566, y: 1072 },
+                { x: 621, y: 1072 },
+                { x: 621, y: 1088 },
+                { x: 566, y: 1088 }
+              ],
+              normalizedVertices: [
+                { x: 0.4756302535533905, y: 0.6365795731544495 },
+                { x: 0.521848738193512, y: 0.6365795731544495 },
+                { x: 0.521848738193512, y: 0.646080732345581 },
+                { x: 0.4756302535533905, y: 0.646080732345581 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '589', endIndex: '600' } ],
+              content: ''
+            },
+            confidence: 0.9420174360275269,
+            boundingPoly: {
+              vertices: [
+                { x: 551, y: 1087 },
+                { x: 638, y: 1089 },
+                { x: 637, y: 1118 },
+                { x: 550, y: 1116 }
+              ],
+              normalizedVertices: [
+                { x: 0.46302521228790283, y: 0.6454869508743286 },
+                { x: 0.5361344814300537, y: 0.6466745734214783 },
+                { x: 0.5352941155433655, y: 0.6638954877853394 },
+                { x: 0.462184876203537, y: 0.6627078652381897 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '600', endIndex: '612' } ],
+              content: ''
+            },
+            confidence: 0.5439592003822327,
+            boundingPoly: {
+              vertices: [
+                { x: 743, y: 1213 },
+                { x: 999, y: 1207 },
+                { x: 1000, y: 1255 },
+                { x: 744, y: 1261 }
+              ],
+              normalizedVertices: [
+                { x: 0.624369740486145, y: 0.720308780670166 },
+                { x: 0.8394957780838013, y: 0.7167458534240723 },
+                { x: 0.8403361439704895, y: 0.7452493906021118 },
+                { x: 0.6252101063728333, y: 0.7488123774528503 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'ha', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '612', endIndex: '627' } ],
+              content: ''
+            },
+            confidence: 0.9904066324234009,
+            boundingPoly: {
+              vertices: [
+                { x: 786, y: 1275 },
+                { x: 974, y: 1275 },
+                { x: 974, y: 1296 },
+                { x: 786, y: 1296 }
+              ],
+              normalizedVertices: [
+                { x: 0.6605042219161987, y: 0.7571259140968323 },
+                { x: 0.8184874057769775, y: 0.7571259140968323 },
+                { x: 0.8184874057769775, y: 0.7695962190628052 },
+                { x: 0.6605042219161987, y: 0.7695962190628052 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '627', endIndex: '647' } ],
+              content: ''
+            },
+            confidence: 0.9549967050552368,
+            boundingPoly: {
+              vertices: [
+                { x: 797, y: 1309 },
+                { x: 972, y: 1309 },
+                { x: 972, y: 1327 },
+                { x: 797, y: 1327 }
+              ],
+              normalizedVertices: [
+                { x: 0.6697478890419006, y: 0.7773159146308899 },
+                { x: 0.8168067336082458, y: 0.7773159146308899 },
+                { x: 0.8168067336082458, y: 0.7880047559738159 },
+                { x: 0.6697478890419006, y: 0.7880047559738159 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          provenance: null
+        }
+      ],
+      tokens: [
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '0', endIndex: '6' } ],
+              content: ''
+            },
+            confidence: 0.839394211769104,
+            boundingPoly: {
+              vertices: [
+                { x: 549, y: 345 },
+                { x: 567, y: 345 },
+                { x: 567, y: 360 },
+                { x: 549, y: 360 }
+              ],
+              normalizedVertices: [
+                { x: 0.46134454011917114, y: 0.2048693597316742 },
+                { x: 0.47647058963775635, y: 0.2048693597316742 },
+                { x: 0.47647058963775635, y: 0.21377672255039215 },
+                { x: 0.46134454011917114, y: 0.21377672255039215 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '6', endIndex: '10' } ],
+              content: ''
+            },
+            confidence: 0.9898456931114197,
+            boundingPoly: {
+              vertices: [
+                { x: 566, y: 345 },
+                { x: 579, y: 345 },
+                { x: 579, y: 359 },
+                { x: 566, y: 359 }
+              ],
+              normalizedVertices: [
+                { x: 0.4756302535533905, y: 0.2048693597316742 },
+                { x: 0.4865546226501465, y: 0.2048693597316742 },
+                { x: 0.4865546226501465, y: 0.21318289637565613 },
+                { x: 0.4756302535533905, y: 0.21318289637565613 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '10', endIndex: '16' } ],
+              content: ''
+            },
+            confidence: 0.9088690280914307,
+            boundingPoly: {
+              vertices: [
+                { x: 580, y: 345 },
+                { x: 597, y: 345 },
+                { x: 597, y: 359 },
+                { x: 580, y: 359 }
+              ],
+              normalizedVertices: [
+                { x: 0.48739495873451233, y: 0.2048693597316742 },
+                { x: 0.5016806721687317, y: 0.2048693597316742 },
+                { x: 0.5016806721687317, y: 0.21318289637565613 },
+                { x: 0.48739495873451233, y: 0.21318289637565613 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '16', endIndex: '22' } ],
+              content: ''
+            },
+            confidence: 0.864791214466095,
+            boundingPoly: {
+              vertices: [
+                { x: 597, y: 345 },
+                { x: 615, y: 345 },
+                { x: 615, y: 359 },
+                { x: 597, y: 359 }
+              ],
+              normalizedVertices: [
+                { x: 0.5016806721687317, y: 0.2048693597316742 },
+                { x: 0.5168067216873169, y: 0.2048693597316742 },
+                { x: 0.5168067216873169, y: 0.21318289637565613 },
+                { x: 0.5016806721687317, y: 0.21318289637565613 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '22', endIndex: '26' } ],
+              content: ''
+            },
+            confidence: 0.9667311310768127,
+            boundingPoly: {
+              vertices: [
+                { x: 615, y: 345 },
+                { x: 629, y: 345 },
+                { x: 629, y: 359 },
+                { x: 615, y: 359 }
+              ],
+              normalizedVertices: [
+                { x: 0.5168067216873169, y: 0.2048693597316742 },
+                { x: 0.5285714268684387, y: 0.2048693597316742 },
+                { x: 0.5285714268684387, y: 0.21318289637565613 },
+                { x: 0.5168067216873169, y: 0.21318289637565613 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '26', endIndex: '35' } ],
+              content: ''
+            },
+            confidence: 0.9177811145782471,
+            boundingPoly: {
+              vertices: [
+                { x: 629, y: 345 },
+                { x: 660, y: 345 },
+                { x: 660, y: 359 },
+                { x: 629, y: 359 }
+              ],
+              normalizedVertices: [
+                { x: 0.5285714268684387, y: 0.2048693597316742 },
+                { x: 0.5546218752861023, y: 0.2048693597316742 },
+                { x: 0.5546218752861023, y: 0.21318289637565613 },
+                { x: 0.5285714268684387, y: 0.21318289637565613 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'WIDE_SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '35', endIndex: '43' } ],
+              content: ''
+            },
+            confidence: 0.9914929270744324,
+            boundingPoly: {
+              vertices: [
+                { x: 407, y: 369 },
+                { x: 513, y: 369 },
+                { x: 513, y: 387 },
+                { x: 407, y: 387 }
+              ],
+              normalizedVertices: [
+                { x: 0.3420168161392212, y: 0.21912114322185516 },
+                { x: 0.43109244108200073, y: 0.21912114322185516 },
+                { x: 0.43109244108200073, y: 0.22980996966362 },
+                { x: 0.3420168161392212, y: 0.22980996966362 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '43', endIndex: '52' } ],
+              content: ''
+            },
+            confidence: 0.9925754070281982,
+            boundingPoly: {
+              vertices: [
+                { x: 520, y: 369 },
+                { x: 635, y: 369 },
+                { x: 635, y: 386 },
+                { x: 520, y: 386 }
+              ],
+              normalizedVertices: [
+                { x: 0.43697479367256165, y: 0.21912114322185516 },
+                { x: 0.5336134433746338, y: 0.21912114322185516 },
+                { x: 0.5336134433746338, y: 0.22921615839004517 },
+                { x: 0.43697479367256165, y: 0.22921615839004517 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '52', endIndex: '55' } ],
+              content: ''
+            },
+            confidence: 0.9714635610580444,
+            boundingPoly: {
+              vertices: [
+                { x: 642, y: 369 },
+                { x: 673, y: 369 },
+                { x: 673, y: 386 },
+                { x: 642, y: 386 }
+              ],
+              normalizedVertices: [
+                { x: 0.5394958257675171, y: 0.21912114322185516 },
+                { x: 0.5655462145805359, y: 0.21912114322185516 },
+                { x: 0.5655462145805359, y: 0.22921615839004517 },
+                { x: 0.5394958257675171, y: 0.22921615839004517 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '55', endIndex: '63' } ],
+              content: ''
+            },
+            confidence: 0.9908140301704407,
+            boundingPoly: {
+              vertices: [
+                { x: 678, y: 369 },
+                { x: 776, y: 369 },
+                { x: 776, y: 386 },
+                { x: 678, y: 386 }
+              ],
+              normalizedVertices: [
+                { x: 0.5697479248046875, y: 0.21912114322185516 },
+                { x: 0.6521008610725403, y: 0.21912114322185516 },
+                { x: 0.6521008610725403, y: 0.22921615839004517 },
+                { x: 0.5697479248046875, y: 0.22921615839004517 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'WIDE_SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '63', endIndex: '75' } ],
+              content: ''
+            },
+            confidence: 0.9784942865371704,
+            boundingPoly: {
+              vertices: [
+                { x: 297, y: 422 },
+                { x: 542, y: 422 },
+                { x: 542, y: 449 },
+                { x: 297, y: 449 }
+              ],
+              normalizedVertices: [
+                { x: 0.24957983195781708, y: 0.25059381127357483 },
+                { x: 0.45546218752861023, y: 0.25059381127357483 },
+                { x: 0.45546218752861023, y: 0.26662707328796387 },
+                { x: 0.24957983195781708, y: 0.26662707328796387 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '75', endIndex: '78' } ],
+              content: ''
+            },
+            confidence: 0.9903035759925842,
+            boundingPoly: {
+              vertices: [
+                { x: 553, y: 422 },
+                { x: 601, y: 422 },
+                { x: 601, y: 448 },
+                { x: 553, y: 448 }
+              ],
+              normalizedVertices: [
+                { x: 0.4647058844566345, y: 0.25059381127357483 },
+                { x: 0.5050420165061951, y: 0.25059381127357483 },
+                { x: 0.5050420165061951, y: 0.26603326201438904 },
+                { x: 0.4647058844566345, y: 0.26603326201438904 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '78', endIndex: '91' } ],
+              content: ''
+            },
+            confidence: 0.9947664737701416,
+            boundingPoly: {
+              vertices: [
+                { x: 611, y: 422 },
+                { x: 889, y: 422 },
+                { x: 889, y: 448 },
+                { x: 611, y: 448 }
+              ],
+              normalizedVertices: [
+                { x: 0.5134453773498535, y: 0.25059381127357483 },
+                { x: 0.7470588088035583, y: 0.25059381127357483 },
+                { x: 0.7470588088035583, y: 0.26603326201438904 },
+                { x: 0.5134453773498535, y: 0.26603326201438904 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'WIDE_SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '91', endIndex: '100' } ],
+              content: ''
+            },
+            confidence: 0.986873209476471,
+            boundingPoly: {
+              vertices: [
+                { x: 311, y: 461 },
+                { x: 434, y: 461 },
+                { x: 434, y: 482 },
+                { x: 311, y: 482 }
+              ],
+              normalizedVertices: [
+                { x: 0.2613445520401001, y: 0.27375295758247375 },
+                { x: 0.364705890417099, y: 0.27375295758247375 },
+                { x: 0.364705890417099, y: 0.28622329235076904 },
+                { x: 0.2613445520401001, y: 0.28622329235076904 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '100', endIndex: '105' } ],
+              content: ''
+            },
+            confidence: 0.9757114052772522,
+            boundingPoly: {
+              vertices: [
+                { x: 442, y: 461 },
+                { x: 519, y: 461 },
+                { x: 519, y: 481 },
+                { x: 442, y: 481 }
+              ],
+              normalizedVertices: [
+                { x: 0.37142857909202576, y: 0.27375295758247375 },
+                { x: 0.4361344575881958, y: 0.27375295758247375 },
+                { x: 0.4361344575881958, y: 0.2856294512748718 },
+                { x: 0.37142857909202576, y: 0.2856294512748718 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '105', endIndex: '118' } ],
+              content: ''
+            },
+            confidence: 0.9752317070960999,
+            boundingPoly: {
+              vertices: [
+                { x: 526, y: 461 },
+                { x: 724, y: 461 },
+                { x: 724, y: 481 },
+                { x: 526, y: 481 }
+              ],
+              normalizedVertices: [
+                { x: 0.4420168101787567, y: 0.27375295758247375 },
+                { x: 0.6084033846855164, y: 0.27375295758247375 },
+                { x: 0.6084033846855164, y: 0.2856294512748718 },
+                { x: 0.4420168101787567, y: 0.2856294512748718 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '118', endIndex: '120' } ],
+              content: ''
+            },
+            confidence: 0.7599114179611206,
+            boundingPoly: {
+              vertices: [
+                { x: 731, y: 461 },
+                { x: 768, y: 461 },
+                { x: 768, y: 481 },
+                { x: 731, y: 481 }
+              ],
+              normalizedVertices: [
+                { x: 0.6142857074737549, y: 0.27375295758247375 },
+                { x: 0.6453781723976135, y: 0.27375295758247375 },
+                { x: 0.6453781723976135, y: 0.2856294512748718 },
+                { x: 0.6142857074737549, y: 0.2856294512748718 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: null,
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '120', endIndex: '122' } ],
+              content: ''
+            },
+            confidence: 0.9600768089294434,
+            boundingPoly: {
+              vertices: [
+                { x: 770, y: 461 },
+                { x: 775, y: 461 },
+                { x: 775, y: 481 },
+                { x: 770, y: 481 }
+              ],
+              normalizedVertices: [
+                { x: 0.6470588445663452, y: 0.27375295758247375 },
+                { x: 0.651260495185852, y: 0.27375295758247375 },
+                { x: 0.651260495185852, y: 0.2856294512748718 },
+                { x: 0.6470588445663452, y: 0.2856294512748718 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '122', endIndex: '130' } ],
+              content: ''
+            },
+            confidence: 0.9911110997200012,
+            boundingPoly: {
+              vertices: [
+                { x: 781, y: 461 },
+                { x: 870, y: 461 },
+                { x: 870, y: 481 },
+                { x: 781, y: 481 }
+              ],
+              normalizedVertices: [
+                { x: 0.6563025116920471, y: 0.27375295758247375 },
+                { x: 0.7310924530029297, y: 0.27375295758247375 },
+                { x: 0.7310924530029297, y: 0.2856294512748718 },
+                { x: 0.6563025116920471, y: 0.2856294512748718 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'WIDE_SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '130', endIndex: '134' } ],
+              content: ''
+            },
+            confidence: 0.9823533892631531,
+            boundingPoly: {
+              vertices: [
+                { x: 186, y: 516 },
+                { x: 233, y: 516 },
+                { x: 233, y: 536 },
+                { x: 186, y: 536 }
+              ],
+              normalizedVertices: [
+                { x: 0.1563025265932083, y: 0.30641329288482666 },
+                { x: 0.19579832255840302, y: 0.30641329288482666 },
+                { x: 0.19579832255840302, y: 0.31828978657722473 },
+                { x: 0.1563025265932083, y: 0.31828978657722473 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '134', endIndex: '144' } ],
+              content: ''
+            },
+            confidence: 0.9842417240142822,
+            boundingPoly: {
+              vertices: [
+                { x: 239, y: 516 },
+                { x: 382, y: 516 },
+                { x: 382, y: 535 },
+                { x: 239, y: 535 }
+              ],
+              normalizedVertices: [
+                { x: 0.20084033906459808, y: 0.30641329288482666 },
+                { x: 0.3210084140300751, y: 0.30641329288482666 },
+                { x: 0.3210084140300751, y: 0.3176959753036499 },
+                { x: 0.20084033906459808, y: 0.3176959753036499 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '144', endIndex: '146' } ],
+              content: ''
+            },
+            confidence: 0.5852985382080078,
+            boundingPoly: {
+              vertices: [
+                { x: 384, y: 516 },
+                { x: 396, y: 516 },
+                { x: 396, y: 535 },
+                { x: 384, y: 535 }
+              ],
+              normalizedVertices: [
+                { x: 0.32268908619880676, y: 0.30641329288482666 },
+                { x: 0.3327731192111969, y: 0.30641329288482666 },
+                { x: 0.3327731192111969, y: 0.3176959753036499 },
+                { x: 0.32268908619880676, y: 0.3176959753036499 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '146', endIndex: '154' } ],
+              content: ''
+            },
+            confidence: 0.9857931733131409,
+            boundingPoly: {
+              vertices: [
+                { x: 402, y: 516 },
+                { x: 521, y: 516 },
+                { x: 521, y: 535 },
+                { x: 402, y: 535 }
+              ],
+              normalizedVertices: [
+                { x: 0.33781513571739197, y: 0.30641329288482666 },
+                { x: 0.4378151297569275, y: 0.30641329288482666 },
+                { x: 0.4378151297569275, y: 0.3176959753036499 },
+                { x: 0.33781513571739197, y: 0.3176959753036499 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '154', endIndex: '157' } ],
+              content: ''
+            },
+            confidence: 0.9771145582199097,
+            boundingPoly: {
+              vertices: [
+                { x: 529, y: 516 },
+                { x: 560, y: 516 },
+                { x: 560, y: 535 },
+                { x: 529, y: 535 }
+              ],
+              normalizedVertices: [
+                { x: 0.44453781843185425, y: 0.30641329288482666 },
+                { x: 0.47058823704719543, y: 0.30641329288482666 },
+                { x: 0.47058823704719543, y: 0.3176959753036499 },
+                { x: 0.44453781843185425, y: 0.3176959753036499 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '157', endIndex: '167' } ],
+              content: ''
+            },
+            confidence: 0.9865596294403076,
+            boundingPoly: {
+              vertices: [
+                { x: 567, y: 516 },
+                { x: 718, y: 516 },
+                { x: 718, y: 535 },
+                { x: 567, y: 535 }
+              ],
+              normalizedVertices: [
+                { x: 0.47647058963775635, y: 0.30641329288482666 },
+                { x: 0.6033613681793213, y: 0.30641329288482666 },
+                { x: 0.6033613681793213, y: 0.3176959753036499 },
+                { x: 0.47647058963775635, y: 0.3176959753036499 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '167', endIndex: '175' } ],
+              content: ''
+            },
+            confidence: 0.9872537851333618,
+            boundingPoly: {
+              vertices: [
+                { x: 724, y: 516 },
+                { x: 829, y: 516 },
+                { x: 829, y: 535 },
+                { x: 724, y: 535 }
+              ],
+              normalizedVertices: [
+                { x: 0.6084033846855164, y: 0.30641329288482666 },
+                { x: 0.6966386437416077, y: 0.30641329288482666 },
+                { x: 0.6966386437416077, y: 0.3176959753036499 },
+                { x: 0.6084033846855164, y: 0.3176959753036499 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '175', endIndex: '186' } ],
+              content: ''
+            },
+            confidence: 0.9856286644935608,
+            boundingPoly: {
+              vertices: [
+                { x: 837, y: 516 },
+                { x: 998, y: 516 },
+                { x: 998, y: 535 },
+                { x: 837, y: 535 }
+              ],
+              normalizedVertices: [
+                { x: 0.7033613324165344, y: 0.30641329288482666 },
+                { x: 0.8386554718017578, y: 0.30641329288482666 },
+                { x: 0.8386554718017578, y: 0.3176959753036499 },
+                { x: 0.7033613324165344, y: 0.3176959753036499 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'WIDE_SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '186', endIndex: '193' } ],
+              content: ''
+            },
+            confidence: 0.9855968952178955,
+            boundingPoly: {
+              vertices: [
+                { x: 486, y: 571 },
+                { x: 560, y: 571 },
+                { x: 560, y: 592 },
+                { x: 486, y: 592 }
+              ],
+              normalizedVertices: [
+                { x: 0.4084033668041229, y: 0.33907362818717957 },
+                { x: 0.47058823704719543, y: 0.33907362818717957 },
+                { x: 0.47058823704719543, y: 0.35154393315315247 },
+                { x: 0.4084033668041229, y: 0.35154393315315247 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '193', endIndex: '203' } ],
+              content: ''
+            },
+            confidence: 0.9901173710823059,
+            boundingPoly: {
+              vertices: [
+                { x: 564, y: 571 },
+                { x: 644, y: 571 },
+                { x: 644, y: 591 },
+                { x: 564, y: 591 }
+              ],
+              normalizedVertices: [
+                { x: 0.4739495813846588, y: 0.33907362818717957 },
+                { x: 0.5411764979362488, y: 0.33907362818717957 },
+                { x: 0.5411764979362488, y: 0.35095012187957764 },
+                { x: 0.4739495813846588, y: 0.35095012187957764 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '203', endIndex: '208' } ],
+              content: ''
+            },
+            confidence: 0.993934154510498,
+            boundingPoly: {
+              vertices: [
+                { x: 649, y: 571 },
+                { x: 694, y: 571 },
+                { x: 694, y: 591 },
+                { x: 649, y: 591 }
+              ],
+              normalizedVertices: [
+                { x: 0.5453781485557556, y: 0.33907362818717957 },
+                { x: 0.583193302154541, y: 0.33907362818717957 },
+                { x: 0.583193302154541, y: 0.35095012187957764 },
+                { x: 0.5453781485557556, y: 0.35095012187957764 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'WIDE_SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '208', endIndex: '216' } ],
+              content: ''
+            },
+            confidence: 0.9876636862754822,
+            boundingPoly: {
+              vertices: [
+                { x: 448, y: 623 },
+                { x: 546, y: 623 },
+                { x: 546, y: 640 },
+                { x: 448, y: 640 }
+              ],
+              normalizedVertices: [
+                { x: 0.3764705955982208, y: 0.3699524998664856 },
+                { x: 0.4588235318660736, y: 0.3699524998664856 },
+                { x: 0.4588235318660736, y: 0.3800475001335144 },
+                { x: 0.3764705955982208, y: 0.3800475001335144 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '216', endIndex: '229' } ],
+              content: ''
+            },
+            confidence: 0.9918022751808167,
+            boundingPoly: {
+              vertices: [
+                { x: 553, y: 623 },
+                { x: 735, y: 623 },
+                { x: 735, y: 639 },
+                { x: 553, y: 639 }
+              ],
+              normalizedVertices: [
+                { x: 0.4647058844566345, y: 0.3699524998664856 },
+                { x: 0.6176470518112183, y: 0.3699524998664856 },
+                { x: 0.6176470518112183, y: 0.3794536888599396 },
+                { x: 0.4647058844566345, y: 0.3794536888599396 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'WIDE_SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '229', endIndex: '232' } ],
+              content: ''
+            },
+            confidence: 0.9844271540641785,
+            boundingPoly: {
+              vertices: [
+                { x: 326, y: 675 },
+                { x: 347, y: 675 },
+                { x: 347, y: 697 },
+                { x: 326, y: 697 }
+              ],
+              normalizedVertices: [
+                { x: 0.27394959330558777, y: 0.40083134174346924 },
+                { x: 0.2915966510772705, y: 0.40083134174346924 },
+                { x: 0.2915966510772705, y: 0.41389548778533936 },
+                { x: 0.27394959330558777, y: 0.41389548778533936 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '232', endIndex: '237' } ],
+              content: ''
+            },
+            confidence: 0.9906865358352661,
+            boundingPoly: {
+              vertices: [
+                { x: 348, y: 675 },
+                { x: 391, y: 675 },
+                { x: 391, y: 696 },
+                { x: 348, y: 696 }
+              ],
+              normalizedVertices: [
+                { x: 0.29243698716163635, y: 0.40083134174346924 },
+                { x: 0.3285714387893677, y: 0.40083134174346924 },
+                { x: 0.3285714387893677, y: 0.4133016765117645 },
+                { x: 0.29243698716163635, y: 0.4133016765117645 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '237', endIndex: '241' } ],
+              content: ''
+            },
+            confidence: 0.9883952736854553,
+            boundingPoly: {
+              vertices: [
+                { x: 393, y: 675 },
+                { x: 439, y: 675 },
+                { x: 439, y: 696 },
+                { x: 393, y: 696 }
+              ],
+              normalizedVertices: [
+                { x: 0.33025211095809937, y: 0.40083134174346924 },
+                { x: 0.3689075708389282, y: 0.40083134174346924 },
+                { x: 0.3689075708389282, y: 0.4133016765117645 },
+                { x: 0.33025211095809937, y: 0.4133016765117645 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '241', endIndex: '252' } ],
+              content: ''
+            },
+            confidence: 0.9858566522598267,
+            boundingPoly: {
+              vertices: [
+                { x: 442, y: 675 },
+                { x: 543, y: 675 },
+                { x: 543, y: 696 },
+                { x: 442, y: 696 }
+              ],
+              normalizedVertices: [
+                { x: 0.37142857909202576, y: 0.40083134174346924 },
+                { x: 0.4563025236129761, y: 0.40083134174346924 },
+                { x: 0.4563025236129761, y: 0.4133016765117645 },
+                { x: 0.37142857909202576, y: 0.4133016765117645 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '252', endIndex: '255' } ],
+              content: ''
+            },
+            confidence: 0.9880462884902954,
+            boundingPoly: {
+              vertices: [
+                { x: 548, y: 675 },
+                { x: 570, y: 675 },
+                { x: 570, y: 696 },
+                { x: 548, y: 696 }
+              ],
+              normalizedVertices: [
+                { x: 0.4605042040348053, y: 0.40083134174346924 },
+                { x: 0.4789915978908539, y: 0.40083134174346924 },
+                { x: 0.4789915978908539, y: 0.4133016765117645 },
+                { x: 0.4605042040348053, y: 0.4133016765117645 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '255', endIndex: '257' } ],
+              content: ''
+            },
+            confidence: 0.9878551959991455,
+            boundingPoly: {
+              vertices: [
+                { x: 577, y: 675 },
+                { x: 591, y: 675 },
+                { x: 591, y: 696 },
+                { x: 577, y: 696 }
+              ],
+              normalizedVertices: [
+                { x: 0.4848739504814148, y: 0.40083134174346924 },
+                { x: 0.4966386556625366, y: 0.40083134174346924 },
+                { x: 0.4966386556625366, y: 0.4133016765117645 },
+                { x: 0.4848739504814148, y: 0.4133016765117645 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '257', endIndex: '266' } ],
+              content: ''
+            },
+            confidence: 0.9937759637832642,
+            boundingPoly: {
+              vertices: [
+                { x: 596, y: 675 },
+                { x: 679, y: 675 },
+                { x: 679, y: 696 },
+                { x: 596, y: 696 }
+              ],
+              normalizedVertices: [
+                { x: 0.5008403658866882, y: 0.40083134174346924 },
+                { x: 0.570588231086731, y: 0.40083134174346924 },
+                { x: 0.570588231086731, y: 0.4133016765117645 },
+                { x: 0.5008403658866882, y: 0.4133016765117645 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '266', endIndex: '271' } ],
+              content: ''
+            },
+            confidence: 0.9908074140548706,
+            boundingPoly: {
+              vertices: [
+                { x: 686, y: 675 },
+                { x: 744, y: 675 },
+                { x: 744, y: 696 },
+                { x: 686, y: 696 }
+              ],
+              normalizedVertices: [
+                { x: 0.5764706134796143, y: 0.40083134174346924 },
+                { x: 0.6252101063728333, y: 0.40083134174346924 },
+                { x: 0.6252101063728333, y: 0.4133016765117645 },
+                { x: 0.5764706134796143, y: 0.4133016765117645 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '271', endIndex: '277' } ],
+              content: ''
+            },
+            confidence: 0.988193154335022,
+            boundingPoly: {
+              vertices: [
+                { x: 749, y: 675 },
+                { x: 812, y: 675 },
+                { x: 812, y: 696 },
+                { x: 749, y: 696 }
+              ],
+              normalizedVertices: [
+                { x: 0.6294117569923401, y: 0.40083134174346924 },
+                { x: 0.6823529601097107, y: 0.40083134174346924 },
+                { x: 0.6823529601097107, y: 0.4133016765117645 },
+                { x: 0.6294117569923401, y: 0.4133016765117645 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '277', endIndex: '281' } ],
+              content: ''
+            },
+            confidence: 0.9903162121772766,
+            boundingPoly: {
+              vertices: [
+                { x: 816, y: 675 },
+                { x: 850, y: 675 },
+                { x: 850, y: 696 },
+                { x: 816, y: 696 }
+              ],
+              normalizedVertices: [
+                { x: 0.6857143044471741, y: 0.40083134174346924 },
+                { x: 0.7142857313156128, y: 0.40083134174346924 },
+                { x: 0.7142857313156128, y: 0.4133016765117645 },
+                { x: 0.6857143044471741, y: 0.4133016765117645 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'WIDE_SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '281', endIndex: '291' } ],
+              content: ''
+            },
+            confidence: 0.9827145338058472,
+            boundingPoly: {
+              vertices: [
+                { x: 324, y: 702 },
+                { x: 469, y: 702 },
+                { x: 469, y: 721 },
+                { x: 324, y: 721 }
+              ],
+              normalizedVertices: [
+                { x: 0.2722689211368561, y: 0.4168646037578583 },
+                { x: 0.39411765336990356, y: 0.4168646037578583 },
+                { x: 0.39411765336990356, y: 0.42814725637435913 },
+                { x: 0.2722689211368561, y: 0.42814725637435913 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '291', endIndex: '295' } ],
+              content: ''
+            },
+            confidence: 0.9711750149726868,
+            boundingPoly: {
+              vertices: [
+                { x: 475, y: 702 },
+                { x: 526, y: 702 },
+                { x: 526, y: 720 },
+                { x: 475, y: 720 }
+              ],
+              normalizedVertices: [
+                { x: 0.39915966987609863, y: 0.4168646037578583 },
+                { x: 0.4420168101787567, y: 0.4168646037578583 },
+                { x: 0.4420168101787567, y: 0.4275534451007843 },
+                { x: 0.39915966987609863, y: 0.4275534451007843 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '295', endIndex: '302' } ],
+              content: ''
+            },
+            confidence: 0.9833785891532898,
+            boundingPoly: {
+              vertices: [
+                { x: 532, y: 702 },
+                { x: 624, y: 702 },
+                { x: 624, y: 720 },
+                { x: 532, y: 720 }
+              ],
+              normalizedVertices: [
+                { x: 0.4470588266849518, y: 0.4168646037578583 },
+                { x: 0.5243697762489319, y: 0.4168646037578583 },
+                { x: 0.5243697762489319, y: 0.4275534451007843 },
+                { x: 0.4470588266849518, y: 0.4275534451007843 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '302', endIndex: '310' } ],
+              content: ''
+            },
+            confidence: 0.9752506017684937,
+            boundingPoly: {
+              vertices: [
+                { x: 631, y: 702 },
+                { x: 750, y: 702 },
+                { x: 750, y: 720 },
+                { x: 631, y: 720 }
+              ],
+              normalizedVertices: [
+                { x: 0.5302520990371704, y: 0.4168646037578583 },
+                { x: 0.6302521228790283, y: 0.4168646037578583 },
+                { x: 0.6302521228790283, y: 0.4275534451007843 },
+                { x: 0.5302520990371704, y: 0.4275534451007843 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '310', endIndex: '314' } ],
+              content: ''
+            },
+            confidence: 0.7867620587348938,
+            boundingPoly: {
+              vertices: [
+                { x: 756, y: 702 },
+                { x: 806, y: 702 },
+                { x: 806, y: 720 },
+                { x: 756, y: 720 }
+              ],
+              normalizedVertices: [
+                { x: 0.6352941393852234, y: 0.4168646037578583 },
+                { x: 0.6773109436035156, y: 0.4168646037578583 },
+                { x: 0.6773109436035156, y: 0.4275534451007843 },
+                { x: 0.6352941393852234, y: 0.4275534451007843 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '314', endIndex: '319' } ],
+              content: ''
+            },
+            confidence: 0.9937683343887329,
+            boundingPoly: {
+              vertices: [
+                { x: 812, y: 702 },
+                { x: 860, y: 702 },
+                { x: 860, y: 720 },
+                { x: 812, y: 720 }
+              ],
+              normalizedVertices: [
+                { x: 0.6823529601097107, y: 0.4168646037578583 },
+                { x: 0.7226890921592712, y: 0.4168646037578583 },
+                { x: 0.7226890921592712, y: 0.4275534451007843 },
+                { x: 0.6823529601097107, y: 0.4275534451007843 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'WIDE_SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '319', endIndex: '323' } ],
+              content: ''
+            },
+            confidence: 0.9801840782165527,
+            boundingPoly: {
+              vertices: [
+                { x: 393, y: 759 },
+                { x: 447, y: 759 },
+                { x: 447, y: 782 },
+                { x: 393, y: 782 }
+              ],
+              normalizedVertices: [
+                { x: 0.33025211095809937, y: 0.4507125914096832 },
+                { x: 0.375630259513855, y: 0.4507125914096832 },
+                { x: 0.375630259513855, y: 0.4643705487251282 },
+                { x: 0.33025211095809937, y: 0.4643705487251282 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '323', endIndex: '331' } ],
+              content: ''
+            },
+            confidence: 0.984359860420227,
+            boundingPoly: {
+              vertices: [
+                { x: 450, y: 759 },
+                { x: 541, y: 759 },
+                { x: 541, y: 782 },
+                { x: 450, y: 782 }
+              ],
+              normalizedVertices: [
+                { x: 0.3781512677669525, y: 0.4507125914096832 },
+                { x: 0.4546218514442444, y: 0.4507125914096832 },
+                { x: 0.4546218514442444, y: 0.4643705487251282 },
+                { x: 0.3781512677669525, y: 0.4643705487251282 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '331', endIndex: '338' } ],
+              content: ''
+            },
+            confidence: 0.9819851517677307,
+            boundingPoly: {
+              vertices: [
+                { x: 546, y: 759 },
+                { x: 622, y: 759 },
+                { x: 622, y: 782 },
+                { x: 546, y: 782 }
+              ],
+              normalizedVertices: [
+                { x: 0.4588235318660736, y: 0.4507125914096832 },
+                { x: 0.5226891040802002, y: 0.4507125914096832 },
+                { x: 0.5226891040802002, y: 0.4643705487251282 },
+                { x: 0.4588235318660736, y: 0.4643705487251282 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '338', endIndex: '341' } ],
+              content: ''
+            },
+            confidence: 0.9802733659744263,
+            boundingPoly: {
+              vertices: [
+                { x: 629, y: 759 },
+                { x: 656, y: 759 },
+                { x: 656, y: 782 },
+                { x: 629, y: 782 }
+              ],
+              normalizedVertices: [
+                { x: 0.5285714268684387, y: 0.4507125914096832 },
+                { x: 0.5512605309486389, y: 0.4507125914096832 },
+                { x: 0.5512605309486389, y: 0.4643705487251282 },
+                { x: 0.5285714268684387, y: 0.4643705487251282 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '341', endIndex: '350' } ],
+              content: ''
+            },
+            confidence: 0.9926386475563049,
+            boundingPoly: {
+              vertices: [
+                { x: 662, y: 759 },
+                { x: 755, y: 759 },
+                { x: 755, y: 782 },
+                { x: 662, y: 782 }
+              ],
+              normalizedVertices: [
+                { x: 0.556302547454834, y: 0.4507125914096832 },
+                { x: 0.6344537734985352, y: 0.4507125914096832 },
+                { x: 0.6344537734985352, y: 0.4643705487251282 },
+                { x: 0.556302547454834, y: 0.4643705487251282 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '350', endIndex: '352' } ],
+              content: ''
+            },
+            confidence: 0.9883891344070435,
+            boundingPoly: {
+              vertices: [
+                { x: 761, y: 759 },
+                { x: 782, y: 759 },
+                { x: 782, y: 782 },
+                { x: 761, y: 782 }
+              ],
+              normalizedVertices: [
+                { x: 0.6394957900047302, y: 0.4507125914096832 },
+                { x: 0.6571428775787354, y: 0.4507125914096832 },
+                { x: 0.6571428775787354, y: 0.4643705487251282 },
+                { x: 0.6394957900047302, y: 0.4643705487251282 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: null,
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '352', endIndex: '354' } ],
+              content: ''
+            },
+            confidence: 0.9672784805297852,
+            boundingPoly: {
+              vertices: [
+                { x: 780, y: 759 },
+                { x: 788, y: 759 },
+                { x: 788, y: 782 },
+                { x: 780, y: 782 }
+              ],
+              normalizedVertices: [
+                { x: 0.6554622054100037, y: 0.4507125914096832 },
+                { x: 0.6621848940849304, y: 0.4507125914096832 },
+                { x: 0.6621848940849304, y: 0.4643705487251282 },
+                { x: 0.6554622054100037, y: 0.4643705487251282 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'WIDE_SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '354', endIndex: '364' } ],
+              content: ''
+            },
+            confidence: 0.9903917908668518,
+            boundingPoly: {
+              vertices: [
+                { x: 310, y: 789 },
+                { x: 443, y: 789 },
+                { x: 443, y: 808 },
+                { x: 310, y: 808 }
+              ],
+              normalizedVertices: [
+                { x: 0.26050421595573425, y: 0.46852731704711914 },
+                { x: 0.3722689151763916, y: 0.46852731704711914 },
+                { x: 0.3722689151763916, y: 0.47980996966362 },
+                { x: 0.26050421595573425, y: 0.47980996966362 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '364', endIndex: '371' } ],
+              content: ''
+            },
+            confidence: 0.9863633513450623,
+            boundingPoly: {
+              vertices: [
+                { x: 448, y: 789 },
+                { x: 553, y: 789 },
+                { x: 553, y: 807 },
+                { x: 448, y: 807 }
+              ],
+              normalizedVertices: [
+                { x: 0.3764705955982208, y: 0.46852731704711914 },
+                { x: 0.4647058844566345, y: 0.46852731704711914 },
+                { x: 0.4647058844566345, y: 0.47921615839004517 },
+                { x: 0.3764705955982208, y: 0.47921615839004517 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: null,
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '371', endIndex: '372' } ],
+              content: ''
+            },
+            confidence: 0.9733816385269165,
+            boundingPoly: {
+              vertices: [
+                { x: 554, y: 789 },
+                { x: 561, y: 789 },
+                { x: 561, y: 807 },
+                { x: 554, y: 807 }
+              ],
+              normalizedVertices: [
+                { x: 0.46554622054100037, y: 0.46852731704711914 },
+                { x: 0.4714285731315613, y: 0.46852731704711914 },
+                { x: 0.4714285731315613, y: 0.47921615839004517 },
+                { x: 0.46554622054100037, y: 0.47921615839004517 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: null,
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '372', endIndex: '377' } ],
+              content: ''
+            },
+            confidence: 0.9891808032989502,
+            boundingPoly: {
+              vertices: [
+                { x: 561, y: 789 },
+                { x: 625, y: 789 },
+                { x: 625, y: 807 },
+                { x: 561, y: 807 }
+              ],
+              normalizedVertices: [
+                { x: 0.4714285731315613, y: 0.46852731704711914 },
+                { x: 0.5252100825309753, y: 0.46852731704711914 },
+                { x: 0.5252100825309753, y: 0.47921615839004517 },
+                { x: 0.4714285731315613, y: 0.47921615839004517 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '377', endIndex: '384' } ],
+              content: ''
+            },
+            confidence: 0.9921685457229614,
+            boundingPoly: {
+              vertices: [
+                { x: 632, y: 789 },
+                { x: 721, y: 789 },
+                { x: 721, y: 807 },
+                { x: 632, y: 807 }
+              ],
+              normalizedVertices: [
+                { x: 0.5310924649238586, y: 0.46852731704711914 },
+                { x: 0.6058823466300964, y: 0.46852731704711914 },
+                { x: 0.6058823466300964, y: 0.47921615839004517 },
+                { x: 0.5310924649238586, y: 0.47921615839004517 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '384', endIndex: '389' } ],
+              content: ''
+            },
+            confidence: 0.991536557674408,
+            boundingPoly: {
+              vertices: [
+                { x: 727, y: 789 },
+                { x: 789, y: 789 },
+                { x: 789, y: 807 },
+                { x: 727, y: 807 }
+              ],
+              normalizedVertices: [
+                { x: 0.6109243631362915, y: 0.46852731704711914 },
+                { x: 0.6630252003669739, y: 0.46852731704711914 },
+                { x: 0.6630252003669739, y: 0.47921615839004517 },
+                { x: 0.6109243631362915, y: 0.47921615839004517 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '389', endIndex: '395' } ],
+              content: ''
+            },
+            confidence: 0.9819519519805908,
+            boundingPoly: {
+              vertices: [
+                { x: 796, y: 789 },
+                { x: 871, y: 789 },
+                { x: 871, y: 807 },
+                { x: 796, y: 807 }
+              ],
+              normalizedVertices: [
+                { x: 0.6689075827598572, y: 0.46852731704711914 },
+                { x: 0.7319327592849731, y: 0.46852731704711914 },
+                { x: 0.7319327592849731, y: 0.47921615839004517 },
+                { x: 0.6689075827598572, y: 0.47921615839004517 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'WIDE_SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '395', endIndex: '399' } ],
+              content: ''
+            },
+            confidence: 0.9813352227210999,
+            boundingPoly: {
+              vertices: [
+                { x: 336, y: 842 },
+                { x: 383, y: 842 },
+                { x: 383, y: 865 },
+                { x: 336, y: 865 }
+              ],
+              normalizedVertices: [
+                { x: 0.2823529541492462, y: 0.5 },
+                { x: 0.3218487501144409, y: 0.5 },
+                { x: 0.3218487501144409, y: 0.5136579275131226 },
+                { x: 0.2823529541492462, y: 0.5136579275131226 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '399', endIndex: '407' } ],
+              content: ''
+            },
+            confidence: 0.976219654083252,
+            boundingPoly: {
+              vertices: [
+                { x: 386, y: 842 },
+                { x: 465, y: 842 },
+                { x: 465, y: 864 },
+                { x: 386, y: 864 }
+              ],
+              normalizedVertices: [
+                { x: 0.32436975836753845, y: 0.5 },
+                { x: 0.3907563090324402, y: 0.5 },
+                { x: 0.3907563090324402, y: 0.5130641460418701 },
+                { x: 0.32436975836753845, y: 0.5130641460418701 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '407', endIndex: '410' } ],
+              content: ''
+            },
+            confidence: 0.9846975803375244,
+            boundingPoly: {
+              vertices: [
+                { x: 471, y: 842 },
+                { x: 496, y: 842 },
+                { x: 496, y: 864 },
+                { x: 471, y: 864 }
+              ],
+              normalizedVertices: [
+                { x: 0.39579832553863525, y: 0.5 },
+                { x: 0.41680672764778137, y: 0.5 },
+                { x: 0.41680672764778137, y: 0.5130641460418701 },
+                { x: 0.39579832553863525, y: 0.5130641460418701 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '410', endIndex: '414' } ],
+              content: ''
+            },
+            confidence: 0.9813172817230225,
+            boundingPoly: {
+              vertices: [
+                { x: 499, y: 842 },
+                { x: 532, y: 842 },
+                { x: 532, y: 864 },
+                { x: 499, y: 864 }
+              ],
+              normalizedVertices: [
+                { x: 0.4193277359008789, y: 0.5 },
+                { x: 0.4470588266849518, y: 0.5 },
+                { x: 0.4470588266849518, y: 0.5130641460418701 },
+                { x: 0.4193277359008789, y: 0.5130641460418701 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '414', endIndex: '424' } ],
+              content: ''
+            },
+            confidence: 0.9873541593551636,
+            boundingPoly: {
+              vertices: [
+                { x: 537, y: 842 },
+                { x: 638, y: 842 },
+                { x: 638, y: 864 },
+                { x: 537, y: 864 }
+              ],
+              normalizedVertices: [
+                { x: 0.451260507106781, y: 0.5 },
+                { x: 0.5361344814300537, y: 0.5 },
+                { x: 0.5361344814300537, y: 0.5130641460418701 },
+                { x: 0.451260507106781, y: 0.5130641460418701 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '424', endIndex: '430' } ],
+              content: ''
+            },
+            confidence: 0.9879584312438965,
+            boundingPoly: {
+              vertices: [
+                { x: 641, y: 842 },
+                { x: 698, y: 842 },
+                { x: 698, y: 864 },
+                { x: 641, y: 864 }
+              ],
+              normalizedVertices: [
+                { x: 0.5386554598808289, y: 0.5 },
+                { x: 0.5865546464920044, y: 0.5 },
+                { x: 0.5865546464920044, y: 0.5130641460418701 },
+                { x: 0.5386554598808289, y: 0.5130641460418701 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '430', endIndex: '433' } ],
+              content: ''
+            },
+            confidence: 0.9880834817886353,
+            boundingPoly: {
+              vertices: [
+                { x: 703, y: 842 },
+                { x: 728, y: 842 },
+                { x: 728, y: 864 },
+                { x: 703, y: 864 }
+              ],
+              normalizedVertices: [
+                { x: 0.5907562971115112, y: 0.5 },
+                { x: 0.6117647290229797, y: 0.5 },
+                { x: 0.6117647290229797, y: 0.5130641460418701 },
+                { x: 0.5907562971115112, y: 0.5130641460418701 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '433', endIndex: '442' } ],
+              content: ''
+            },
+            confidence: 0.995045006275177,
+            boundingPoly: {
+              vertices: [
+                { x: 732, y: 842 },
+                { x: 815, y: 842 },
+                { x: 815, y: 864 },
+                { x: 732, y: 864 }
+              ],
+              normalizedVertices: [
+                { x: 0.6151260733604431, y: 0.5 },
+                { x: 0.6848739385604858, y: 0.5 },
+                { x: 0.6848739385604858, y: 0.5130641460418701 },
+                { x: 0.6151260733604431, y: 0.5130641460418701 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '442', endIndex: '444' } ],
+              content: ''
+            },
+            confidence: 0.989776611328125,
+            boundingPoly: {
+              vertices: [
+                { x: 821, y: 842 },
+                { x: 840, y: 842 },
+                { x: 840, y: 864 },
+                { x: 821, y: 864 }
+              ],
+              normalizedVertices: [
+                { x: 0.6899159550666809, y: 0.5 },
+                { x: 0.7058823704719543, y: 0.5 },
+                { x: 0.7058823704719543, y: 0.5130641460418701 },
+                { x: 0.6899159550666809, y: 0.5130641460418701 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: null,
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '444', endIndex: '446' } ],
+              content: ''
+            },
+            confidence: 0.9628186821937561,
+            boundingPoly: {
+              vertices: [
+                { x: 834, y: 842 },
+                { x: 843, y: 842 },
+                { x: 843, y: 864 },
+                { x: 834, y: 864 }
+              ],
+              normalizedVertices: [
+                { x: 0.7008403539657593, y: 0.5 },
+                { x: 0.7084033489227295, y: 0.5 },
+                { x: 0.7084033489227295, y: 0.5130641460418701 },
+                { x: 0.7008403539657593, y: 0.5130641460418701 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'WIDE_SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '446', endIndex: '449' } ],
+              content: ''
+            },
+            confidence: 0.9809569716453552,
+            boundingPoly: {
+              vertices: [
+                { x: 168, y: 886 },
+                { x: 204, y: 886 },
+                { x: 204, y: 908 },
+                { x: 168, y: 908 }
+              ],
+              normalizedVertices: [
+                { x: 0.1411764770746231, y: 0.5261282920837402 },
+                { x: 0.17142857611179352, y: 0.5261282920837402 },
+                { x: 0.17142857611179352, y: 0.5391923785209656 },
+                { x: 0.1411764770746231, y: 0.5391923785209656 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '449', endIndex: '452' } ],
+              content: ''
+            },
+            confidence: 0.9918859601020813,
+            boundingPoly: {
+              vertices: [
+                { x: 209, y: 886 },
+                { x: 231, y: 886 },
+                { x: 231, y: 907 },
+                { x: 209, y: 907 }
+              ],
+              normalizedVertices: [
+                { x: 0.17563025653362274, y: 0.5261282920837402 },
+                { x: 0.19411765038967133, y: 0.5261282920837402 },
+                { x: 0.19411765038967133, y: 0.5385985970497131 },
+                { x: 0.17563025653362274, y: 0.5385985970497131 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '452', endIndex: '459' } ],
+              content: ''
+            },
+            confidence: 0.9926373958587646,
+            boundingPoly: {
+              vertices: [
+                { x: 240, y: 886 },
+                { x: 323, y: 886 },
+                { x: 323, y: 907 },
+                { x: 240, y: 907 }
+              ],
+              normalizedVertices: [
+                { x: 0.20168067514896393, y: 0.5261282920837402 },
+                { x: 0.27142858505249023, y: 0.5261282920837402 },
+                { x: 0.27142858505249023, y: 0.5385985970497131 },
+                { x: 0.20168067514896393, y: 0.5385985970497131 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '459', endIndex: '464' } ],
+              content: ''
+            },
+            confidence: 0.9949232935905457,
+            boundingPoly: {
+              vertices: [
+                { x: 330, y: 886 },
+                { x: 398, y: 886 },
+                { x: 398, y: 907 },
+                { x: 330, y: 907 }
+              ],
+              normalizedVertices: [
+                { x: 0.27731093764305115, y: 0.5261282920837402 },
+                { x: 0.3344537913799286, y: 0.5261282920837402 },
+                { x: 0.3344537913799286, y: 0.5385985970497131 },
+                { x: 0.27731093764305115, y: 0.5385985970497131 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '464', endIndex: '470' } ],
+              content: ''
+            },
+            confidence: 0.9902005195617676,
+            boundingPoly: {
+              vertices: [
+                { x: 406, y: 886 },
+                { x: 492, y: 886 },
+                { x: 492, y: 907 },
+                { x: 406, y: 907 }
+              ],
+              normalizedVertices: [
+                { x: 0.34117648005485535, y: 0.5261282920837402 },
+                { x: 0.413445383310318, y: 0.5261282920837402 },
+                { x: 0.413445383310318, y: 0.5385985970497131 },
+                { x: 0.34117648005485535, y: 0.5385985970497131 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: null,
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '470', endIndex: '472' } ],
+              content: ''
+            },
+            confidence: 0.9840163588523865,
+            boundingPoly: {
+              vertices: [
+                { x: 494, y: 886 },
+                { x: 498, y: 886 },
+                { x: 498, y: 907 },
+                { x: 494, y: 907 }
+              ],
+              normalizedVertices: [
+                { x: 0.4151260554790497, y: 0.5261282920837402 },
+                { x: 0.41848739981651306, y: 0.5261282920837402 },
+                { x: 0.41848739981651306, y: 0.5385985970497131 },
+                { x: 0.4151260554790497, y: 0.5385985970497131 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '472', endIndex: '478' } ],
+              content: ''
+            },
+            confidence: 0.991421103477478,
+            boundingPoly: {
+              vertices: [
+                { x: 505, y: 886 },
+                { x: 575, y: 886 },
+                { x: 575, y: 907 },
+                { x: 505, y: 907 }
+              ],
+              normalizedVertices: [
+                { x: 0.424369752407074, y: 0.5261282920837402 },
+                { x: 0.4831932783126831, y: 0.5261282920837402 },
+                { x: 0.4831932783126831, y: 0.5385985970497131 },
+                { x: 0.424369752407074, y: 0.5385985970497131 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '478', endIndex: '482' } ],
+              content: ''
+            },
+            confidence: 0.9892083406448364,
+            boundingPoly: {
+              vertices: [
+                { x: 582, y: 886 },
+                { x: 627, y: 886 },
+                { x: 627, y: 907 },
+                { x: 582, y: 907 }
+              ],
+              normalizedVertices: [
+                { x: 0.489075630903244, y: 0.5261282920837402 },
+                { x: 0.526890754699707, y: 0.5261282920837402 },
+                { x: 0.526890754699707, y: 0.5385985970497131 },
+                { x: 0.489075630903244, y: 0.5385985970497131 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '482', endIndex: '486' } ],
+              content: ''
+            },
+            confidence: 0.9874307513237,
+            boundingPoly: {
+              vertices: [
+                { x: 635, y: 886 },
+                { x: 694, y: 886 },
+                { x: 694, y: 907 },
+                { x: 635, y: 907 }
+              ],
+              normalizedVertices: [
+                { x: 0.5336134433746338, y: 0.5261282920837402 },
+                { x: 0.583193302154541, y: 0.5261282920837402 },
+                { x: 0.583193302154541, y: 0.5385985970497131 },
+                { x: 0.5336134433746338, y: 0.5385985970497131 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: null,
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '486', endIndex: '488' } ],
+              content: ''
+            },
+            confidence: 0.9822492003440857,
+            boundingPoly: {
+              vertices: [
+                { x: 693, y: 886 },
+                { x: 697, y: 886 },
+                { x: 697, y: 907 },
+                { x: 693, y: 907 }
+              ],
+              normalizedVertices: [
+                { x: 0.5823529362678528, y: 0.5261282920837402 },
+                { x: 0.5857142806053162, y: 0.5261282920837402 },
+                { x: 0.5857142806053162, y: 0.5385985970497131 },
+                { x: 0.5823529362678528, y: 0.5385985970497131 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '488', endIndex: '497' } ],
+              content: ''
+            },
+            confidence: 0.9854021072387695,
+            boundingPoly: {
+              vertices: [
+                { x: 705, y: 886 },
+                { x: 841, y: 886 },
+                { x: 841, y: 907 },
+                { x: 705, y: 907 }
+              ],
+              normalizedVertices: [
+                { x: 0.5924369692802429, y: 0.5261282920837402 },
+                { x: 0.7067226767539978, y: 0.5261282920837402 },
+                { x: 0.7067226767539978, y: 0.5385985970497131 },
+                { x: 0.5924369692802429, y: 0.5385985970497131 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: null,
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '497', endIndex: '499' } ],
+              content: ''
+            },
+            confidence: 0.9700015783309937,
+            boundingPoly: {
+              vertices: [
+                { x: 842, y: 886 },
+                { x: 846, y: 886 },
+                { x: 846, y: 907 },
+                { x: 842, y: 907 }
+              ],
+              normalizedVertices: [
+                { x: 0.707563042640686, y: 0.5261282920837402 },
+                { x: 0.7109243869781494, y: 0.5261282920837402 },
+                { x: 0.7109243869781494, y: 0.5385985970497131 },
+                { x: 0.707563042640686, y: 0.5385985970497131 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '499', endIndex: '505' } ],
+              content: ''
+            },
+            confidence: 0.9911440014839172,
+            boundingPoly: {
+              vertices: [
+                { x: 853, y: 886 },
+                { x: 933, y: 886 },
+                { x: 933, y: 907 },
+                { x: 853, y: 907 }
+              ],
+              normalizedVertices: [
+                { x: 0.7168067097663879, y: 0.5261282920837402 },
+                { x: 0.7840335965156555, y: 0.5261282920837402 },
+                { x: 0.7840335965156555, y: 0.5385985970497131 },
+                { x: 0.7168067097663879, y: 0.5385985970497131 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '505', endIndex: '511' } ],
+              content: ''
+            },
+            confidence: 0.9960098266601562,
+            boundingPoly: {
+              vertices: [
+                { x: 940, y: 886 },
+                { x: 1013, y: 886 },
+                { x: 1013, y: 907 },
+                { x: 940, y: 907 }
+              ],
+              normalizedVertices: [
+                { x: 0.7899159789085388, y: 0.5261282920837402 },
+                { x: 0.8512604832649231, y: 0.5261282920837402 },
+                { x: 0.8512604832649231, y: 0.5385985970497131 },
+                { x: 0.7899159789085388, y: 0.5385985970497131 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'WIDE_SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '511', endIndex: '517' } ],
+              content: ''
+            },
+            confidence: 0.9801729917526245,
+            boundingPoly: {
+              vertices: [
+                { x: 267, y: 938 },
+                { x: 339, y: 938 },
+                { x: 339, y: 961 },
+                { x: 267, y: 961 }
+              ],
+              normalizedVertices: [
+                { x: 0.22436974942684174, y: 0.5570071339607239 },
+                { x: 0.28487396240234375, y: 0.5570071339607239 },
+                { x: 0.28487396240234375, y: 0.5706650614738464 },
+                { x: 0.22436974942684174, y: 0.5706650614738464 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '517', endIndex: '523' } ],
+              content: ''
+            },
+            confidence: 0.9865232706069946,
+            boundingPoly: {
+              vertices: [
+                { x: 340, y: 938 },
+                { x: 407, y: 938 },
+                { x: 407, y: 960 },
+                { x: 340, y: 960 }
+              ],
+              normalizedVertices: [
+                { x: 0.2857142984867096, y: 0.5570071339607239 },
+                { x: 0.3420168161392212, y: 0.5570071339607239 },
+                { x: 0.3420168161392212, y: 0.570071280002594 },
+                { x: 0.2857142984867096, y: 0.570071280002594 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '523', endIndex: '526' } ],
+              content: ''
+            },
+            confidence: 0.979354977607727,
+            boundingPoly: {
+              vertices: [
+                { x: 411, y: 938 },
+                { x: 446, y: 938 },
+                { x: 446, y: 960 },
+                { x: 411, y: 960 }
+              ],
+              normalizedVertices: [
+                { x: 0.34537816047668457, y: 0.5570071339607239 },
+                { x: 0.37478992342948914, y: 0.5570071339607239 },
+                { x: 0.37478992342948914, y: 0.570071280002594 },
+                { x: 0.34537816047668457, y: 0.570071280002594 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '526', endIndex: '531' } ],
+              content: ''
+            },
+            confidence: 0.9922188520431519,
+            boundingPoly: {
+              vertices: [
+                { x: 449, y: 938 },
+                { x: 508, y: 938 },
+                { x: 508, y: 960 },
+                { x: 449, y: 960 }
+              ],
+              normalizedVertices: [
+                { x: 0.37731093168258667, y: 0.5570071339607239 },
+                { x: 0.4268907606601715, y: 0.5570071339607239 },
+                { x: 0.4268907606601715, y: 0.570071280002594 },
+                { x: 0.37731093168258667, y: 0.570071280002594 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '531', endIndex: '534' } ],
+              content: ''
+            },
+            confidence: 0.9892433881759644,
+            boundingPoly: {
+              vertices: [
+                { x: 512, y: 938 },
+                { x: 535, y: 938 },
+                { x: 535, y: 960 },
+                { x: 512, y: 960 }
+              ],
+              normalizedVertices: [
+                { x: 0.4302521049976349, y: 0.5570071339607239 },
+                { x: 0.4495798349380493, y: 0.5570071339607239 },
+                { x: 0.4495798349380493, y: 0.570071280002594 },
+                { x: 0.4302521049976349, y: 0.570071280002594 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '534', endIndex: '540' } ],
+              content: ''
+            },
+            confidence: 0.9930001497268677,
+            boundingPoly: {
+              vertices: [
+                { x: 540, y: 938 },
+                { x: 612, y: 938 },
+                { x: 612, y: 960 },
+                { x: 540, y: 960 }
+              ],
+              normalizedVertices: [
+                { x: 0.45378151535987854, y: 0.5570071339607239 },
+                { x: 0.5142857432365417, y: 0.5570071339607239 },
+                { x: 0.5142857432365417, y: 0.570071280002594 },
+                { x: 0.45378151535987854, y: 0.570071280002594 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '540', endIndex: '545' } ],
+              content: ''
+            },
+            confidence: 0.9923670887947083,
+            boundingPoly: {
+              vertices: [
+                { x: 617, y: 938 },
+                { x: 655, y: 938 },
+                { x: 655, y: 960 },
+                { x: 617, y: 960 }
+              ],
+              normalizedVertices: [
+                { x: 0.5184873938560486, y: 0.5570071339607239 },
+                { x: 0.5504201650619507, y: 0.5570071339607239 },
+                { x: 0.5504201650619507, y: 0.570071280002594 },
+                { x: 0.5184873938560486, y: 0.570071280002594 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '545', endIndex: '550' } ],
+              content: ''
+            },
+            confidence: 0.9819843769073486,
+            boundingPoly: {
+              vertices: [
+                { x: 663, y: 938 },
+                { x: 710, y: 938 },
+                { x: 710, y: 960 },
+                { x: 663, y: 960 }
+              ],
+              normalizedVertices: [
+                { x: 0.5571428537368774, y: 0.5570071339607239 },
+                { x: 0.5966386795043945, y: 0.5570071339607239 },
+                { x: 0.5966386795043945, y: 0.570071280002594 },
+                { x: 0.5571428537368774, y: 0.570071280002594 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '550', endIndex: '554' } ],
+              content: ''
+            },
+            confidence: 0.9820606112480164,
+            boundingPoly: {
+              vertices: [
+                { x: 716, y: 938 },
+                { x: 758, y: 938 },
+                { x: 758, y: 960 },
+                { x: 716, y: 960 }
+              ],
+              normalizedVertices: [
+                { x: 0.6016806960105896, y: 0.5570071339607239 },
+                { x: 0.6369748115539551, y: 0.5570071339607239 },
+                { x: 0.6369748115539551, y: 0.570071280002594 },
+                { x: 0.6016806960105896, y: 0.570071280002594 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '554', endIndex: '557' } ],
+              content: ''
+            },
+            confidence: 0.9838244318962097,
+            boundingPoly: {
+              vertices: [
+                { x: 765, y: 938 },
+                { x: 789, y: 938 },
+                { x: 789, y: 960 },
+                { x: 765, y: 960 }
+              ],
+              normalizedVertices: [
+                { x: 0.6428571343421936, y: 0.5570071339607239 },
+                { x: 0.6630252003669739, y: 0.5570071339607239 },
+                { x: 0.6630252003669739, y: 0.570071280002594 },
+                { x: 0.6428571343421936, y: 0.570071280002594 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '557', endIndex: '561' } ],
+              content: ''
+            },
+            confidence: 0.9811139106750488,
+            boundingPoly: {
+              vertices: [
+                { x: 791, y: 938 },
+                { x: 845, y: 938 },
+                { x: 845, y: 960 },
+                { x: 791, y: 960 }
+              ],
+              normalizedVertices: [
+                { x: 0.6647058725357056, y: 0.5570071339607239 },
+                { x: 0.7100840210914612, y: 0.5570071339607239 },
+                { x: 0.7100840210914612, y: 0.570071280002594 },
+                { x: 0.6647058725357056, y: 0.570071280002594 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: null,
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '561', endIndex: '563' } ],
+              content: ''
+            },
+            confidence: 0.9834690093994141,
+            boundingPoly: {
+              vertices: [
+                { x: 842, y: 938 },
+                { x: 848, y: 938 },
+                { x: 848, y: 960 },
+                { x: 842, y: 960 }
+              ],
+              normalizedVertices: [
+                { x: 0.707563042640686, y: 0.5570071339607239 },
+                { x: 0.7126050591468811, y: 0.5570071339607239 },
+                { x: 0.7126050591468811, y: 0.570071280002594 },
+                { x: 0.707563042640686, y: 0.570071280002594 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [ { languageCode: 'en', confidence: 1 } ],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '563', endIndex: '568' } ],
+              content: ''
+            },
+            confidence: 0.9891748428344727,
+            boundingPoly: {
+              vertices: [
+                { x: 856, y: 938 },
+                { x: 909, y: 938 },
+                { x: 909, y: 960 },
+                { x: 856, y: 960 }
+              ],
+              normalizedVertices: [
+                { x: 0.7193277478218079, y: 0.5570071339607239 },
+                { x: 0.7638655304908752, y: 0.5570071339607239 },
+                { x: 0.7638655304908752, y: 0.570071280002594 },
+                { x: 0.7193277478218079, y: 0.570071280002594 }
+              ]
+            },
+            orientation: 'PAGE_UP'
+          },
+          detectedBreak: { type: 'WIDE_SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        {
+          detectedLanguages: [],
+          layout: {
+            textAnchor: {
+              textSegments: [ { startIndex: '568', endIndex: '570' } ],
+              content: ''
+            },
+            confidence: 0.9210802316665649,
+            boundingPoly: {
+              vertices: [
+                { x: 543, y: 1074 },
+                { x: 543, y: 1059 },
+                { x: 551, y: 1059 },
+                { x: 551, y: 1074 }
+              ],
+              normalizedVertices: [
+                { x: 0.4563025236129761, y: 0.6377671957015991 },
+                { x: 0.4563025236129761, y: 0.6288598775863647 },
+                { x: 0.46302521228790283, y: 0.6288598775863647 },
+                { x: 0.46302521228790283, y: 0.6377671957015991 }
+              ]
+            },
+            orientation: 'PAGE_LEFT'
+          },
+          detectedBreak: { type: 'WIDE_SPACE' },
+          provenance: null,
+          styleInfo: null
+        },
+        ... 11 more items
+      ],
+      visualElements: [],
+      tables: [],
+      formFields: [],
+      symbols: [],
+      transforms: [],
+      detectedBarcodes: [],
+      pageNumber: 1,
+      dimension: { width: 1190, height: 1684, unit: 'pixels' },
+      layout: {
+        textAnchor: {
+          textSegments: [ { startIndex: '0', endIndex: '647' } ],
+          content: ''
+        },
+        confidence: 0.960512638092041,
+        boundingPoly: {
+          vertices: [
+            { x: 0, y: 0 },
+            { x: 1190, y: 0 },
+            { x: 1190, y: 1684 },
+            { x: 0, y: 1684 }
+          ],
+          normalizedVertices: [
+            { x: 0, y: 0 },
+            { x: 1, y: 0 },
+            { x: 1, y: 1 },
+            { x: 0, y: 1 }
+          ]
+        },
+        orientation: 'PAGE_UP'
+      },
+      image: {
+        content: Buffer(1861986) [Uint8Array] [
+          137,  80,  78,  71,  13,  10,  26,  10,   0,   0,   0,  13,
+           73,  72,  68,  82,   0,   0,   4, 166,   0,   0,   6, 148,
+            8,   2,   0,   0,   0,  69,  81, 131,  62,   0,   0,   0,
+            6,  98,  75,  71,  68,   0, 255,   0, 255,   0, 255, 160,
+          189, 167, 147,   0,   0,  32,   0,  73,  68,  65,  84, 120,
+          156, 236, 221,  73, 147,  37,  89, 118,  31, 246, 115, 238,
+          228, 227, 155,  98, 206, 200, 204, 170, 204, 172, 174, 174,
+          234, 106, 246, 128,   6,   8,  25,  36,  82,  34,  12,  50,
+          146, 102, 228,  70,
+          ... 1861886 more items
+        ],
+        mimeType: 'image/png',
+        width: 1190,
+        height: 1684
+      },
+      provenance: null,
+      imageQualityScores: null
+    }
+  ],
+  entities: [
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '446', endIndex: '510' } ],
+        content: ''
+      },
+      type: 'addrs',
+      mentionText: 'NO 21 ALHAJI YAYA STREET, ILASA BUS STOP, ILASAMAJA, LAGOS STATE',
+      mentionId: '',
+      confidence: 0.9998600482940674,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.1411764770746231, y: 0.5261282920837402 },
+                { x: 0.8512604832649231, y: 0.5261282920837402 },
+                { x: 0.8512604832649231, y: 0.5391923785209656 },
+                { x: 0.1411764770746231, y: 0.5391923785209656 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '0',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '545', endIndex: '567' } ],
+        content: ''
+      },
+      type: 'date',
+      mentionText: '13th day of July, 2023',
+      mentionId: '',
+      confidence: 0.8693254590034485,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.5571428537368774, y: 0.5570071339607239 },
+                { x: 0.7638655304908752, y: 0.5570071339607239 },
+                { x: 0.7638655304908752, y: 0.570071280002594 },
+                { x: 0.5571428537368774, y: 0.570071280002594 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '1',
+      normalizedValue: {
+        text: '2023-07-13',
+        dateValue: { year: 2023, month: 7, day: 13 },
+        structuredValue: 'dateValue'
+      },
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '122', endIndex: '129' } ],
+        content: ''
+      },
+      type: 'num',
+      mentionText: '7052028',
+      mentionId: '',
+      confidence: 0.9999607801437378,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.6563025116920471, y: 0.27375295758247375 },
+                { x: 0.7310924530029297, y: 0.27375295758247375 },
+                { x: 0.7310924530029297, y: 0.2856294512748718 },
+                { x: 0.6563025116920471, y: 0.2856294512748718 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '2',
+      normalizedValue: { text: '7052028' },
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '35', endIndex: '62' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'FEDERAL REPUBLIC OF NIGERIA',
+      mentionId: '',
+      confidence: 0.9999711513519287,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.3420168161392212, y: 0.21912114322185516 },
+                { x: 0.6521008610725403, y: 0.21912114322185516 },
+                { x: 0.6521008610725403, y: 0.22980996966362 },
+                { x: 0.3420168161392212, y: 0.22980996966362 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '5',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '63', endIndex: '90' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'CERTIFICATE OF REGISTRATION',
+      mentionId: '',
+      confidence: 0.9999872446060181,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.24957983195781708, y: 0.25059381127357483 },
+                { x: 0.7470588088035583, y: 0.25059381127357483 },
+                { x: 0.7470588088035583, y: 0.26662707328796387 },
+                { x: 0.24957983195781708, y: 0.26662707328796387 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '6',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '91', endIndex: '129' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'BUSINESS NAME REGISTRATION NO. 7052028',
+      mentionId: '',
+      confidence: 0.9998348951339722,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.2613445520401001, y: 0.27375295758247375 },
+                { x: 0.7310924530029297, y: 0.27375295758247375 },
+                { x: 0.7310924530029297, y: 0.28622329235076904 },
+                { x: 0.2613445520401001, y: 0.28622329235076904 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '7',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '130', endIndex: '185' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'THE REGISTRAR - GENERAL OF CORPORATE AFFAIRS COMMISSION',
+      mentionId: '',
+      confidence: 0.999933123588562,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.1563025265932083, y: 0.30641329288482666 },
+                { x: 0.8386554718017578, y: 0.30641329288482666 },
+                { x: 0.8386554718017578, y: 0.31828978657722473 },
+                { x: 0.1563025265932083, y: 0.31828978657722473 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '8',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '186', endIndex: '207' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'hereby certifies that',
+      mentionId: '',
+      confidence: 0.9985736012458801,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.4084033668041229, y: 0.33907362818717957 },
+                { x: 0.583193302154541, y: 0.33907362818717957 },
+                { x: 0.583193302154541, y: 0.35154393315315247 },
+                { x: 0.4084033668041229, y: 0.35154393315315247 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '9',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '208', endIndex: '228' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'TEKCIFY TECHNOLOGIES',
+      mentionId: '',
+      confidence: 0.9999839067459106,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.3764705955982208, y: 0.3699524998664856 },
+                { x: 0.6176470518112183, y: 0.3699524998664856 },
+                { x: 0.6176470518112183, y: 0.3800475001335144 },
+                { x: 0.3764705955982208, y: 0.3800475001335144 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '10',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '229', endIndex: '280' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'is this day registered as a business name under the',
+      mentionId: '',
+      confidence: 0.9998950958251953,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.27394959330558777, y: 0.40083134174346924 },
+                { x: 0.7142857313156128, y: 0.40083134174346924 },
+                { x: 0.7142857313156128, y: 0.41389548778533936 },
+                { x: 0.27394959330558777, y: 0.41389548778533936 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '11',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '281', endIndex: '318' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'COMPANIES AND ALLIED MATTERS ACT 2020',
+      mentionId: '',
+      confidence: 0.9999943971633911,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.2722689211368561, y: 0.4168646037578583 },
+                { x: 0.7226890921592712, y: 0.4168646037578583 },
+                { x: 0.7226890921592712, y: 0.42814725637435913 },
+                { x: 0.2722689211368561, y: 0.42814725637435913 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '12',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '319', endIndex: '353' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'The general nature of business is:',
+      mentionId: '',
+      confidence: 0.9999480247497559,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.33025211095809937, y: 0.4507125914096832 },
+                { x: 0.6621848940849304, y: 0.4507125914096832 },
+                { x: 0.6621848940849304, y: 0.4643705487251282 },
+                { x: 0.33025211095809937, y: 0.4643705487251282 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '13',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '354', endIndex: '394' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'PROVIDING CUTTING-EDGE ONLINE TECH TOOLS',
+      mentionId: '',
+      confidence: 0.9999904632568359,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.26050421595573425, y: 0.46852731704711914 },
+                { x: 0.7319327592849731, y: 0.46852731704711914 },
+                { x: 0.7319327592849731, y: 0.47980996966362 },
+                { x: 0.26050421595573425, y: 0.47980996966362 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '14',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '395', endIndex: '445' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'The address of the principal place of business is:',
+      mentionId: '',
+      confidence: 0.999995231628418,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.2823529541492462, y: 0.5 },
+                { x: 0.7084033489227295, y: 0.5 },
+                { x: 0.7084033489227295, y: 0.5136579275131226 },
+                { x: 0.2823529541492462, y: 0.5136579275131226 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '15',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '446', endIndex: '510' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'NO 21 ALHAJI YAYA STREET, ILASA BUS STOP, ILASAMAJA, LAGOS STATE',
+      mentionId: '',
+      confidence: 0.9998600482940674,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.1411764770746231, y: 0.5261282920837402 },
+                { x: 0.8512604832649231, y: 0.5261282920837402 },
+                { x: 0.8512604832649231, y: 0.5391923785209656 },
+                { x: 0.1411764770746231, y: 0.5391923785209656 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '16',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '511', endIndex: '567' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'Given under my hand at Abuja this 13th day of July, 2023',
+      mentionId: '',
+      confidence: 0.9999850988388062,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.22436974942684174, y: 0.5570071339607239 },
+                { x: 0.7638655304908752, y: 0.5570071339607239 },
+                { x: 0.7638655304908752, y: 0.5706650614738464 },
+                { x: 0.22436974942684174, y: 0.5706650614738464 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '17',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '568', endIndex: '569' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'C',
+      mentionId: '',
+      confidence: 0.9571139812469482,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.4563025236129761, y: 0.6288598775863647 },
+                { x: 0.46302521228790283, y: 0.6288598775863647 },
+                { x: 0.46302521228790283, y: 0.6377671957015991 },
+                { x: 0.4563025236129761, y: 0.6377671957015991 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '18',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '570', endIndex: '584' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'PORATE AFFAIRS',
+      mentionId: '',
+      confidence: 0.9994552731513977,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.46554622054100037, y: 0.5985748171806335 },
+                { x: 0.5504201650619507, y: 0.5985748171806335 },
+                { x: 0.5504201650619507, y: 0.6413301825523376 },
+                { x: 0.46554622054100037, y: 0.6413301825523376 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '19',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '585', endIndex: '588' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'CAC',
+      mentionId: '',
+      confidence: 0.9995040893554688,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.4756302535533905, y: 0.6365795731544495 },
+                { x: 0.521848738193512, y: 0.6365795731544495 },
+                { x: 0.521848738193512, y: 0.646080732345581 },
+                { x: 0.4756302535533905, y: 0.646080732345581 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '20',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '589', endIndex: '599' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'COMMISSION',
+      mentionId: '',
+      confidence: 0.9999967813491821,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.462184876203537, y: 0.6454869508743286 },
+                { x: 0.5361344814300537, y: 0.6454869508743286 },
+                { x: 0.5361344814300537, y: 0.6638954877853394 },
+                { x: 0.462184876203537, y: 0.6638954877853394 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '21',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '600', endIndex: '611' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'Acalabankar',
+      mentionId: '',
+      confidence: 0.9986824989318848,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.624369740486145, y: 0.7167458534240723 },
+                { x: 0.8403361439704895, y: 0.7167458534240723 },
+                { x: 0.8403361439704895, y: 0.7488123774528503 },
+                { x: 0.624369740486145, y: 0.7488123774528503 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '22',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '612', endIndex: '626' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'A. G. Abubakar',
+      mentionId: '',
+      confidence: 0.999981164932251,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.6605042219161987, y: 0.7571259140968323 },
+                { x: 0.8184874057769775, y: 0.7571259140968323 },
+                { x: 0.8184874057769775, y: 0.7695962190628052 },
+                { x: 0.6605042219161987, y: 0.7695962190628052 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '23',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    },
+    {
+      properties: [],
+      textAnchor: {
+        textSegments: [ { startIndex: '627', endIndex: '646' } ],
+        content: ''
+      },
+      type: 'text',
+      mentionText: 'Registrar - General',
+      mentionId: '',
+      confidence: 0.9999592304229736,
+      pageAnchor: {
+        pageRefs: [
+          {
+            page: '0',
+            layoutType: 'LAYOUT_TYPE_UNSPECIFIED',
+            layoutId: '',
+            boundingPoly: {
+              vertices: [],
+              normalizedVertices: [
+                { x: 0.6697478890419006, y: 0.7773159146308899 },
+                { x: 0.8168067336082458, y: 0.7773159146308899 },
+                { x: 0.8168067336082458, y: 0.7880047559738159 },
+                { x: 0.6697478890419006, y: 0.7880047559738159 }
+              ]
+            },
+            confidence: 0
+          }
+        ]
+      },
+      id: '24',
+      normalizedValue: null,
+      provenance: null,
+      redacted: false
+    }
+  ],
+  entityRelations: [],
+  revisions: [],
+  textChanges: [],
+  mimeType: 'image/png',
+  text: 'UNITY AND FAITH FEACE AND PROGRESS\n' +
+    'FEDERAL REPUBLIC OF NIGERIA\n' +
+    'CERTIFICATE OF REGISTRATION\n' +
+    'BUSINESS NAME REGISTRATION NO. 7052028\n' +
+    'THE REGISTRAR - GENERAL OF CORPORATE AFFAIRS COMMISSION\n' +
+    'hereby certifies that\n' +
+    'TEKCIFY TECHNOLOGIES\n' +
+    'is this day registered as a business name under the\n' +
+    'COMPANIES AND ALLIED MATTERS ACT 2020\n' +
+    'The general nature of business is:\n' +
+    'PROVIDING CUTTING-EDGE ONLINE TECH TOOLS\n' +
+    'The address of the principal place of business is:\n' +
+    'NO 21 ALHAJI YAYA STREET, ILASA BUS STOP, ILASAMAJA, LAGOS STATE\n' +
+    'Given under my hand at Abuja this 13th day of July, 2023\n' +
+    'C\n' +
+    'PORATE AFFAIRS\n' +
+    'CAC\n' +
+    'COMMISSION\n' +
+    'Acalabankar\n' +
+    'A. G. Abubakar\n' +
+    'Registrar - General\n',
+  shardInfo: null,
+  error: null,
+  documentLayout: null,
+  chunkedDocument: null,
+  uri: '',
+  source: 'uri'
+}
+Final results: 1
