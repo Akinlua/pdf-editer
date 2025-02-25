@@ -6,16 +6,16 @@ const jsQR = require('jsqr');
 const pdfjsLib = require('pdfjs-dist/legacy/build/pdf.js');
 const path = require('path');
 const puppeteer = require('puppeteer-core'); // Use Puppeteer Core
+const nodemailer = require('nodemailer'); // Import Nodemailer
 
 // Define the path to your Chromium or Chrome executable
 // const CHROME_PATH = 'C:/Program Files/Google/Chrome/Application/chrome.exe'; // Update this path
 const CHROME_PATH = '/usr/bin/google-chrome'; // Update this path
 
 
-// Define product links and sensitive texts
-const products = [
-    {
-        link: "https://www.omegamotor.com.tr/en/product/detail/524",
+// Define product links and sensitive texts grouped by domain
+const productsByDomain = {
+    "omegamotor.com.tr": {
         sensitiveText: [
             "Adress : Dudullu Organize Sanayi Bölgesi 2. Cadde No : 10 Ümraniye - İstanbul",
             "Telephone : +90 216 266 32 80",
@@ -23,9 +23,15 @@ const products = [
             "E - mail : info@omegamotor.com.tr",
             "www.omegamotor.com.tr"
         ],
-        selector: 'div.summary.entry-summary strong' // Add selector for product name
+        selector: 'div.summary.entry-summary strong', // Selector for product name
+        products: [
+            {
+                link: "https://www.omegamotor.com.tr/en/product/detail/524"
+            },
+            // Add more products related to this domain here
+        ]
     },
-];
+};
 
 // Function to fetch PDF links from a product page using Puppeteer Core
 async function fetchPdfLinks(page) {
@@ -57,6 +63,30 @@ async function downloadPdf(url, outputPath) {
     });
 }
 
+// Function to send notification email
+async function sendNotification(productName, duration) {
+    // Create a transporter object using your email service
+    const transporter = nodemailer.createTransport({
+        service: 'gmail', // Use your email service (e.g., Gmail)
+        auth: {
+            user: 'akinluaolorunfunminiyi@gmail.com', // Your email address
+            pass: 'qnswilhynzsybrrp' // Your email password or app password
+        }
+    });
+
+    // Email options
+    const mailOptions = {
+        from: 'akinluaolorunfunminiyi@gmail.com', // Sender address
+        to: 'olorunfunminiyiakinlua@student.oauife.edu.ng', // List of recipients
+        subject: `PDF Processing Complete for ${productName}`, // Subject line
+        text: `All PDFs for the product "${productName}" have been processed successfully in ${duration} seconds!`, // Plain text body
+    };
+
+    // Send the email
+    await transporter.sendMail(mailOptions);
+    console.log(`Notification sent for product: ${productName}`);
+}
+
 // Main function to process each product
 async function processProducts() {
     const downloadDir = 'downloaded_pdfs';
@@ -70,34 +100,42 @@ async function processProducts() {
     });
     const page = await browser.newPage(); // Create a single page instance
 
-    for (const product of products) {
-        await page.goto(product.link, { waitUntil: 'networkidle2', timeout: 30000000 });
-        console.log(`Navigated to ${product.link}`);
+    // Process all domains in parallel
+    await Promise.all(Object.entries(productsByDomain).map(async ([domain, domainData]) => {
+        // Process all products in the current domain
+        await Promise.all(domainData.products.map(async (product) => {
+            const startTime = Date.now(); // Start timer
 
-        const productName = await getProductName(page, product.selector); // Get product name using the existing page
-        const pdfLinks = await fetchPdfLinks(page); // Fetch PDF links using the same page instance
-        console.log(`Downloading PDFs for ${product.link}:`, pdfLinks);
+            await page.goto(product.link, { waitUntil: 'networkidle2', timeout: 30000000 });
+            console.log(`Navigated to ${product.link}`);
 
-        // Extract domain and product name using the selector
-        const domain = new URL(product.link).hostname;
+            const productName = await getProductName(page, domainData.selector); // Get product name using the domain's selector
+            const pdfLinks = await fetchPdfLinks(page); // Fetch PDF links using the same page instance
+            console.log(`Downloading PDFs for ${product.link}:`, pdfLinks);
 
-        // Create directories for domain and product
-        const productDir = path.join(downloadDir, domain, productName);
-        const outputProductDir = path.join(outputDir, domain, productName);
-        fs.mkdirSync(productDir, { recursive: true });
-        fs.mkdirSync(outputProductDir, { recursive: true });
+            // Create directories for domain and product
+            const productDir = path.join(downloadDir, domain, productName);
+            const outputProductDir = path.join(outputDir, domain, productName);
+            fs.mkdirSync(productDir, { recursive: true });
+            fs.mkdirSync(outputProductDir, { recursive: true });
 
-        let pdfCounter = 1; // Counter for naming PDFs
-        for (const pdfLink of pdfLinks) {
-            const pdfFileName = `${productName} ${pdfCounter}.pdf`; // Naming convention
-            const pdfFilePath = path.join(productDir, pdfFileName); // Ensure this directory exists
-            const outputPdfPath = path.join(outputProductDir, pdfFileName); // Define output PDF path
+            // Process all PDF links in parallel
+            await Promise.all(pdfLinks.map(async (pdfLink, pdfCounter) => {
+                const pdfFileName = `${productName} ${pdfCounter + 1}.pdf`; // Naming convention
+                const pdfFilePath = path.join(productDir, pdfFileName); // Ensure this directory exists
+                const outputPdfPath = path.join(outputProductDir, pdfFileName); // Define output PDF path
 
-            await downloadPdf(pdfLink, pdfFilePath);
-            await modifyPdf(pdfFilePath, outputPdfPath, 'cover_page.png', product.sensitiveText);
-            pdfCounter++; // Increment counter for next PDF
-        }
-    }
+                await downloadPdf(pdfLink, pdfFilePath);
+                await modifyPdf(pdfFilePath, outputPdfPath, 'cover_page.png', domainData.sensitiveText);
+            }));
+
+            const endTime = Date.now(); // End timer
+            const duration = ((endTime - startTime) / 1000).toFixed(2); // Calculate duration in seconds
+
+            // Send notification after processing all PDFs for the product
+            await sendNotification(productName, duration);
+        }));
+    }));
 
     await browser.close(); // Close the browser after processing all products
 }
