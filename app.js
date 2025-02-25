@@ -69,7 +69,7 @@ async function sendNotification(productName, duration) {
     const transporter = nodemailer.createTransport({
         service: 'gmail', // Use your email service (e.g., Gmail)
         auth: {
-            user: 'akinluaolorunfunminiyi@gmail.com', // Your email address
+            user: 'akinluaolorunfunminiyi', // Your email address
             pass: 'qnswilhynzsybrrp' // Your email password or app password
         }
     });
