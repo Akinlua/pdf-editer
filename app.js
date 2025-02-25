@@ -64,7 +64,10 @@ async function processProducts() {
     fs.mkdirSync(downloadDir, { recursive: true }); // Ensure the download directory exists
     fs.mkdirSync(outputDir, { recursive: true }); // Ensure the output directory exists
 
-    const browser = await puppeteer.launch({ executablePath: CHROME_PATH }); // Launch browser once
+    const browser = await puppeteer.launch({
+        executablePath: CHROME_PATH,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
     const page = await browser.newPage(); // Create a single page instance
 
     for (const product of products) {
