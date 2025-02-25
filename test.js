@@ -438,66 +438,66 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
       }
 
 
-      const Qrpage = await pdfDocument.getPage(i + 1);
-        // Your chosen scale factor
-        const s = 4.0;
-        const viewport = Qrpage.getViewport({ scale: s });
+      // const Qrpage = await pdfDocument.getPage(i + 1);
+      //   // Your chosen scale factor
+      //   const s = 4.0;
+      //   const viewport = Qrpage.getViewport({ scale: s });
 
-        const canvas = createCanvas(viewport.width, viewport.height);
-        const context = canvas.getContext('2d');
+      //   const canvas = createCanvas(viewport.width, viewport.height);
+      //   const context = canvas.getContext('2d');
 
-        const renderContext = {
-            canvasContext: context,
-            viewport: viewport,
-        };
+      //   const renderContext = {
+      //       canvasContext: context,
+      //       viewport: viewport,
+      //   };
 
-        await Qrpage.render(renderContext).promise;
+      //   await Qrpage.render(renderContext).promise;
 
-        // After rendering the page onto the canvas:
-        thresholdImage(context);
+      //   // After rendering the page onto the canvas:
+      //   thresholdImage(context);
 
-        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-        const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
+      //   const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      //   const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
 
-        if (qrCode) {
-            // console.log(qrCode)
-            console.log(`🔍 QR code found on page ${i + 1}:`, qrCode.location);
+      //   if (qrCode) {
+      //       // console.log(qrCode)
+      //       console.log(`🔍 QR code found on page ${i + 1}:`, qrCode.location);
 
 
-            // ... after detecting QR code in the scaled canvas ...
-            const topLeft = qrCode.location.topLeftCorner;
-            const bottomRight = qrCode.location.bottomRightCorner;
+      //       // ... after detecting QR code in the scaled canvas ...
+      //       const topLeft = qrCode.location.topLeftCorner;
+      //       const bottomRight = qrCode.location.bottomRightCorner;
 
-            const xScaled = topLeft.x;
-            const yScaled = topLeft.y;
-            const wScaled = Math.abs(bottomRight.x - topLeft.x);
-            const hScaled = Math.abs(bottomRight.y - topLeft.y);
+      //       const xScaled = topLeft.x;
+      //       const yScaled = topLeft.y;
+      //       const wScaled = Math.abs(bottomRight.x - topLeft.x);
+      //       const hScaled = Math.abs(bottomRight.y - topLeft.y);
 
-            // Convert scaled coords -> PDF coords
-            const xPdf = xScaled / s;
-            const wPdf = wScaled / s;
-            const hPdf = hScaled / s;
+      //       // Convert scaled coords -> PDF coords
+      //       const xPdf = xScaled / s;
+      //       const wPdf = wScaled / s;
+      //       const hPdf = hScaled / s;
 
-            // For the Y-axis, PDF is bottom-left, so flip:
-            const pdfPage = pdfDoc.getPages()[i];
-            const pdfHeight = pdfPage.getHeight();  // page height in PDF coords
-            // Move from top-left (canvas) to bottom-left (PDF):
-            const yPdf = pdfHeight - (yScaled / s) - hPdf;
+      //       // For the Y-axis, PDF is bottom-left, so flip:
+      //       const pdfPage = pdfDoc.getPages()[i];
+      //       const pdfHeight = pdfPage.getHeight();  // page height in PDF coords
+      //       // Move from top-left (canvas) to bottom-left (PDF):
+      //       const yPdf = pdfHeight - (yScaled / s) - hPdf;
 
-            // Draw your rectangle in the PDF coordinate space
-            const padding = 2;
-            pdfPage.drawRectangle({
-                x: xPdf - padding,
-                y: yPdf - padding,
-                width: wPdf + padding * 2,
-                height: hPdf + padding * 2,
-                color: rgb(1, 1, 1), // Red, just for testing
-            });
+      //       // Draw your rectangle in the PDF coordinate space
+      //       const padding = 2;
+      //       pdfPage.drawRectangle({
+      //           x: xPdf - padding,
+      //           y: yPdf - padding,
+      //           width: wPdf + padding * 2,
+      //           height: hPdf + padding * 2,
+      //           color: rgb(1, 1, 1), // Red, just for testing
+      //       });
 
-            console.log(`✅ QR code covered on page ${i + 1}`);
-        } else {
-            console.log(`ℹ️ No QR code found on page ${i + 1}`);
-        }
+      //       console.log(`✅ QR code covered on page ${i + 1}`);
+      //   } else {
+      //       console.log(`ℹ️ No QR code found on page ${i + 1}`);
+      //   }
     }
   
     const coverImageBytes = fs.readFileSync(coverImagePath);
