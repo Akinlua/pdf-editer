@@ -100,44 +100,50 @@ async function processProducts() {
     });
     const page = await browser.newPage(); // Create a single page instance
 
-    // Process all domains in parallel
-    await Promise.all(Object.entries(productsByDomain).map(async ([domain, domainData]) => {
-        // Process all products in the current domain
-        await Promise.all(domainData.products.map(async (product) => {
-            const startTime = Date.now(); // Start timer
+    try {
+        // Process all domains in parallel
+        await Promise.all(Object.entries(productsByDomain).map(async ([domain, domainData]) => {
+            // Process all products in the current domain
+            await Promise.all(domainData.products.map(async (product) => {
+                const startTime = Date.now(); // Start timer
 
-            await page.goto(product.link, { waitUntil: 'networkidle2', timeout: 30000000 });
-            console.log(`Navigated to ${product.link}`);
+                await page.goto(product.link, { waitUntil: 'networkidle2', timeout: 30000000 });
+                console.log(`Navigated to ${product.link}`);
 
-            const productName = await getProductName(page, domainData.selector); // Get product name using the domain's selector
-            const pdfLinks = await fetchPdfLinks(page); // Fetch PDF links using the same page instance
-            console.log(`Downloading PDFs for ${product.link}:`, pdfLinks);
+                const productName = await getProductName(page, domainData.selector); // Get product name using the domain's selector
+                const pdfLinks = await fetchPdfLinks(page); // Fetch PDF links using the same page instance
+                console.log(`Downloading PDFs for ${product.link}:`, pdfLinks);
 
-            // Create directories for domain and product
-            const productDir = path.join(downloadDir, domain, productName);
-            const outputProductDir = path.join(outputDir, domain, productName);
-            fs.mkdirSync(productDir, { recursive: true });
-            fs.mkdirSync(outputProductDir, { recursive: true });
+                // Create directories for domain and product
+                const productDir = path.join(downloadDir, domain, productName);
+                const outputProductDir = path.join(outputDir, domain, productName);
+                fs.mkdirSync(productDir, { recursive: true });
+                fs.mkdirSync(outputProductDir, { recursive: true });
 
-            // Process all PDF links in parallel
-            await Promise.all(pdfLinks.map(async (pdfLink, pdfCounter) => {
-                const pdfFileName = `${productName} ${pdfCounter + 1}.pdf`; // Naming convention
-                const pdfFilePath = path.join(productDir, pdfFileName); // Ensure this directory exists
-                const outputPdfPath = path.join(outputProductDir, pdfFileName); // Define output PDF path
+                // Process all PDF links in parallel
+                await Promise.all(pdfLinks.map(async (pdfLink, pdfCounter) => {
+                    const pdfFileName = `${productName} ${pdfCounter + 1}.pdf`; // Naming convention
+                    const pdfFilePath = path.join(productDir, pdfFileName); // Ensure this directory exists
+                    const outputPdfPath = path.join(outputProductDir, pdfFileName); // Define output PDF path
 
-                await downloadPdf(pdfLink, pdfFilePath);
-                await modifyPdf(pdfFilePath, outputPdfPath, 'cover_page.png', domainData.sensitiveText);
+                    await downloadPdf(pdfLink, pdfFilePath);
+                    await modifyPdf(pdfFilePath, outputPdfPath, 'cover_page.png', domainData.sensitiveText);
+                }));
+
+                const endTime = Date.now(); // End timer
+                const duration = ((endTime - startTime) / 1000).toFixed(2); // Calculate duration in seconds
+
+                // Send notification after processing all PDFs for the product
+                await sendNotification(productName, duration);
             }));
-
-            const endTime = Date.now(); // End timer
-            const duration = ((endTime - startTime) / 1000).toFixed(2); // Calculate duration in seconds
-
-            // Send notification after processing all PDFs for the product
-            await sendNotification(productName, duration);
         }));
-    }));
-
-    await browser.close(); // Close the browser after processing all products
+    } catch (error) {
+        // Send notification about the error
+        await sendNotification('Error Occurred', error.message);
+        console.error('Error occurred:', error);
+    } finally {
+        await browser.close(); // Close the browser after processing all products
+    }
 }
 
 // Function to get product name from the page using the selector
