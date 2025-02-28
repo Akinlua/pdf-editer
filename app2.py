@@ -9,6 +9,7 @@ from pathlib import Path
 import concurrent.futures
 from functools import partial
 from flask import Flask, request, jsonify  # Import Flask and request modules
+import uuid  # Import uuid for generating unique filenames
 
 app = Flask(__name__)  # Create a Flask application
 
@@ -21,8 +22,9 @@ def extract_qr():
     if file.filename == '':  # Check if the file has a valid name
         return jsonify({'error': 'No selected file'}), 400
     
-    # Save the uploaded PDF temporarily
-    pdf_path = os.path.join(tempfile.gettempdir(), file.filename)
+    # Save the uploaded PDF in the root folder with a unique name
+    pdf_filename = f"{uuid.uuid4()}_{file.filename}"  # Generate a unique filename
+    pdf_path = os.path.join(os.getcwd(), pdf_filename)  # Save in the root folder
     file.save(pdf_path)
     
     try:
