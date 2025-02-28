@@ -30,6 +30,8 @@ def extract_qr():
         start_time = time.time()
         qr_positions = extract_qr_positions_from_pdf(pdf_path)
         elapsed_time = time.time() - start_time
+        print(f"Found {len(qr_positions)} QR codes in the {pdf_path} in {elapsed_time:.2f} seconds")
+
 
         return jsonify(qr_positions)  # Return the QR positions as JSON
     finally:
