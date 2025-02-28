@@ -24,9 +24,10 @@ const productsByDomain = {
             "www.omegamotor.com.tr"
         ],
         selector: 'div.summary.entry-summary strong', // Selector for product name
+        fileselector: "",
         products: [
             {
-                link: "https://www.omegamotor.com.tr/en/product/detail/524"
+                link: "https://www.omegamotor.com.tr/en/product/detail/524",
             },
             // Add more products related to this domain here
         ]
@@ -34,15 +35,15 @@ const productsByDomain = {
 };
 
 // Function to fetch PDF links from a product page using Puppeteer Core
-async function fetchPdfLinks(page) {
+async function fetchPdfLinks(page, selector) {
     // No need to launch a new browser instance; we use the existing page
     await page.goto(page.url(), { waitUntil: 'networkidle2', timeout: 30000000 });
     console.log(`Navigated to ${page.url()}`);
 
-    const pdfLinks = await page.evaluate(() => {
-        const links = Array.from(document.querySelectorAll('a[href$=".pdf"]'));
+    const pdfLinks = await page.evaluate((selector) => {
+        const links = Array.from(document.querySelectorAll(`${selector} a[href$=".pdf"]`));
         return links.map(link => link.href);
-    });
+    }, selector); // Pass the selector to the page context
 
     console.log(pdfLinks);
     return Array.from(new Set(pdfLinks)); // Remove duplicates
@@ -111,7 +112,7 @@ async function processProducts() {
                 console.log(`Navigated to ${product.link}`);
 
                 const productName = await getProductName(page, domainData.selector); // Get product name using the domain's selector
-                const pdfLinks = await fetchPdfLinks(page); // Fetch PDF links using the same page instance
+                const pdfLinks = await fetchPdfLinks(page, domainData.fileselector); // Fetch PDF links using the same page instance and domain selector
                 console.log(`Downloading PDFs for ${product.link}:`, pdfLinks);
 
                 // Create directories for domain and product
