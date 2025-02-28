@@ -8,6 +8,34 @@ import shutil
 from pathlib import Path
 import concurrent.futures
 from functools import partial
+from flask import Flask, request, jsonify  # Import Flask and request modules
+
+app = Flask(__name__)  # Create a Flask application
+
+@app.route('/extract_qr', methods=['POST'])  # Define the API endpoint
+def extract_qr():
+    if 'file' not in request.files:  # Check if a file is part of the request
+        return jsonify({'error': 'No file part'}), 400
+    
+    file = request.files['file']  # Get the file from the request
+    if file.filename == '':  # Check if the file has a valid name
+        return jsonify({'error': 'No selected file'}), 400
+    
+    # Save the uploaded PDF temporarily
+    pdf_path = os.path.join(tempfile.gettempdir(), file.filename)
+    file.save(pdf_path)
+    
+    try:
+        # Call the existing function to extract QR positions
+        start_time = time.time()
+        qr_positions = extract_qr_positions_from_pdf(pdf_path)
+        elapsed_time = time.time() - start_time
+
+        return jsonify(qr_positions)  # Return the QR positions as JSON
+    finally:
+        # Clean up the temporary file
+        if os.path.exists(pdf_path):
+            os.remove(pdf_path)
 
 def process_page(page_info, temp_dir, qr_detector=None):
     """
@@ -327,12 +355,12 @@ def extract_qr_with_contours(pdf_path, max_workers=None):
 
 def main():
     # Example usage
-    pdf_path = "./3M0SA3E-09LK21CT0 3.pdf"
+    pdf_path = "./3M0SA3E-09LK21CT0 16.pdf"
     
     # Determine number of worker threads (CPU count is often a good default)
     import multiprocessing
-    # max_workers = multiprocessing.cpu_count()
-    max_workers = 10
+    max_workers = multiprocessing.cpu_count()
+    # max_workers = 10
     print(f"Using {max_workers} worker threads")
     
     start_time = time.time()
@@ -373,4 +401,4 @@ def main():
             print(f"  Detection method: {qr['detection_method']} (confidence: {qr['confidence']})")
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)  # Run the Flask app

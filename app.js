@@ -323,103 +323,53 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
     const existingPdfBytes = fs.readFileSync(inputPdfPath);
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
   
-    // OCR the entire PDF (your method returns array of pages, each with words)
-    const ocrResults = await ocrExtractText(existingPdfBytes);
+    // OCR the entire PDF and fetch QR code results in parallel
+    const [ocrResults, qrResults] = await Promise.all([
+        ocrExtractText(existingPdfBytes),
+        fetchQrResults(existingPdfBytes) // New function to fetch QR results
+    ]);
 
     const pdfData = new Uint8Array(fs.readFileSync(inputPdfPath));
     const loadingTask = pdfjsLib.getDocument({ data: pdfData });
     const pdfDocument = await loadingTask.promise;
     
-    let added_width
-    let added_height
+    let added_width;
+    let added_height;
     for (let i = 0; i < pdfDoc.getPageCount(); i++) {
-      const page = pdfDoc.getPage(i);
-      const { width, height } = page.getSize();
-      if(i == 0) {
-        added_height= height
-        added_width = width
-      }    
+        const page = pdfDoc.getPage(i);
+        const { width, height } = page.getSize();
+        if (i == 0) {
+            added_height = height;
+            added_width = width;
+        }    
 
+        // The OCR result for page i
+        const ocrPageData = ocrResults[i];
+        if (!ocrPageData) continue; // No OCR for this page?
   
-      // The OCR result for page i
-      const ocrPageData = ocrResults[i];
-      if (!ocrPageData) continue; // No OCR for this page?
-  
-      // We'll search each phrase in the array
-      for (const phrase of phrases) {
-        // Find all consecutive matches for "phrase"
-        const matches = findPhraseMatches(ocrPageData.words, phrase);
-        if (matches.length > 0) {
-          console.log(`Page ${i + 1}: Found phrase "${phrase}" ${matches.length} time(s).`);
-          // For each match, combine bounding boxes
-          for (const matchWords of matches) {
-            const box = combineBoundingBoxes(matchWords);
-            drawRedaction(page, width, height, box);
-          }
+        // Draw rectangles for OCR matches
+        for (const phrase of phrases) {
+            const matches = findPhraseMatches(ocrPageData.words, phrase);
+            if (matches.length > 0) {
+                console.log(`Page ${i + 1}: Found phrase "${phrase}" ${matches.length} time(s).`);
+                for (const matchWords of matches) {
+                    const box = combineBoundingBoxes(matchWords);
+                    drawRedaction(page, width, height, box);
+                }
+            }
         }
-      }
 
-
-      // const Qrpage = await pdfDocument.getPage(i + 1);
-      //   // Your chosen scale factor
-      //   const s = 4.0;
-      //   const viewport = Qrpage.getViewport({ scale: s });
-
-      //   const canvas = createCanvas(viewport.width, viewport.height);
-      //   const context = canvas.getContext('2d');
-
-      //   const renderContext = {
-      //       canvasContext: context,
-      //       viewport: viewport,
-      //   };
-
-      //   await Qrpage.render(renderContext).promise;
-
-      //   // After rendering the page onto the canvas:
-      //   thresholdImage(context);
-
-      //   const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      //   const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
-
-      //   if (qrCode) {
-      //       // console.log(qrCode)
-      //       console.log(`🔍 QR code found on page ${i + 1}:`, qrCode.location);
-
-
-      //       // ... after detecting QR code in the scaled canvas ...
-      //       const topLeft = qrCode.location.topLeftCorner;
-      //       const bottomRight = qrCode.location.bottomRightCorner;
-
-      //       const xScaled = topLeft.x;
-      //       const yScaled = topLeft.y;
-      //       const wScaled = Math.abs(bottomRight.x - topLeft.x);
-      //       const hScaled = Math.abs(bottomRight.y - topLeft.y);
-
-      //       // Convert scaled coords -> PDF coords
-      //       const xPdf = xScaled / s;
-      //       const wPdf = wScaled / s;
-      //       const hPdf = hScaled / s;
-
-      //       // For the Y-axis, PDF is bottom-left, so flip:
-      //       const pdfPage = pdfDoc.getPages()[i];
-      //       const pdfHeight = pdfPage.getHeight();  // page height in PDF coords
-      //       // Move from top-left (canvas) to bottom-left (PDF):
-      //       const yPdf = pdfHeight - (yScaled / s) - hPdf;
-
-      //       // Draw your rectangle in the PDF coordinate space
-      //       const padding = 2;
-      //       pdfPage.drawRectangle({
-      //           x: xPdf - padding,
-      //           y: yPdf - padding,
-      //           width: wPdf + padding * 2,
-      //           height: hPdf + padding * 2,
-      //           color: rgb(1, 1, 1), // Red, just for testing
-      //       });
-
-      //       console.log(`✅ QR code covered on page ${i + 1}`);
-      //   } else {
-      //       console.log(`ℹ️ No QR code found on page ${i + 1}`);
-      //   }
+        // Draw rectangles for QR results
+        const qrPageData = qrResults.filter(qr => qr.page === (i + 1)); // Filter QR results for the current page
+        qrPageData.forEach(qr => {
+            const box = {
+                x0: qr.bbox.x1,
+                y0: qr.bbox.y1,
+                x1: qr.bbox.x2,
+                y1: qr.bbox.y2
+            };
+            drawRedaction(page, width, height, box);
+        });
     }
   
     const coverImageBytes = fs.readFileSync(coverImagePath);
@@ -433,7 +383,23 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
     const pdfBytes = await pdfDoc.save();
     fs.writeFileSync(outputPdfPath, pdfBytes);
     console.log(`✅ Modified PDF saved as ${outputPdfPath}`);
-  }
+}
+
+// New function to fetch QR results
+async function fetchQrResults(pdfBuffer) {
+    const formData = new FormData();
+    formData.append('file', new Blob([pdfBuffer], { type: 'application/pdf' }));
+
+    const response = await axios.post('http://127.0.0.1:5000/extract_qr', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+    });
+
+    if (response.data) {
+        return response.data; // Return the QR results
+    } else {
+        throw new Error('QR extraction failed');
+    }
+}
 
 //   const SENSITIVE_PHRASES = [
 //     "Adress : Dudullu Organize Sanayi Bölgesi 2. Cadde No : 10 Ümraniye - İstanbul",
