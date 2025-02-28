@@ -24,7 +24,7 @@ const productsByDomain = {
             "www.omegamotor.com.tr"
         ],
         selector: 'div.summary.entry-summary strong', // Selector for product name
-        fileselector: "",
+        fileselector: ".shop_table cart",
         products: [
             {
                 link: "https://www.omegamotor.com.tr/en/product/detail/524",
