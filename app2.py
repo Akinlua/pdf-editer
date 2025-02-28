@@ -332,7 +332,7 @@ def main():
     # Determine number of worker threads (CPU count is often a good default)
     import multiprocessing
     # max_workers = multiprocessing.cpu_count()
-    max_workers = 1
+    max_workers = 10
     print(f"Using {max_workers} worker threads")
     
     start_time = time.time()
