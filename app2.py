@@ -403,4 +403,4 @@ def main():
             print(f"  Detection method: {qr['detection_method']} (confidence: {qr['confidence']})")
 
 if __name__ == "__main__":
-    app.run(debug=True, port=3001)  # Run the Flask app
+    app.run(host='0.0.0.0', port=3001)  # Run the Flask app
