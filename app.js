@@ -9,8 +9,8 @@ const puppeteer = require('puppeteer-core'); // Use Puppeteer Core
 const nodemailer = require('nodemailer'); // Import Nodemailer
 
 // Define the path to your Chromium or Chrome executable
-const CHROME_PATH = 'C:/Program Files/Google/Chrome/Application/chrome.exe'; // Update this path
-// const CHROME_PATH = '/usr/bin/google-chrome'; // Update this path
+// const CHROME_PATH = 'C:/Program Files/Google/Chrome/Application/chrome.exe'; // Update this path
+const CHROME_PATH = '/usr/bin/google-chrome'; // Update this path
 
 
 // Define product links and sensitive texts grouped by domain
