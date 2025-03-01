@@ -396,7 +396,7 @@ async function fetchQrResults(pdfBuffer) {
     const formData = new FormData();
     formData.append('file', new Blob([pdfBuffer], { type: 'application/pdf' }));
 
-    const response = await axios.post('http://127.0.0.1:5000/extract_qr', formData, {
+    const response = await axios.post('http://194.31.150.41:3001/extract_qr', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
     });
 
