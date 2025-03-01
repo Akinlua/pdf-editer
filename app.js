@@ -9,8 +9,8 @@ const puppeteer = require('puppeteer-core'); // Use Puppeteer Core
 const nodemailer = require('nodemailer'); // Import Nodemailer
 
 // Define the path to your Chromium or Chrome executable
-// const CHROME_PATH = 'C:/Program Files/Google/Chrome/Application/chrome.exe'; // Update this path
-const CHROME_PATH = '/usr/bin/google-chrome'; // Update this path
+const CHROME_PATH = 'C:/Program Files/Google/Chrome/Application/chrome.exe'; // Update this path
+// const CHROME_PATH = '/usr/bin/google-chrome'; // Update this path
 
 
 // Define product links and sensitive texts grouped by domain
@@ -24,7 +24,7 @@ const productsByDomain = {
             "www.omegamotor.com.tr"
         ],
         selector: 'div.summary.entry-summary strong', // Selector for product name
-        fileselector: ".shop_table cart",
+        fileselector: ".shop_table.cart",
         products: [
             {
                 link: "https://www.omegamotor.com.tr/en/product/detail/524",
@@ -41,7 +41,12 @@ async function fetchPdfLinks(page, selector) {
     console.log(`Navigated to ${page.url()}`);
 
     const pdfLinks = await page.evaluate((selector) => {
-        const links = Array.from(document.querySelectorAll(`${selector} a[href$=".pdf"]`));
+        // Find the specified selector
+        const container = document.querySelector(selector);
+        if (!container) return []; // Return an empty array if the selector is not found
+
+        // Collect all PDF links within the specified container, case insensitive
+        const links = Array.from(container.querySelectorAll('a[href$=".pdf"], a[href$=".PDF"]'));
         return links.map(link => link.href);
     }, selector); // Pass the selector to the page context
 
