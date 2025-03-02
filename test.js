@@ -6,6 +6,7 @@ const jsQR = require('jsqr');
 const pdfjsLib = require('pdfjs-dist/legacy/build/pdf.js');
 const path = require('path');
 const puppeteer = require('puppeteer-core'); // Use Puppeteer Core
+const { match } = require('assert');
 
 // Define the path to your Chromium or Chrome executable
 const CHROME_PATH = 'C:/Program Files/Google/Chrome/Application/chrome.exe'; // Update this path
@@ -527,34 +528,34 @@ function combineBoundingBoxes(words) {
     return matches;
   }
 
-  // function findPhraseMatches(ocrWords, phrase) {
-  //   const phraseTokens = phrase.split(/\s+/); // ["omega", "digital", "the", "best"]
-  //   const matches = [];
-  //   const totalWords = ocrWords.length;
-  //   const phraseLen = phraseTokens.length;
+  function findPhraseMatches2(ocrWords, phrase) {
+    const phraseTokens = phrase.split(/\s+/); // ["omega", "digital", "the", "best"]
+    const matches = [];
+    const totalWords = ocrWords.length;
+    const phraseLen = phraseTokens.length;
   
-  //   for (let i = 0; i <= totalWords - phraseLen; i++) {
-  //     let match = true;
-  //     for (let j = 0; j < phraseLen; j++) {
-  //       // Compare text in lower case
-  //       if (
-  //         ocrWords[i + j].text.toLowerCase() !== phraseTokens[j].toLowerCase()
-  //       ) {
-  //         match = false;
-  //         break;
-  //       }
-  //     }
+    for (let i = 0; i <= totalWords - phraseLen; i++) {
+      let match = true;
+      for (let j = 0; j < phraseLen; j++) {
+        // Compare text in lower case
+        if (
+          ocrWords[i + j].text.toLowerCase() !== phraseTokens[j].toLowerCase()
+        ) {
+          match = false;
+          break;
+        }
+      }
   
-  //     if (match) {
-  //       // We found a consecutive match
-  //       const matchedWords = ocrWords.slice(i, i + phraseLen);
-  //       matches.push(matchedWords);
-  //       // Move i forward so we don't re-check overlapping tokens
-  //       i += phraseLen - 1;
-  //     }
-  //   }
-  //   return matches;
-  // }
+      if (match) {
+        // We found a consecutive match
+        const matchedWords = ocrWords.slice(i, i + phraseLen);
+        matches.push(matchedWords);
+        // Move i forward so we don't re-check overlapping tokens
+        i += phraseLen - 1;
+      }
+    }
+    return matches;
+  }
   
 
 
@@ -714,7 +715,8 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
           if (matches.length > 0) {
               console.log(`Page ${i + 1}: Found phrase "${phrase}" ${matches.length} time(s).`);
               for (const matchWords of matches) {
-                  const box = combineBoundingBoxes(matchWords);
+                console.log(matchWords)
+                  const box = combineBoundingBoxes(matchWords.words);
                   drawRedaction(page, width, height, box);
               }
           }

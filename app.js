@@ -1387,7 +1387,8 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
             if (matches.length > 0) {
                 console.log(`Page ${i + 1}: Found phrase "${phrase}" ${matches.length} time(s).`);
                 for (const matchWords of matches) {
-                    const box = combineBoundingBoxes(matchWords);
+                    // const box = combineBoundingBoxes(matchWords);
+                    const box = combineBoundingBoxes(matchWords.words);
                     drawRedaction(page, width, height, box);
                 }
             }
