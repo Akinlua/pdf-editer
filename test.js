@@ -713,10 +713,10 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
           const matches = findPhraseMatches(ocrPageData.words, phrase);
           if (matches.length > 0) {
               console.log(`Page ${i + 1}: Found phrase "${phrase}" ${matches.length} time(s).`);
-              // for (const matchWords of matches) {
-              //     const box = combineBoundingBoxes(matchWords);
-              //     drawRedaction(page, width, height, box);
-              // }
+              for (const matchWords of matches) {
+                  const box = combineBoundingBoxes(matchWords);
+                  drawRedaction(page, width, height, box);
+              }
           }
       }
 

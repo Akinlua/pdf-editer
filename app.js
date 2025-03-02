@@ -1322,34 +1322,34 @@ function drawRedaction(page, pdfWidth, pdfHeight, box) {
     return matches;
   }
 
-function findPhraseMatches(ocrWords, phrase) {
-    const phraseTokens = phrase.split(/\s+/); // ["omega", "digital", "the", "best"]
-    const matches = [];
-    const totalWords = ocrWords.length;
-    const phraseLen = phraseTokens.length;
+// function findPhraseMatches(ocrWords, phrase) {
+//     const phraseTokens = phrase.split(/\s+/); // ["omega", "digital", "the", "best"]
+//     const matches = [];
+//     const totalWords = ocrWords.length;
+//     const phraseLen = phraseTokens.length;
 
-    for (let i = 0; i <= totalWords - phraseLen; i++) {
-        let match = true;
-        for (let j = 0; j < phraseLen; j++) {
-            // Compare text in lower case
-            if (
-                ocrWords[i + j].text.toLowerCase() !== phraseTokens[j].toLowerCase()
-            ) {
-                match = false;
-                break;
-            }
-        }
+//     for (let i = 0; i <= totalWords - phraseLen; i++) {
+//         let match = true;
+//         for (let j = 0; j < phraseLen; j++) {
+//             // Compare text in lower case
+//             if (
+//                 ocrWords[i + j].text.toLowerCase() !== phraseTokens[j].toLowerCase()
+//             ) {
+//                 match = false;
+//                 break;
+//             }
+//         }
 
-        if (match) {
-            // We found a consecutive match
-            const matchedWords = ocrWords.slice(i, i + phraseLen);
-            matches.push(matchedWords);
-            // Move i forward so we don't re-check overlapping tokens
-            i += phraseLen - 1;
-        }
-    }
-    return matches;
-}
+//         if (match) {
+//             // We found a consecutive match
+//             const matchedWords = ocrWords.slice(i, i + phraseLen);
+//             matches.push(matchedWords);
+//             // Move i forward so we don't re-check overlapping tokens
+//             i += phraseLen - 1;
+//         }
+//     }
+//     return matches;
+// }
 
 
 
