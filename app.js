@@ -1138,27 +1138,29 @@ function combineBoundingBoxes(words) {
 }
 
 
-function drawRedaction(page, pdfWidth, pdfHeight, box) {
+
+  
+function drawRedaction(page, pdfWidth, pdfHeight, box, divide=2) {
     // If your OCR was done on a certain dimension, adjust if needed
     // But let's assume 1:1 for simplicity:
-
+  
     const padding = 2;
-    const x = box.x0 - padding;
-    const width = (box.x1 - box.x0) + padding * 2;
-
+    const x = (box.x0)/divide - padding;
+    const width = (box.x1 - box.x0)/divide + padding * 2;
+  
     // PDF coordinate system has origin at bottom-left
     // If the OCR origin is top-left, you invert Y
-    const y = pdfHeight - box.y1 - padding;
-    const height = (box.y1 - box.y0) + padding * 2;
-
+    const y = pdfHeight - (box.y1)/divide - padding;
+    const height = (box.y1 - box.y0)/divide + padding * 2;
+  
     page.drawRectangle({
-        x,
-        y,
-        width,
-        height,
-        color: rgb(1, 1, 1) // White fill
+      x,
+      y,
+      width,
+      height,
+      color: rgb(1, 1, 1) // White fill
     });
-}
+  }
 
   function findPhraseMatches(ocrWords, phrase, options = {}) {
     // Default options
@@ -1322,34 +1324,34 @@ function drawRedaction(page, pdfWidth, pdfHeight, box) {
     return matches;
   }
 
-// function findPhraseMatches(ocrWords, phrase) {
-//     const phraseTokens = phrase.split(/\s+/); // ["omega", "digital", "the", "best"]
-//     const matches = [];
-//     const totalWords = ocrWords.length;
-//     const phraseLen = phraseTokens.length;
+function findPhraseMatches2(ocrWords, phrase) {
+    const phraseTokens = phrase.split(/\s+/); // ["omega", "digital", "the", "best"]
+    const matches = [];
+    const totalWords = ocrWords.length;
+    const phraseLen = phraseTokens.length;
 
-//     for (let i = 0; i <= totalWords - phraseLen; i++) {
-//         let match = true;
-//         for (let j = 0; j < phraseLen; j++) {
-//             // Compare text in lower case
-//             if (
-//                 ocrWords[i + j].text.toLowerCase() !== phraseTokens[j].toLowerCase()
-//             ) {
-//                 match = false;
-//                 break;
-//             }
-//         }
+    for (let i = 0; i <= totalWords - phraseLen; i++) {
+        let match = true;
+        for (let j = 0; j < phraseLen; j++) {
+            // Compare text in lower case
+            if (
+                ocrWords[i + j].text.toLowerCase() !== phraseTokens[j].toLowerCase()
+            ) {
+                match = false;
+                break;
+            }
+        }
 
-//         if (match) {
-//             // We found a consecutive match
-//             const matchedWords = ocrWords.slice(i, i + phraseLen);
-//             matches.push(matchedWords);
-//             // Move i forward so we don't re-check overlapping tokens
-//             i += phraseLen - 1;
-//         }
-//     }
-//     return matches;
-// }
+        if (match) {
+            // We found a consecutive match
+            const matchedWords = ocrWords.slice(i, i + phraseLen);
+            matches.push(matchedWords);
+            // Move i forward so we don't re-check overlapping tokens
+            i += phraseLen - 1;
+        }
+    }
+    return matches;
+}
 
 
 
@@ -1383,12 +1385,12 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
 
         // Draw rectangles for OCR matches
         for (const phrase of phrases) {
-            const matches = findPhraseMatches(ocrPageData.words, phrase);
+            const matches = findPhraseMatches2(ocrPageData.words, phrase);
             if (matches.length > 0) {
                 console.log(`Page ${i + 1}: Found phrase "${phrase}" ${matches.length} time(s).`);
                 for (const matchWords of matches) {
                     // const box = combineBoundingBoxes(matchWords);
-                    const box = combineBoundingBoxes(matchWords.words);
+                    const box = combineBoundingBoxes(matchWords);
                     drawRedaction(page, width, height, box);
                 }
             }
@@ -1403,7 +1405,8 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
                 x1: qr.bbox.x2,
                 y1: qr.bbox.y2
             };
-            drawRedaction(page, width, height, box);
+            drawRedaction(page, width, height, box, 1);
+
         });
     }
 

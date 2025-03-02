@@ -163,158 +163,6 @@ async function ocrExtractText(pdfBuffer) {
     }
 }
 
-// async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, sensitiveText) {
-//     const sensitiveWords = sensitiveText.split(/\s+/); // Split into words based on OCR splitting logic
-//     console.log(sensitiveWords)
-    
-//     const existingPdfBytes = fs.readFileSync(inputPdfPath);
-//     const pdfDoc = await PDFDocument.load(existingPdfBytes);
-//     const pagesText = await extractTextFromPdf(inputPdfPath);
-//     const ocrResults = await ocrExtractText(existingPdfBytes);
-
-
-//     const pdfData = new Uint8Array(fs.readFileSync(inputPdfPath));
-//     const loadingTask = pdfjsLib.getDocument({ data: pdfData });
-//     const pdfDocument = await loadingTask.promise;
-//     // const QrpdfDoc = await PDFDocument.load(pdfData);
-
-   
-//     let added_width
-//     let added_height
-//     for (let i = 0; i < pdfDoc.getPageCount(); i++) {
-//         const page = pdfDoc.getPage(i);
-//         const { width, height } = page.getSize();
-//         if(i == 0) {
-//             added_height= height
-//             added_width = width
-//         }    
-
-//         // sensitiveTexts.forEach(text => {
-//         for (const text of sensitiveWords) {
-//             console.log("checking......")
-//                 const ocrPageData = ocrResults[i];
-//                 if (ocrPageData && ocrPageData.text.includes(text)) {
-//                     console.log(`OCR found '${text}' on page ${i + 1}, applying redaction...`);
-//                     const word = ocrPageData.words.find(w => w.text.includes(text));
-//                     if (word && word.bbox) {
-//                         const { x0, x1, y0, y1 } = word.bbox;
-//                         const page_width = word.page_width
-//                         const page_height = word.page_height
-
-//                         console.log(page_width, page_height)
-//                         console.log(word.bbox)
-//                         console.log(`Page height: ${height}, OCR y0: ${y0}, y1: ${y1}`);
-                        
-//                         const ocrPageHeight = page_height;
-//                         const scaleFactor = height / ocrPageHeight;
-//                         console.log(`OCR PAGE HEIGHT ${ocrPageHeight}`)
-
-
-//                         const correctedY0 = height - (y0); // 841.68 - (1557 * 0.42084) 63.48
-//                         const correctedY1 = height - (y1); // 841.68 - (1544 * 0.42084)  69.97 
-                    
-//                         const ocrPageWidth = page_width; // Assuming OCR used a 1000px width (adjust if different)
-//                         const scaleFactorX = width / ocrPageWidth;
-
-//                         const correctedX0 = x0;
-//                         const correctedX1 = x1;
-//                         console.log(correctedX0, correctedX1, correctedY0, correctedY1)
-
-
-
-//                         const padding = 2;
-//                         const rectHeight = ((y1 - y0)) + padding * 2;
-
-//                         page.drawRectangle({
-//                             x: correctedX0 - padding,
-//                             y: correctedY1 - padding, // Adjusted to always extend upwards
-//                             width: (correctedX1 - correctedX0) + padding * 2,
-//                             height: rectHeight, // Negative height to ensure upward direction
-//                             color: rgb(1, 1, 1),
-//                         });
-
-
-//                     }
-//                 }
-        
-//         }
-        
-
-//         const Qrpage = await pdfDocument.getPage(i + 1);
-//         // Your chosen scale factor
-//         const s = 4.0;
-//         const viewport = Qrpage.getViewport({ scale: s });
-
-//         const canvas = createCanvas(viewport.width, viewport.height);
-//         const context = canvas.getContext('2d');
-
-//         const renderContext = {
-//             canvasContext: context,
-//             viewport: viewport,
-//         };
-
-//         await Qrpage.render(renderContext).promise;
-
-//         // After rendering the page onto the canvas:
-//         thresholdImage(context);
-
-//         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-//         const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
-
-//         if (qrCode) {
-//             // console.log(qrCode)
-//             console.log(`🔍 QR code found on page ${i + 1}:`);
-
-
-//             // ... after detecting QR code in the scaled canvas ...
-//             const topLeft = qrCode.location.topLeftCorner;
-//             const bottomRight = qrCode.location.bottomRightCorner;
-
-//             const xScaled = topLeft.x;
-//             const yScaled = topLeft.y;
-//             const wScaled = Math.abs(bottomRight.x - topLeft.x);
-//             const hScaled = Math.abs(bottomRight.y - topLeft.y);
-
-//             // Convert scaled coords -> PDF coords
-//             const xPdf = xScaled / s;
-//             const wPdf = wScaled / s;
-//             const hPdf = hScaled / s;
-
-//             // For the Y-axis, PDF is bottom-left, so flip:
-//             const pdfPage = pdfDoc.getPages()[i];
-//             const pdfHeight = pdfPage.getHeight();  // page height in PDF coords
-//             // Move from top-left (canvas) to bottom-left (PDF):
-//             const yPdf = pdfHeight - (yScaled / s) - hPdf;
-
-//             // Draw your rectangle in the PDF coordinate space
-//             const padding = 2;
-//             pdfPage.drawRectangle({
-//                 x: xPdf - padding,
-//                 y: yPdf - padding,
-//                 width: wPdf + padding * 2,
-//                 height: hPdf + padding * 2,
-//                 color: rgb(1, 1, 1), // Red, just for testing
-//             });
-
-//             console.log(`✅ QR code covered on page ${i + 1}`);
-//         } else {
-//             console.log(`ℹ️ No QR code found on page ${i + 1}`);
-//         }
-//     }
-
-//     const coverImageBytes = fs.readFileSync(coverImagePath);
-//     const coverImage = await pdfDoc.embedPng(coverImageBytes);
-//     const coverPage = pdfDoc.addPage([added_width, added_height]);
-//     coverPage.drawImage(coverImage, { x: 0, y: 0, width: added_width, height: added_height });
-
-//     pdfDoc.removePage(pdfDoc.getPageCount() - 1);
-//     pdfDoc.insertPage(0, coverPage);
-
-//     const pdfBytes = await pdfDoc.save();
-//     fs.writeFileSync(outputPdfPath, pdfBytes);
-//     console.log(`✅ Modified PDF saved as ${outputPdfPath}`);
-// }
-
 
 function combineBoundingBoxes(words) {
     // x0 = min of all x0
@@ -345,18 +193,18 @@ function combineBoundingBoxes(words) {
   }
 
   
-  function drawRedaction(page, pdfWidth, pdfHeight, box) {
+  function drawRedaction(page, pdfWidth, pdfHeight, box, divide=2) {
     // If your OCR was done on a certain dimension, adjust if needed
     // But let's assume 1:1 for simplicity:
   
     const padding = 2;
-    const x = box.x0 - padding;
-    const width = (box.x1 - box.x0) + padding * 2;
+    const x = (box.x0)/divide - padding;
+    const width = (box.x1 - box.x0)/divide + padding * 2;
   
     // PDF coordinate system has origin at bottom-left
     // If the OCR origin is top-left, you invert Y
-    const y = pdfHeight - box.y1 - padding;
-    const height = (box.y1 - box.y0) + padding * 2;
+    const y = pdfHeight - (box.y1)/divide - padding;
+    const height = (box.y1 - box.y0)/divide + padding * 2;
   
     page.drawRectangle({
       x,
@@ -559,125 +407,6 @@ function combineBoundingBoxes(words) {
   
 
 
-// async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
-//     const existingPdfBytes = fs.readFileSync(inputPdfPath);
-//     const pdfDoc = await PDFDocument.load(existingPdfBytes);
-  
-//     // OCR the entire PDF (your method returns array of pages, each with words)
-//     // const ocrResults = await ocrExtractText(existingPdfBytes);
-
-//     const pdfData = new Uint8Array(fs.readFileSync(inputPdfPath));
-//     const loadingTask = pdfjsLib.getDocument({ data: pdfData });
-//     const pdfDocument = await loadingTask.promise;
-    
-//     let added_width
-//     let added_height
-//     for (let i = 0; i < pdfDoc.getPageCount(); i++) {
-//       const page = pdfDoc.getPage(i);
-//       const { width, height } = page.getSize();
-//       if(i == 0) {
-//         added_height= height
-//         added_width = width
-//       }    
-
-  
-//       // The OCR result for page i
-//       // const ocrPageData = ocrResults[i];
-//       // if (!ocrPageData) continue; // No OCR for this page?
-  
-//       // // We'll search each phrase in the array
-//       // for (const phrase of phrases) {
-//       //   // Find all consecutive matches for "phrase"
-//       //   const matches = findPhraseMatches(ocrPageData.words, phrase);
-//       //   if (matches.length > 0) {
-//       //     console.log(`Page ${i + 1}: Found phrase "${phrase}" ${matches.length} time(s).`);
-//       //     // For each match, combine bounding boxes
-//       //     for (const matchWords of matches) {
-//       //       const box = combineBoundingBoxes(matchWords);
-//       //       drawRedaction(page, width, height, box);
-//       //     }
-//       //   }
-//       // }
-
-
-//       const Qrpage = await pdfDocument.getPage(i + 1);
-//         // Your chosen scale factor
-//         const s = 4.0;
-//         const viewport = Qrpage.getViewport({ scale: s });
-
-//         const canvas = createCanvas(viewport.width, viewport.height);
-//         const context = canvas.getContext('2d');
-
-//         const renderContext = {
-//             canvasContext: context,
-//             viewport: viewport,
-//         };
-
-//         await Qrpage.render(renderContext).promise;
-
-//         // After rendering the page onto the canvas:
-//         thresholdImage(context);
-//         const fs = require('fs');
-//     fs.writeFileSync(`page_${i}.png`, canvas.toBuffer('image/png'));
-
-//         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-//         const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
-
-//         if (qrCode) {
-//             // console.log(qrCode)
-//             console.log(`🔍 QR code found on page ${i + 1}:`, qrCode.location);
-
-
-//             // ... after detecting QR code in the scaled canvas ...
-//             const topLeft = qrCode.location.topLeftCorner;
-//             const bottomRight = qrCode.location.bottomRightCorner;
-
-//             const xScaled = topLeft.x;
-//             const yScaled = topLeft.y;
-//             const wScaled = Math.abs(bottomRight.x - topLeft.x);
-//             const hScaled = Math.abs(bottomRight.y - topLeft.y);
-
-//             // Convert scaled coords -> PDF coords
-//             const xPdf = xScaled / s;
-//             const wPdf = wScaled / s;
-//             const hPdf = hScaled / s;
-
-//             // For the Y-axis, PDF is bottom-left, so flip:
-//             const pdfPage = pdfDoc.getPages()[i];
-//             const pdfHeight = pdfPage.getHeight();  // page height in PDF coords
-//             // Move from top-left (canvas) to bottom-left (PDF):
-//             const yPdf = pdfHeight - (yScaled / s) - hPdf;
-
-//             // Draw your rectangle in the PDF coordinate space
-//             const padding = 2;
-//             pdfPage.drawRectangle({
-//                 x: xPdf - padding,
-//                 y: yPdf - padding,
-//                 width: wPdf + padding * 2,
-//                 height: hPdf + padding * 2,
-//                 color: rgb(1, 1, 1), // Red, just for testing
-//             });
-
-//             console.log(`✅ QR code covered on page ${i + 1}`);
-//         } else {
-//             console.log(`ℹ️ No QR code found on page ${i + 1}`);
-//         }
-//     }
-  
-//     const coverImageBytes = fs.readFileSync(coverImagePath);
-//     const coverImage = await pdfDoc.embedPng(coverImageBytes);
-//     const coverPage = pdfDoc.addPage([added_width, added_height]);
-//     coverPage.drawImage(coverImage, { x: 0, y: 0, width: added_width, height: added_height });
-
-//     pdfDoc.removePage(pdfDoc.getPageCount() - 1);
-//     pdfDoc.insertPage(0, coverPage);
-
-//     const pdfBytes = await pdfDoc.save();
-//     fs.writeFileSync(outputPdfPath, pdfBytes);
-//     console.log(`✅ Modified PDF saved as ${outputPdfPath}`);
-//   }
-
-
   
 async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
   const existingPdfBytes = fs.readFileSync(inputPdfPath);
@@ -711,12 +440,12 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
 
       // Draw rectangles for OCR matches
       for (const phrase of phrases) {
-          const matches = findPhraseMatches(ocrPageData.words, phrase);
+          const matches = findPhraseMatches2(ocrPageData.words, phrase);
           if (matches.length > 0) {
               console.log(`Page ${i + 1}: Found phrase "${phrase}" ${matches.length} time(s).`);
               for (const matchWords of matches) {
                 console.log(matchWords)
-                  const box = combineBoundingBoxes(matchWords.words);
+                  const box = combineBoundingBoxes(matchWords);
                   drawRedaction(page, width, height, box);
               }
           }
@@ -731,7 +460,7 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
               x1: qr.bbox.x2,
               y1: qr.bbox.y2
           };
-          drawRedaction(page, width, height, box);
+          drawRedaction(page, width, height, box, 1);
       });
   }
 
