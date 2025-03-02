@@ -145,7 +145,7 @@ async function ocrExtractText(pdfBuffer) {
     const formData = new FormData();
     formData.append('files', new Blob([pdfBuffer], { type: 'application/pdf' }));
 
-    const response = await axios.post('http://194.31.150.41:4000/api/upload', formData, {
+    const response = await axios.post('http://localhost:4000/api/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
     });
 
@@ -365,35 +365,196 @@ function combineBoundingBoxes(words) {
       color: rgb(1, 1, 1) // White fill
     });
   }
-
-  function findPhraseMatches(ocrWords, phrase) {
-    const phraseTokens = phrase.split(/\s+/); // ["omega", "digital", "the", "best"]
+  function findPhraseMatches(ocrWords, phrase, options = {}) {
+    // Default options
+    const {
+      similarityThreshold = 0.7, // How similar words need to be (0-1)
+      allowSkippedWords = true,  // Allow skipping a word in the phrase
+      maxSkips = 1,              // Maximum words that can be skipped
+      allowPartialWords = true,  // Match partial words (for split words)
+      partialMatchThreshold = 0.8 // Threshold for partial word matching
+    } = options;
+    
+    // Helper function to calculate string similarity (Levenshtein distance based)
+    function stringSimilarity(s1, s2) {
+      if (s1 === s2) return 1.0; // Exact match
+      
+      // Convert to lowercase for comparison
+      s1 = s1.toLowerCase();
+      s2 = s2.toLowerCase();
+      
+      // Calculate Levenshtein distance
+      const track = Array(s2.length + 1).fill(null).map(() => 
+        Array(s1.length + 1).fill(null));
+      
+      for (let i = 0; i <= s1.length; i++) track[0][i] = i;
+      for (let j = 0; j <= s2.length; j++) track[j][0] = j;
+      
+      for (let j = 1; j <= s2.length; j++) {
+        for (let i = 1; i <= s1.length; i++) {
+          const indicator = s1[i - 1] === s2[j - 1] ? 0 : 1;
+          track[j][i] = Math.min(
+            track[j][i - 1] + 1, // deletion
+            track[j - 1][i] + 1, // insertion
+            track[j - 1][i - 1] + indicator // substitution
+          );
+        }
+      }
+      
+      const distance = track[s2.length][s1.length];
+      const maxLength = Math.max(s1.length, s2.length);
+      
+      // Return similarity score (1 - normalized distance)
+      return 1 - distance / maxLength;
+    }
+    
+    // Try to match with consecutive words first
+    const phraseTokens = phrase.toLowerCase().split(/\s+/);
     const matches = [];
     const totalWords = ocrWords.length;
     const phraseLen = phraseTokens.length;
-  
-    for (let i = 0; i <= totalWords - phraseLen; i++) {
-      let match = true;
-      for (let j = 0; j < phraseLen; j++) {
-        // Compare text in lower case
-        if (
-          ocrWords[i + j].text.toLowerCase() !== phraseTokens[j].toLowerCase()
-        ) {
-          match = false;
-          break;
+    
+    // Track best matches for partial matching
+    let partialMatches = [];
+    
+    // Find matches with various degrees of fuzziness
+    for (let i = 0; i <= totalWords - 1; i++) {
+      let matchQuality = 0;
+      let matchedWords = [];
+      let phraseIndex = 0;
+      let skippedWords = 0;
+      
+      for (let j = i; j < totalWords && phraseIndex < phraseLen; j++) {
+        const currentWord = ocrWords[j].text.toLowerCase();
+        const currentPhraseWord = phraseTokens[phraseIndex];
+        const similarity = stringSimilarity(currentWord, currentPhraseWord);
+        
+        if (similarity >= similarityThreshold) {
+          // Good enough match for this word
+          matchedWords.push(ocrWords[j]);
+          matchQuality += similarity;
+          phraseIndex++;
+        } 
+        // Check if this word might be a partial match (split word)
+        else if (allowPartialWords) {
+          // Try to combine with next word if available
+          if (j < totalWords - 1) {
+            const combinedWord = currentWord + ocrWords[j + 1].text.toLowerCase();
+            const combinedSimilarity = stringSimilarity(combinedWord, currentPhraseWord);
+            
+            if (combinedSimilarity >= partialMatchThreshold) {
+              matchedWords.push(ocrWords[j]);
+              matchedWords.push(ocrWords[j + 1]);
+              matchQuality += combinedSimilarity;
+              phraseIndex++;
+              j++; // Skip the next word as we've used it
+            }
+            else if (allowSkippedWords && skippedWords < maxSkips) {
+              // Skip this word and try the next one
+              skippedWords++;
+            }
+            else {
+              break; // No match found
+            }
+          }
+          else if (allowSkippedWords && skippedWords < maxSkips) {
+            // Skip this word and try the next one
+            skippedWords++;
+          }
+          else {
+            break; // No match found
+          }
+        }
+        else if (allowSkippedWords && skippedWords < maxSkips) {
+          // Skip this word and try the next one
+          skippedWords++;
+        }
+        else {
+          break; // No match found
         }
       }
-  
-      if (match) {
-        // We found a consecutive match
-        const matchedWords = ocrWords.slice(i, i + phraseLen);
-        matches.push(matchedWords);
-        // Move i forward so we don't re-check overlapping tokens
-        i += phraseLen - 1;
+      
+      // Check if we've matched all words in the phrase
+      if (phraseIndex === phraseLen) {
+        // Normalize match quality
+        const normalizedQuality = matchQuality / phraseLen;
+        
+        if (normalizedQuality >= similarityThreshold) {
+          matches.push({
+            words: matchedWords,
+            confidence: normalizedQuality,
+            skippedWords: skippedWords
+          });
+          
+          // Skip ahead to avoid overlapping matches
+          i += matchedWords.length - 1;
+        }
+      }
+      // Store partial matches for consideration
+      else if (phraseIndex > phraseLen / 2) {
+        partialMatches.push({
+          words: matchedWords,
+          confidence: matchQuality / phraseIndex,
+          matched: phraseIndex,
+          total: phraseLen,
+          startIndex: i
+        });
       }
     }
+    
+    // If no complete matches found, consider returning best partial matches
+    if (matches.length === 0 && partialMatches.length > 0) {
+      // Sort by confidence and percentage matched
+      partialMatches.sort((a, b) => {
+        const aScore = a.confidence * (a.matched / a.total);
+        const bScore = b.confidence * (b.matched / b.total);
+        return bScore - aScore;
+      });
+      
+      // Return the best partial match if it's good enough
+      if (partialMatches[0].confidence >= similarityThreshold &&
+          partialMatches[0].matched >= phraseLen * 0.7) {
+        matches.push({
+          words: partialMatches[0].words,
+          confidence: partialMatches[0].confidence,
+          partial: true,
+          matchedWords: partialMatches[0].matched,
+          totalWords: phraseLen
+        });
+      }
+    }
+    
     return matches;
   }
+
+  // function findPhraseMatches(ocrWords, phrase) {
+  //   const phraseTokens = phrase.split(/\s+/); // ["omega", "digital", "the", "best"]
+  //   const matches = [];
+  //   const totalWords = ocrWords.length;
+  //   const phraseLen = phraseTokens.length;
+  
+  //   for (let i = 0; i <= totalWords - phraseLen; i++) {
+  //     let match = true;
+  //     for (let j = 0; j < phraseLen; j++) {
+  //       // Compare text in lower case
+  //       if (
+  //         ocrWords[i + j].text.toLowerCase() !== phraseTokens[j].toLowerCase()
+  //       ) {
+  //         match = false;
+  //         break;
+  //       }
+  //     }
+  
+  //     if (match) {
+  //       // We found a consecutive match
+  //       const matchedWords = ocrWords.slice(i, i + phraseLen);
+  //       matches.push(matchedWords);
+  //       // Move i forward so we don't re-check overlapping tokens
+  //       i += phraseLen - 1;
+  //     }
+  //   }
+  //   return matches;
+  // }
   
 
 
@@ -522,8 +683,8 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
   const pdfDoc = await PDFDocument.load(existingPdfBytes);
 
   // OCR the entire PDF and fetch QR code results in parallel
-  const [qrResults] = await Promise.all([
-      // ocrExtractText(existingPdfBytes),
+  const [ocrResults, qrResults] = await Promise.all([
+      ocrExtractText(existingPdfBytes),
       fetchQrResults(existingPdfBytes) // New function to fetch QR results
   ]);
   console.log("DONE")
@@ -544,20 +705,20 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
       }    
 
       // The OCR result for page i
-      // const ocrPageData = ocrResults[i];
-      // if (!ocrPageData) continue; // No OCR for this page?
+      const ocrPageData = ocrResults[i];
+      if (!ocrPageData) continue; // No OCR for this page?
 
-      // // Draw rectangles for OCR matches
-      // for (const phrase of phrases) {
-      //     const matches = findPhraseMatches(ocrPageData.words, phrase);
-      //     if (matches.length > 0) {
-      //         console.log(`Page ${i + 1}: Found phrase "${phrase}" ${matches.length} time(s).`);
-      //         for (const matchWords of matches) {
-      //             const box = combineBoundingBoxes(matchWords);
-      //             drawRedaction(page, width, height, box);
-      //         }
-      //     }
-      // }
+      // Draw rectangles for OCR matches
+      for (const phrase of phrases) {
+          const matches = findPhraseMatches(ocrPageData.words, phrase);
+          if (matches.length > 0) {
+              console.log(`Page ${i + 1}: Found phrase "${phrase}" ${matches.length} time(s).`);
+              // for (const matchWords of matches) {
+              //     const box = combineBoundingBoxes(matchWords);
+              //     drawRedaction(page, width, height, box);
+              // }
+          }
+      }
 
       // Draw rectangles for QR results
       const qrPageData = qrResults.filter(qr => qr.page === (i + 1)); // Filter QR results for the current page
