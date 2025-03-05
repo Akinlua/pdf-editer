@@ -86,6 +86,8 @@ for url in product_urls:
     # except Exception:
     #     img = ""
 
+        
+
     try:
         page_html = driver.page_source
         soup = BeautifulSoup(page_html, "html.parser")
@@ -95,16 +97,19 @@ for url in product_urls:
         if link_tag and link_tag.has_attr("href"):
             img = link_tag["href"]
         else:
-            # If the preload link is not available, extract the image from style tag
+            # If preload is not available, extract from style
             style_tag = soup.find("style", id="wpr-usedcss")
             if style_tag:
-                match = re.search(r'background-image:url\("([^"]+)"\)', style_tag.text)
+                # Find the correct CSS rule for .elementor-element-70ad1ea
+                pattern = r'\.elementor-element\.elementor-element-70ad1ea[^{]*\{[^}]*background-image:url\("([^"]+)"\)'
+                match = re.search(pattern, style_tag.text)
                 img = match.group(1) if match else ""
             else:
                 img = ""
 
     except Exception:
         img = ""
+
 
     print(f"image here {img}")  # Debugging
 
