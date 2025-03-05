@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+import re
 
 options = Options()
 options.add_argument("--headless")
@@ -77,13 +78,36 @@ for url in product_urls:
     except Exception:
         details = ""
     
+    # try:
+    #     page_html = driver.page_source
+    #     soup = BeautifulSoup(page_html, "html.parser")
+    #     link_tag = soup.find("link", {"rel": "preload", "data-rocket-preload": True, "as": "image"})
+    #     img = link_tag["href"] if link_tag and link_tag.has_attr("href") else ""
+    # except Exception:
+    #     img = ""
+
     try:
         page_html = driver.page_source
         soup = BeautifulSoup(page_html, "html.parser")
+
+        # Try getting the preload image first
         link_tag = soup.find("link", {"rel": "preload", "data-rocket-preload": True, "as": "image"})
-        img = link_tag["href"] if link_tag and link_tag.has_attr("href") else ""
+        if link_tag and link_tag.has_attr("href"):
+            img = link_tag["href"]
+        else:
+            # If the preload link is not available, extract the image from style tag
+            style_tag = soup.find("style", id="wpr-usedcss")
+            if style_tag:
+                match = re.search(r'background-image:url\("([^"]+)"\)', style_tag.text)
+                img = match.group(1) if match else ""
+            else:
+                img = ""
+
     except Exception:
         img = ""
+
+    print(f"image here {img}")  # Debugging
+
 
     # print(f'Gotten for${url} - ${title} - ${brand}- ${description}- ${details} - ${img}  now')
     print(f'Gotten for ${url} now')
