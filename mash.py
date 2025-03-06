@@ -110,6 +110,20 @@ for url in product_urls:
     except Exception:
         img = ""
 
+    # Extract additional categories from the product page using the new selectors.
+    try:
+        additional_cat_container = driver.find_element(
+            By.CSS_SELECTOR,
+            "div.jet-listing-grid__items.grid-col-desk-1.grid-col-tablet-1.grid-col-mobile-1.jet-listing-grid--1882.jet-equal-columns__wrapper"
+        )
+        additional_cat_elements = additional_cat_container.find_elements(
+            By.CSS_SELECTOR,
+            "div.jet-listing-grid__item.jet-equal-columns p.elementor-icon-box-description"
+        )
+        additional_categories = [elem.text.strip() for elem in additional_cat_elements if elem.text.strip()]
+    except Exception:
+        additional_categories = []
+
 
     print(f"image here {img}")  # Debugging
 
@@ -127,7 +141,8 @@ for url in product_urls:
         "DESCRIPTION": description,
         "DETAILS": details,
         "IMG": image_filename,  # Store only the filename, not the full URL
-        "URL": url
+        "URL": url,
+        "ADDITIONAL_CATEGORIES": additional_categories  # New field for additional categories
     })
 
 product_types_sitemap_url = "https://www.mash-mahatz.co.il/product_types-sitemap.xml"
@@ -164,8 +179,17 @@ with open("products2.csv", "w", newline="", encoding="utf-8") as csvfile:
     
     for product in products_data:
         title = product["TITLE"]
+
+        # Get the categories from the product types mapping (if any)
+        existing_categories = product_category_map.get(title, set())
+        # Get additional categories from the product page
+        additional_categories = product.get("ADDITIONAL_CATEGORIES", [])
+        # Combine both lists
+        combined_categories = list(existing_categories) + additional_categories
+        # Join with commas ensuring they remain in a single CSV cell.
+        categories = ", ".join(combined_categories)
         
-        categories = ", ".join(product_category_map.get(title, []))
+        # categories = ", ".join(product_category_map.get(title, []))
         writer.writerow({
             "TITLE": title,
             "BRAND": product["BRAND"],
