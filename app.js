@@ -1019,6 +1019,8 @@ async function processProducts() {
   });
 
   try {
+    const startTime = Date.now();
+
     // Queue all products from all domains with batch processing
     for (const [domain, domainData] of Object.entries(productsByDomain)) {
       // Process products in batches
@@ -1038,6 +1040,10 @@ async function processProducts() {
 
     // Wait for all tasks to complete
     await cluster.idle();
+    const endTime = Date.now();
+    const duration = ((endTime - startTime) / 1000).toFixed(2);
+    await sendNotification("ALL PRODUCTS", duration);
+
   } catch (error) {
     await sendNotification('Error Occurred', error.message);
     console.error('Error occurred:', error);
