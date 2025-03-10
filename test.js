@@ -146,7 +146,7 @@ async function ocrExtractText(pdfBuffer) {
     const formData = new FormData();
     formData.append('files', new Blob([pdfBuffer], { type: 'application/pdf' }));
 
-    const response = await axios.post('http://localhost:4000/api/upload', formData, {
+    const response = await axios.post('http://194.31.150.41:4000/api/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
     });
 
