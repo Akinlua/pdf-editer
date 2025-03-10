@@ -992,8 +992,18 @@ async function processProducts() {
     await page.goto(productUrl, { waitUntil: 'networkidle2', timeout: 30000000 });
     console.log(`Navigated to ${productUrl}`);
 
-    const productName = await getProductName(page, domainData.selector);
-    const pdfLinks = await fetchPdfLinks(page, domainData.fileselector);
+    // const productName = await getProductName(page, domainData.selector);
+    const productName = await page.$eval(selector, el => el.innerText.trim());
+    // const pdfLinks = await fetchPdfLinks(page, domainData.fileselector);
+    const pdfLinks = await page.evaluate((selector) => {
+        // Find the specified selector
+        const container = document.querySelector(selector);
+        if (!container) return []; // Return an empty array if the selector is not found
+
+        // Collect all PDF links within the specified container, case insensitive
+        const links = Array.from(container.querySelectorAll('a[href$=".pdf"], a[href$=".PDF"]'));
+        return links.map(link => link.href);
+    }, selector); // Pass the selector to the page context
     console.log(`Downloading PDFs for ${productUrl}:`, pdfLinks);
 
     // Create directories for domain and product
