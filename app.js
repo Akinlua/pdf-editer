@@ -993,17 +993,19 @@ async function processProducts() {
     console.log(`Navigated to ${productUrl}`);
 
     // const productName = await getProductName(page, domainData.selector);
-    const productName = await page.$eval(selector, el => el.innerText.trim());
+    const productName = await page.$eval(domainData.selector, el => el.innerText.trim());
+    console.log("Product name ", productName)
     // const pdfLinks = await fetchPdfLinks(page, domainData.fileselector);
-    const pdfLinks = await page.evaluate((selector) => {
+    const pdflink_selector = domainData.fileselector
+    const pdfLinks = await page.evaluate((pdflink_selector) => {
         // Find the specified selector
-        const container = document.querySelector(selector);
+        const container = document.querySelector(pdflink_selector);
         if (!container) return []; // Return an empty array if the selector is not found
 
         // Collect all PDF links within the specified container, case insensitive
         const links = Array.from(container.querySelectorAll('a[href$=".pdf"], a[href$=".PDF"]'));
         return links.map(link => link.href);
-    }, selector); // Pass the selector to the page context
+    }, pdflink_selector); // Pass the selector to the page context
     console.log(`Downloading PDFs for ${productUrl}:`, pdfLinks);
 
     // Create directories for domain and product
