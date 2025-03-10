@@ -1004,7 +1004,8 @@ async function processProducts() {
 
         // Collect all PDF links within the specified container, case insensitive
         const links = Array.from(container.querySelectorAll('a[href$=".pdf"], a[href$=".PDF"]'));
-        return links.map(link => link.href);
+        const uniqueLinks = [...new Set(links.map(link => link.href))]; // Remove duplicates
+        return uniqueLinks;
     }, pdflink_selector); // Pass the selector to the page context
     console.log(`Downloading PDFs for ${productUrl}:`, pdfLinks);
 
