@@ -25,13 +25,13 @@ def extract_qr():
         return jsonify({'error': 'No selected file'}), 400
     
     try:
-        # Save the uploaded PDF in a dedicated temp directory instead of root folder
-        temp_dir = os.path.join(tempfile.gettempdir(), f"qr_api_{int(time.time())}")
-        os.makedirs(temp_dir, exist_ok=True)
+        # Save the uploaded PDF in a dedicated folder in the root directory
+        upload_dir = os.path.join(os.getcwd(), "uploads", f"qr_api_{int(time.time())}")
+        os.makedirs(upload_dir, exist_ok=True)
         
         # Save the uploaded PDF with a unique name
         pdf_filename = f"{uuid.uuid4()}_{file.filename}"  # Generate a unique filename
-        pdf_path = os.path.join(temp_dir, pdf_filename)  # Save in temp directory
+        pdf_path = os.path.join(upload_dir, pdf_filename)  # Save in uploads directory
         file.save(pdf_path)
         
         # Call the existing function to extract QR positions
@@ -57,8 +57,8 @@ def extract_qr():
                 os.remove(pdf_path)
                 
             # Clean up the temp directory we created
-            if 'temp_dir' in locals() and os.path.exists(temp_dir):
-                shutil.rmtree(temp_dir, ignore_errors=True)
+            if 'upload_dir' in locals() and os.path.exists(upload_dir):
+                shutil.rmtree(upload_dir, ignore_errors=True)
         except Exception as cleanup_error:
             print(f"Warning: Could not remove temporary files: {cleanup_error}")
 
