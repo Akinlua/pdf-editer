@@ -15,6 +15,8 @@ app = Flask(__name__)  # Create a Flask application
 
 @app.route('/extract_qr', methods=['POST'])  # Define the API endpoint
 def extract_qr():
+    pdf_path = None
+    
     if 'file' not in request.files:  # Check if a file is part of the request
         return jsonify({'error': 'No file part'}), 400
     
@@ -22,12 +24,16 @@ def extract_qr():
     if file.filename == '':  # Check if the file has a valid name
         return jsonify({'error': 'No selected file'}), 400
     
-    # Save the uploaded PDF in the root folder with a unique name
-    pdf_filename = f"{uuid.uuid4()}_{file.filename}"  # Generate a unique filename
-    pdf_path = os.path.join(os.getcwd(), pdf_filename)  # Save in the root folder
-    file.save(pdf_path)
-    
     try:
+        # Save the uploaded PDF in a dedicated temp directory instead of root folder
+        temp_dir = os.path.join(tempfile.gettempdir(), f"qr_api_{int(time.time())}")
+        os.makedirs(temp_dir, exist_ok=True)
+        
+        # Save the uploaded PDF with a unique name
+        pdf_filename = f"{uuid.uuid4()}_{file.filename}"  # Generate a unique filename
+        pdf_path = os.path.join(temp_dir, pdf_filename)  # Save in temp directory
+        file.save(pdf_path)
+        
         # Call the existing function to extract QR positions
         start_time = time.time()
         qr_positions = extract_qr_positions_from_pdf(pdf_path)
@@ -36,10 +42,25 @@ def extract_qr():
 
 
         return jsonify(qr_positions)  # Return the QR positions as JSON
+    except Exception as e:
+        print(f"Error processing PDF: {str(e)}")
+        return jsonify({'error': f'Error processing PDF: {str(e)}'}), 500
     finally:
-        # Clean up the temporary file
-        if os.path.exists(pdf_path):
-            os.remove(pdf_path)
+        # Clean up the temporary file with better error handling
+        try:
+            # Clean up the specific PDF file
+            if pdf_path and os.path.exists(pdf_path):
+                try:
+                    os.chmod(pdf_path, 0o777)  # Ensure we have permissions
+                except:
+                    pass  # Ignore if we can't change permissions
+                os.remove(pdf_path)
+                
+            # Clean up the temp directory we created
+            if 'temp_dir' in locals() and os.path.exists(temp_dir):
+                shutil.rmtree(temp_dir, ignore_errors=True)
+        except Exception as cleanup_error:
+            print(f"Warning: Could not remove temporary files: {cleanup_error}")
 
 def process_page(page_info, temp_dir, qr_detector=None):
     """
@@ -69,7 +90,9 @@ def process_page(page_info, temp_dir, qr_detector=None):
         
         # Verify the file was created and has content
         if not os.path.exists(temp_filename) or os.path.getsize(temp_filename) == 0:
-            raise Exception(f"Failed to create valid image file at {temp_filename}")
+            error_msg = f"Failed to create valid image file at {temp_filename}"
+            print(error_msg)
+            raise Exception(error_msg)
         
         # Add a small delay to ensure the file is fully written
         time.sleep(0.1)
@@ -78,7 +101,8 @@ def process_page(page_info, temp_dir, qr_detector=None):
         img = cv2.imread(temp_filename)
         
         if img is None:
-            print(f"Failed to load image for page {page_num + 1}")
+            error_msg = f"Failed to load image for page {page_num + 1}"
+            print(error_msg)
             
             # Try alternative approach with PIL and convert to OpenCV format
             try:
@@ -88,13 +112,15 @@ def process_page(page_info, temp_dir, qr_detector=None):
                 img = cv2.cvtColor(np.array(pil_img), cv2.COLOR_RGB2BGR)
                 print(f"Successfully loaded image using PIL fallback for page {page_num + 1}")
             except Exception as pil_err:
-                print(f"PIL fallback also failed: {pil_err}")
-                return []
+                error_msg = f"PIL fallback also failed: {pil_err}"
+                print(error_msg)
+                raise Exception(error_msg)
         
         # Check image dimensions
         if img.size == 0:
-            print(f"Image for page {page_num + 1} has zero size")
-            return []
+            error_msg = f"Image for page {page_num + 1} has zero size"
+            print(error_msg)
+            raise Exception(error_msg)
             
         # Convert to grayscale for better QR code detection
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -153,7 +179,10 @@ def process_page(page_info, temp_dir, qr_detector=None):
                 page_results.append(qr_info)
     
     except Exception as e:
-        print(f"Error processing page {page_num + 1}: {e}")
+        error_msg = f"Error processing page {page_num + 1}: {e}"
+        print(error_msg)
+        # Propagate the error by raising it - this helps identify when processing fails
+        raise Exception(error_msg)
     
     finally:
         # Try to remove the temp file, but don't crash if we can't
@@ -272,6 +301,7 @@ def extract_qr_positions_from_pdf(pdf_path, max_workers=None):
     """
     # Results list to store all QR code positions
     results = []
+    errors = []
     
     # Create a temporary directory that we control
     temp_dir = os.path.join(tempfile.gettempdir(), f"qr_extract_{int(time.time())}")
@@ -279,7 +309,12 @@ def extract_qr_positions_from_pdf(pdf_path, max_workers=None):
     
     try:
         # Open the PDF file
-        pdf_document = fitz.open(pdf_path)
+        try:
+            pdf_document = fitz.open(pdf_path)
+        except Exception as e:
+            error_msg = f"Failed to open PDF document: {e}"
+            print(error_msg)
+            raise Exception(error_msg)
         
         # Prepare page information for parallel processing
         page_infos = [(page_num, page, page.rect.width, page.rect.height) 
@@ -293,13 +328,32 @@ def extract_qr_positions_from_pdf(pdf_path, max_workers=None):
             # Create a partial function with the temp_dir and detector
             process_func = partial(process_page, temp_dir=temp_dir, qr_detector=qr_detector)
             
-            # Process all pages and collect results
-            for page_results in executor.map(process_func, page_infos):
-                results.extend(page_results)
+            # Submit all tasks and collect futures
+            future_to_page = {executor.submit(process_func, page_info): page_info[0] 
+                             for page_info in page_infos}
+            
+            # Process results as they complete
+            for future in concurrent.futures.as_completed(future_to_page):
+                page_num = future_to_page[future]
+                try:
+                    page_results = future.result()
+                    results.extend(page_results)
+                except Exception as e:
+                    error_msg = f"Error processing page {page_num + 1}: {e}"
+                    print(error_msg)
+                    errors.append(error_msg)
         
         # Close the PDF document
         pdf_document.close()
         
+        # If we have errors and no results, raise an exception
+        if len(errors) > 0:
+            raise Exception(f"Failed to extract QR codes: {'; '.join(errors)}")
+        
+    except Exception as e:
+        error_msg = f"Error extracting QR codes from PDF: {e}"
+        print(error_msg)
+        raise Exception(error_msg)
     finally:
         # Clean up the temp directory at the end, with error handling
         try:
@@ -315,6 +369,7 @@ def extract_qr_with_contours(pdf_path, max_workers=None):
     This might help when regular QR code detection fails.
     """
     results = []
+    errors = []
     
     # Create a temporary directory
     temp_dir = os.path.join(tempfile.gettempdir(), f"qr_extract_alt_{int(time.time())}")
@@ -322,7 +377,12 @@ def extract_qr_with_contours(pdf_path, max_workers=None):
     
     try:
         # Open the PDF file
-        pdf_document = fitz.open(pdf_path)
+        try:
+            pdf_document = fitz.open(pdf_path)
+        except Exception as e:
+            error_msg = f"Failed to open PDF document for contour detection: {e}"
+            print(error_msg)
+            raise Exception(error_msg)
         
         # Prepare page information
         page_infos = [(page_num, page, page.rect.width, page.rect.height) 
@@ -333,8 +393,21 @@ def extract_qr_with_contours(pdf_path, max_workers=None):
             # Create a partial function with the temp_dir
             process_func = partial(process_page_contours, temp_dir=temp_dir)
             
-            # Get all potential QR codes
-            all_potential_qrs = list(executor.map(process_func, page_infos))
+            # Submit all tasks and collect futures
+            future_to_page = {executor.submit(process_func, page_info): page_info[0] 
+                             for page_info in page_infos}
+            
+            # Process results as they complete
+            all_potential_qrs = []
+            for future in concurrent.futures.as_completed(future_to_page):
+                page_num = future_to_page[future]
+                try:
+                    page_qrs = future.result()
+                    all_potential_qrs.append(page_qrs)
+                except Exception as e:
+                    error_msg = f"Error in contour processing for page {page_num + 1}: {e}"
+                    print(error_msg)
+                    errors.append(error_msg)
             
             # Flatten the list of lists
             potential_qrs = [qr for page_qrs in all_potential_qrs for qr in page_qrs]
@@ -370,12 +443,20 @@ def extract_qr_with_contours(pdf_path, max_workers=None):
         
         pdf_document.close()
         
+        # If we have errors and no results, raise an exception
+        if len(errors) > 0:
+            raise Exception(f"Contour detection failed: {'; '.join(errors)}")
+        
+    except Exception as e:
+        error_msg = f"Error in contour-based QR extraction: {e}"
+        print(error_msg)
+        raise Exception(error_msg)
     finally:
         # Clean up
         try:
             shutil.rmtree(temp_dir, ignore_errors=True)
-        except:
-            pass
+        except Exception as e:
+            print(f"Warning: Could not remove temp directory {temp_dir}: {e}")
     
     return results
 
@@ -391,40 +472,51 @@ def main():
     
     start_time = time.time()
     
-    # Try standard QR detection first
-    qr_positions = extract_qr_positions_from_pdf(pdf_path, max_workers=max_workers)
-    
-    # If no QR codes found or very few, try alternative approach
-    if len(qr_positions) < 1:
-        print("Using alternative detection method...")
-        alt_positions = extract_qr_with_contours(pdf_path, max_workers=max_workers)
+    try:
+        # Try standard QR detection first
+        qr_positions = extract_qr_positions_from_pdf(pdf_path, max_workers=max_workers)
         
-        # Combine results
-        seen_positions = set()
-        for qr in qr_positions:
-            # Create a simple key based on page and center coordinates
-            key = (qr['page'], round(qr['center']['x']), round(qr['center']['y']))
-            seen_positions.add(key)
+        # If no QR codes found or very few, try alternative approach
+        if len(qr_positions) < 1:
+            print("Using alternative detection method...")
+            try:
+                alt_positions = extract_qr_with_contours(pdf_path, max_workers=max_workers)
+                
+                # Combine results
+                seen_positions = set()
+                for qr in qr_positions:
+                    # Create a simple key based on page and center coordinates
+                    key = (qr['page'], round(qr['center']['x']), round(qr['center']['y']))
+                    seen_positions.add(key)
+                
+                # Add non-duplicate positions from alternative method
+                for qr in alt_positions:
+                    key = (qr['page'], round(qr['center']['x']), round(qr['center']['y']))
+                    if key not in seen_positions:
+                        qr_positions.append(qr)
+            except Exception as e:
+                print(f"Alternative detection also failed: {e}")
         
-        # Add non-duplicate positions from alternative method
-        for qr in alt_positions:
-            key = (qr['page'], round(qr['center']['x']), round(qr['center']['y']))
-            if key not in seen_positions:
-                qr_positions.append(qr)
-    
-    elapsed_time = time.time() - start_time
-    
-    # Print the results
-    print(f"Found {len(qr_positions)} QR codes in the PDF in {elapsed_time:.2f} seconds")
-    for i, qr in enumerate(qr_positions):
-        print(f"\nQR Code #{i+1}:")
-        print(f"  Page: {qr['page']}")
-        print(f"  Position (bbox): {qr['bbox']}")
-        print(f"  Center point: ({qr['center']['x']}, {qr['center']['y']})")
-        if 'data' in qr:
-            print(f"  Data: {qr['data']}")
-        if 'detection_method' in qr:
-            print(f"  Detection method: {qr['detection_method']} (confidence: {qr['confidence']})")
+        elapsed_time = time.time() - start_time
+        
+        # Print the results
+        print(f"Found {len(qr_positions)} QR codes in the PDF in {elapsed_time:.2f} seconds")
+        
+        if len(qr_positions) == 0:
+            print("ERROR: No QR codes found in the PDF")
+            return
+            
+        for i, qr in enumerate(qr_positions):
+            print(f"\nQR Code #{i+1}:")
+            print(f"  Page: {qr['page']}")
+            print(f"  Position (bbox): {qr['bbox']}")
+            print(f"  Center point: ({qr['center']['x']}, {qr['center']['y']})")
+            if 'data' in qr:
+                print(f"  Data: {qr['data']}")
+            if 'detection_method' in qr:
+                print(f"  Detection method: {qr['detection_method']} (confidence: {qr['confidence']})")
+    except Exception as e:
+        print(f"ERROR: Failed to process PDF: {e}")
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=3001)  # Run the Flask app
