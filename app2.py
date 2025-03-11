@@ -44,13 +44,6 @@ def monitor_system_resources():
             print(f"Error monitoring resources: {e}")
             time.sleep(5)  # Longer sleep on error
 
-# Start the monitoring thread when the app starts
-@app.before_first_request
-def start_monitoring():
-    monitor_thread = threading.Thread(target=monitor_system_resources, daemon=True)
-    monitor_thread.start()
-    print("Resource monitoring started")
-
 @app.route('/system_stats', methods=['GET'])
 def get_system_stats():
     """API endpoint to get current system statistics"""
