@@ -5,17 +5,61 @@ import cv2
 import numpy as np
 import time
 import shutil
+import psutil  # Add this to monitor system resources
 from pathlib import Path
 import concurrent.futures
 from functools import partial
 from flask import Flask, request, jsonify  # Import Flask and request modules
 import uuid  # Import uuid for generating unique filenames
+import threading  # For periodic resource monitoring
 
 app = Flask(__name__)  # Create a Flask application
+
+# Global variables to store resource usage
+system_stats = {
+    'cpu_percent': 0,
+    'memory_percent': 0,
+    'active_workers': 0,
+    'processed_pages': 0,
+    'total_pages': 0
+}
+
+def monitor_system_resources():
+    """Periodically update system resource statistics"""
+    while True:
+        try:
+            # Update CPU and memory usage
+            system_stats['cpu_percent'] = psutil.cpu_percent()
+            system_stats['memory_percent'] = psutil.virtual_memory().percent
+            
+            # Print current stats
+            print(f"== Sys. load: {system_stats['cpu_percent']}% CPU / {system_stats['memory_percent']}% memory")
+            print(f"== Workers: {system_stats['active_workers']}")
+            print(f"== Progress: {system_stats['processed_pages']} / {system_stats['total_pages']} " + 
+                  f"({(system_stats['processed_pages'] / max(1, system_stats['total_pages']) * 100):.2f}%)")
+            
+            # Sleep for a bit before updating again
+            time.sleep(3)
+        except Exception as e:
+            print(f"Error monitoring resources: {e}")
+            time.sleep(5)  # Longer sleep on error
+
+# Start the monitoring thread when the app starts
+@app.before_first_request
+def start_monitoring():
+    monitor_thread = threading.Thread(target=monitor_system_resources, daemon=True)
+    monitor_thread.start()
+    print("Resource monitoring started")
+
+@app.route('/system_stats', methods=['GET'])
+def get_system_stats():
+    """API endpoint to get current system statistics"""
+    return jsonify(system_stats)
 
 @app.route('/extract_qr', methods=['POST'])  # Define the API endpoint
 def extract_qr():
     pdf_path = None
+    upload_dir = None
     
     if 'file' not in request.files:  # Check if a file is part of the request
         return jsonify({'error': 'No file part'}), 400
@@ -25,14 +69,29 @@ def extract_qr():
         return jsonify({'error': 'No selected file'}), 400
     
     try:
-        # Save the uploaded PDF in a dedicated folder in the root directory
-        upload_dir = os.path.join(os.getcwd(), "uploads", f"qr_api_{int(time.time())}")
+        # Create a truly unique upload directory for this specific request
+        request_id = str(uuid.uuid4())
+        upload_dir = os.path.join(os.getcwd(), "uploads", f"qr_api_{request_id}")
         os.makedirs(upload_dir, exist_ok=True)
         
         # Save the uploaded PDF with a unique name
         pdf_filename = f"{uuid.uuid4()}_{file.filename}"  # Generate a unique filename
         pdf_path = os.path.join(upload_dir, pdf_filename)  # Save in uploads directory
+        
+        # Ensure file is completely written by using flush and fsync
         file.save(pdf_path)
+        
+        # Verify the file exists and has content before processing
+        if not os.path.exists(pdf_path):
+            return jsonify({'error': 'Failed to save uploaded file'}), 500
+            
+        if os.path.getsize(pdf_path) == 0:
+            return jsonify({'error': 'Uploaded file is empty'}), 400
+            
+        print(f"Successfully saved uploaded file: {pdf_path} (size: {os.path.getsize(pdf_path)} bytes)")
+        
+        # Force a small delay to ensure file is fully written to disk
+        time.sleep(0.1)
         
         # Call the existing function to extract QR positions
         start_time = time.time()
@@ -57,7 +116,7 @@ def extract_qr():
                 os.remove(pdf_path)
                 
             # Clean up the temp directory we created
-            if 'upload_dir' in locals() and os.path.exists(upload_dir):
+            if upload_dir and os.path.exists(upload_dir):
                 shutil.rmtree(upload_dir, ignore_errors=True)
         except Exception as cleanup_error:
             print(f"Warning: Could not remove temporary files: {cleanup_error}")
@@ -318,13 +377,12 @@ def extract_qr_positions_from_pdf(pdf_path, max_workers=None):
         list: List of dictionaries containing page number and position information
               for each QR code found
     """
-    # Results list to store all QR code positions
     results = []
     errors = []
     
-    # Create a temporary directory that we control - use a directory in the app folder
-    # instead of system temp to avoid permission issues
-    temp_dir = os.path.join(os.getcwd(), "temp", f"qr_extract_{int(time.time())}")
+    # Create a temporary directory with a unique request-specific ID
+    request_id = str(uuid.uuid4())
+    temp_dir = os.path.join(os.getcwd(), "temp", f"qr_extract_{request_id}")
     try:
         os.makedirs(temp_dir, exist_ok=True)
         print(f"Created temporary directory: {temp_dir}")
@@ -334,10 +392,20 @@ def extract_qr_positions_from_pdf(pdf_path, max_workers=None):
         raise Exception(error_msg)
     
     try:
+        # Verify file exists before opening
+        if not os.path.exists(pdf_path):
+            error_msg = f"PDF file not found at: {pdf_path}"
+            print(error_msg)
+            raise Exception(error_msg)
+            
         # Open the PDF file
         try:
             pdf_document = fitz.open(pdf_path)
             print(f"Successfully opened PDF with {len(pdf_document)} pages")
+            
+            # Update global page count for progress monitoring
+            system_stats['total_pages'] = len(pdf_document)
+            system_stats['processed_pages'] = 0
         except Exception as e:
             error_msg = f"Failed to open PDF document: {e}"
             print(error_msg)
@@ -354,11 +422,14 @@ def extract_qr_positions_from_pdf(pdf_path, max_workers=None):
         if max_workers is None:
             max_workers = min(os.cpu_count() or 4, 4)  # Limit to max 4 workers
             
+        # Update worker count in global stats
+        system_stats['active_workers'] = max_workers
+            
         print(f"Processing PDF with {max_workers} worker threads")
         
         with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
             # Create a partial function with the temp_dir and detector
-            process_func = partial(process_page, temp_dir=temp_dir, qr_detector=qr_detector)
+            process_func = partial(process_page_with_stats, temp_dir=temp_dir, qr_detector=qr_detector)
             
             # Submit all tasks and collect futures
             future_to_page = {executor.submit(process_func, page_info): page_info[0] 
@@ -370,10 +441,17 @@ def extract_qr_positions_from_pdf(pdf_path, max_workers=None):
                 try:
                     page_results = future.result()
                     results.extend(page_results)
+                    # Update processed pages count for progress reporting
+                    system_stats['processed_pages'] += 1
                 except Exception as e:
                     error_msg = f"Error processing page {page_num + 1}: {e}"
                     print(error_msg)
                     errors.append(error_msg)
+                    # Still count as processed for progress
+                    system_stats['processed_pages'] += 1
+        
+        # Reset worker count when done
+        system_stats['active_workers'] = 0
         
         # Close the PDF document
         pdf_document.close()
@@ -387,6 +465,11 @@ def extract_qr_positions_from_pdf(pdf_path, max_workers=None):
         print(error_msg)
         raise Exception(error_msg)
     finally:
+        # Reset stats when done
+        system_stats['active_workers'] = 0
+        system_stats['total_pages'] = 0
+        system_stats['processed_pages'] = 0
+        
         # Clean up the temp directory at the end, with error handling
         try:
             shutil.rmtree(temp_dir, ignore_errors=True)
@@ -395,6 +478,13 @@ def extract_qr_positions_from_pdf(pdf_path, max_workers=None):
             print(f"Warning: Could not remove temp directory {temp_dir}: {e}")
     
     return results
+
+def process_page_with_stats(page_info, temp_dir, qr_detector=None):
+    """Wrapper around process_page that updates system stats"""
+    worker_id = threading.get_ident()
+    print(f"  #{worker_id % 100} WORK PROCESSING PAGE {page_info[0] + 1}")
+    
+    return process_page(page_info, temp_dir, qr_detector)
 
 def extract_qr_with_contours(pdf_path, max_workers=None):
     """
@@ -569,5 +659,13 @@ if __name__ == "__main__":
         os.chmod(os.path.join(os.getcwd(), "uploads"), 0o777)
     except:
         print("Warning: Could not set permissions on temp directories")
+    
+    # Print initial system stats
+    print(f"== Start: {time.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]}")
+    
+    # Start resource monitoring before running the app
+    monitor_thread = threading.Thread(target=monitor_system_resources, daemon=True)
+    monitor_thread.start()
+    print("Resource monitoring started")
     
     app.run(host='0.0.0.0', port=3001)  # Run the Flask app
