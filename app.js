@@ -968,6 +968,65 @@ async function sendNotification(productName, duration) {
     console.log(`Notification sent for product: ${productName}`);
 }
 
+// Helper function to limit concurrency of promises
+async function throttledPromiseAll(tasks, concurrency = 3) {
+  const results = [];
+  const running = new Set();
+  
+  for (const task of tasks) {
+    const promise = Promise.resolve().then(() => task());
+    results.push(promise);
+    
+    running.add(promise);
+    const cleanup = () => running.delete(promise);
+    promise.then(cleanup, cleanup);
+    
+    if (running.size >= concurrency) {
+      // Wait for one task to complete before starting another
+      await Promise.race(running);
+    }
+  }
+  
+  return Promise.all(results);
+}
+
+// Process a single PDF with retry logic
+async function processSinglePdf(pdfLink, pdfFilePath, outputPdfPath, coverPagePath, sensitiveText, productName, index, total) {
+  const maxRetries = 3;
+  let lastError = null;
+  
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      if (attempt > 1) {
+        console.log(`[${productName}] Retry ${attempt-1}/${maxRetries-1} for PDF ${index + 1}/${total}`);
+      }
+      
+      console.log(`[${productName}] Downloading PDF ${index + 1}/${total}: ${pdfLink}`);
+      await downloadPdf(pdfLink, pdfFilePath);
+      
+      console.log(`[${productName}] Modifying PDF ${index + 1}/${total}`);
+      await modifyPdf(pdfFilePath, outputPdfPath, coverPagePath, sensitiveText);
+      
+      console.log(`[${productName}] ✅ Successfully processed PDF ${index + 1}/${total}`);
+      return true; // Success
+    } catch (error) {
+      lastError = error;
+      console.error(`[${productName}] Attempt ${attempt}/${maxRetries} failed for PDF ${index + 1}/${total}: ${error.message}`);
+      
+      if (attempt < maxRetries) {
+        // Wait before retrying (exponential backoff)
+        const delay = 2000 * Math.pow(2, attempt - 1); // 2s, 4s, 8s
+        console.log(`[${productName}] Waiting ${delay/1000}s before retry...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+    }
+  }
+  
+  // If we get here, all retries failed
+  console.error(`[${productName}] ❌ Failed to process PDF ${index + 1}/${total} after ${maxRetries} attempts: ${lastError.message}`);
+  return false;
+}
+
 // Main function to process each product
 async function processProducts() {
   // Record overall start time
@@ -1070,25 +1129,44 @@ async function processProducts() {
       fs.mkdirSync(productDir, { recursive: true });
       fs.mkdirSync(outputProductDir, { recursive: true });
 
-      // IMPORTANT CHANGE: Process PDFs sequentially with proper awaits
-      for (let i = 0; i < pdfLinks.length; i++) {
-        const pdfLink = pdfLinks[i];
-        const pdfFileName = `${productName}_${i + 1}.pdf`;
-        const pdfFilePath = path.join(productDir, pdfFileName);
-        const outputPdfPath = path.join(outputProductDir, pdfFileName);
-
-        try {
-          console.log(`[${productName}] Downloading PDF ${i + 1}/${pdfLinks.length}: ${pdfLink}`);
-          await downloadPdf(pdfLink, pdfFilePath);
-          
-          console.log(`[${productName}] Modifying PDF ${i + 1}/${pdfLinks.length}`);
-          await modifyPdf(pdfFilePath, outputPdfPath, 'cover_page.png', domainData.sensitiveText);
-          
-          console.log(`[${productName}] ✅ Successfully processed PDF ${i + 1}/${pdfLinks.length}`);
-        } catch (pdfErr) {
-          console.error(`[${productName}] Error processing PDF ${pdfFileName} from ${pdfLink}: ${pdfErr.message}`);
-          // Continue with next PDF instead of failing the whole product
+      // UPDATED: Process PDFs in parallel with retry logic and controlled concurrency
+      try {
+        console.log(`[${productName}] Processing ${pdfLinks.length} PDFs in parallel (max 3 at a time)`);
+        
+        // Create task functions for each PDF
+        const tasks = pdfLinks.map((pdfLink, i) => {
+          return async () => {
+            const pdfFileName = `${productName}_${i + 1}.pdf`;
+            const pdfFilePath = path.join(productDir, pdfFileName);
+            const outputPdfPath = path.join(outputProductDir, pdfFileName);
+            
+            return processSinglePdf(
+              pdfLink, 
+              pdfFilePath, 
+              outputPdfPath, 
+              'cover_page.png', 
+              domainData.sensitiveText, 
+              productName, 
+              i, 
+              pdfLinks.length
+            );
+          };
+        });
+        
+        // Run tasks with limited concurrency
+        const results = await throttledPromiseAll(tasks, 3); // Process 3 PDFs at a time
+        
+        // Count successes and failures
+        const successCount = results.filter(result => result === true).length;
+        const failureCount = results.filter(result => result === false).length;
+        
+        console.log(`[${productName}] Completed processing all PDFs: ${successCount} successful, ${failureCount} failed`);
+        
+        if (failureCount > 0) {
+          console.warn(`[${productName}] Warning: ${failureCount} PDFs failed to process even after retries`);
         }
+      } catch (parallelError) {
+        console.error(`[${productName}] Error in parallel PDF processing: ${parallelError.message}`);
       }
 
       // Mark this product as processed in our progress tracker
