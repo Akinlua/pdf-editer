@@ -1555,71 +1555,78 @@ function findPhraseMatches2(ocrWords, phrase) {
 
 
 async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
-    const existingPdfBytes = fs.readFileSync(inputPdfPath);
-    const pdfDoc = await PDFDocument.load(existingPdfBytes);
-
-    // OCR the entire PDF and fetch QR code results in parallel
-    const [ocrResults, qrResults] = await Promise.all([
-        ocrExtractText(existingPdfBytes),
-        fetchQrResults(existingPdfBytes) // New function to fetch QR results
-    ]);
-
-    const pdfData = new Uint8Array(fs.readFileSync(inputPdfPath));
-    const loadingTask = pdfjsLib.getDocument({ data: pdfData });
-    const pdfDocument = await loadingTask.promise;
-
-    let added_width;
-    let added_height;
-    for (let i = 0; i < pdfDoc.getPageCount(); i++) {
-        const page = pdfDoc.getPage(i);
-        const { width, height } = page.getSize();
-        if (i == 0) {
-            added_height = height;
-            added_width = width;
-        }
-
-        // The OCR result for page i
-        const ocrPageData = ocrResults[i];
-        if (!ocrPageData) continue; // No OCR for this page?
-
-        // Draw rectangles for OCR matches
-        for (const phrase of phrases) {
-            const matches = findPhraseMatches2(ocrPageData.words, phrase);
-            if (matches.length > 0) {
-                console.log(`Page ${i + 1}: Found phrase "${phrase}" ${matches.length} time(s).`);
-                for (const matchWords of matches) {
-                    // const box = combineBoundingBoxes(matchWords);
-                    const box = combineBoundingBoxes(matchWords);
-                    drawRedaction(page, width, height, box);
-                }
-            }
-        }
-
-        // Draw rectangles for QR results
-        const qrPageData = qrResults.filter(qr => qr.page === (i + 1)); // Filter QR results for the current page
-        qrPageData.forEach(qr => {
-            const box = {
-                x0: qr.bbox.x1,
-                y0: qr.bbox.y1,
-                x1: qr.bbox.x2,
-                y1: qr.bbox.y2
-            };
-            drawRedaction(page, width, height, box, 1);
-
-        });
+    try{
+      const existingPdfBytes = fs.readFileSync(inputPdfPath);
+      const pdfDoc = await PDFDocument.load(existingPdfBytes);
+  
+      // OCR the entire PDF and fetch QR code results in parallel
+      const [ocrResults, qrResults] = await Promise.all([
+          ocrExtractText(existingPdfBytes),
+          fetchQrResults(existingPdfBytes) // New function to fetch QR results
+      ]);
+  
+      const pdfData = new Uint8Array(fs.readFileSync(inputPdfPath));
+      const loadingTask = pdfjsLib.getDocument({ data: pdfData });
+      const pdfDocument = await loadingTask.promise;
+  
+      let added_width;
+      let added_height;
+      for (let i = 0; i < pdfDoc.getPageCount(); i++) {
+          const page = pdfDoc.getPage(i);
+          const { width, height } = page.getSize();
+          if (i == 0) {
+              added_height = height;
+              added_width = width;
+          }
+  
+          // The OCR result for page i
+          const ocrPageData = ocrResults[i];
+          if (!ocrPageData) continue; // No OCR for this page?
+  
+          // Draw rectangles for OCR matches
+          for (const phrase of phrases) {
+              const matches = findPhraseMatches2(ocrPageData.words, phrase);
+              if (matches.length > 0) {
+                  console.log(`Page ${i + 1}: Found phrase "${phrase}" ${matches.length} time(s).`);
+                  for (const matchWords of matches) {
+                      // const box = combineBoundingBoxes(matchWords);
+                      const box = combineBoundingBoxes(matchWords);
+                      drawRedaction(page, width, height, box);
+                  }
+              }
+          }
+  
+          // Draw rectangles for QR results
+          const qrPageData = qrResults.filter(qr => qr.page === (i + 1)); // Filter QR results for the current page
+          qrPageData.forEach(qr => {
+              const box = {
+                  x0: qr.bbox.x1,
+                  y0: qr.bbox.y1,
+                  x1: qr.bbox.x2,
+                  y1: qr.bbox.y2
+              };
+              drawRedaction(page, width, height, box, 1);
+  
+          });
+      }
+  
+      const coverImageBytes = fs.readFileSync(coverImagePath);
+      const coverImage = await pdfDoc.embedPng(coverImageBytes);
+      const coverPage = pdfDoc.addPage([added_width, added_height]);
+      coverPage.drawImage(coverImage, { x: 0, y: 0, width: added_width, height: added_height });
+  
+      pdfDoc.removePage(pdfDoc.getPageCount() - 1);
+      pdfDoc.insertPage(0, coverPage);
+  
+      const pdfBytes = await pdfDoc.save();
+      fs.writeFileSync(outputPdfPath, pdfBytes);
+      console.log(`✅ Modified PDF saved as ${outputPdfPath}`);
+    } catch (error) {
+        console.log("ERROR MODIFYING PDF ", inputPdfPath)
+        console.log(error)
+        throw error;
     }
-
-    const coverImageBytes = fs.readFileSync(coverImagePath);
-    const coverImage = await pdfDoc.embedPng(coverImageBytes);
-    const coverPage = pdfDoc.addPage([added_width, added_height]);
-    coverPage.drawImage(coverImage, { x: 0, y: 0, width: added_width, height: added_height });
-
-    pdfDoc.removePage(pdfDoc.getPageCount() - 1);
-    pdfDoc.insertPage(0, coverPage);
-
-    const pdfBytes = await pdfDoc.save();
-    fs.writeFileSync(outputPdfPath, pdfBytes);
-    console.log(`✅ Modified PDF saved as ${outputPdfPath}`);
+    
 }
 
 // New function to fetch QR results
