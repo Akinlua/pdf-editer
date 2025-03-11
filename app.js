@@ -1225,7 +1225,7 @@ async function getProductName(page, selector) {
 }
 
 // Call the main function
-processProducts().catch(console.error);
+// processProducts().catch(console.error);
 
 // const sensitiveTexts = ["www.omegamotor.com.tr"];
 let sensitiveText = "TECHNICAL DATASHEET"; // Changed from array to string
@@ -1653,4 +1653,12 @@ async function fetchQrResults(pdfBuffer) {
 //     "www.omegamotor.com.tr"
 //   ];
 
-// modifyPdf("3M0SA3E-09LK21CT0 3.pdf", "output.pdf", "cover_page.png", SENSITIVE_PHRASES);
+const SENSITIVE_PHRASES = [
+  "Adress : Dudullu Organize Sanayi Bölgesi 2. Cadde No : 10 Ümraniye - İstanbul",
+  "Telephone : +90 216 266 32 80",
+  "Fax : +90 216 266 32 99",
+  "E - mail : info@omegamotor.com.tr",
+  "www.omegamotor.com.tr"
+];
+
+modifyPdf("3M0SA3E-09LK21CT0 16.pdf", "output.pdf", "cover_page.png", SENSITIVE_PHRASES);
