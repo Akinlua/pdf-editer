@@ -1070,7 +1070,7 @@ async function processProducts() {
       fs.mkdirSync(productDir, { recursive: true });
       fs.mkdirSync(outputProductDir, { recursive: true });
 
-      // Process PDFs with improved error handling
+      // IMPORTANT CHANGE: Process PDFs sequentially with proper awaits
       for (let i = 0; i < pdfLinks.length; i++) {
         const pdfLink = pdfLinks[i];
         const pdfFileName = `${productName}_${i + 1}.pdf`;
@@ -1078,19 +1078,29 @@ async function processProducts() {
         const outputPdfPath = path.join(outputProductDir, pdfFileName);
 
         try {
-          console.log(`Downloading PDF ${i + 1}/${pdfLinks.length}: ${pdfLink}`);
+          console.log(`[${productName}] Downloading PDF ${i + 1}/${pdfLinks.length}: ${pdfLink}`);
           await downloadPdf(pdfLink, pdfFilePath);
+          
+          console.log(`[${productName}] Modifying PDF ${i + 1}/${pdfLinks.length}`);
           await modifyPdf(pdfFilePath, outputPdfPath, 'cover_page.png', domainData.sensitiveText);
-          console.log(`✅ Successfully processed ${pdfFileName}`);
+          
+          console.log(`[${productName}] ✅ Successfully processed PDF ${i + 1}/${pdfLinks.length}`);
         } catch (pdfErr) {
-          console.error(`Error processing PDF ${pdfFileName} from ${pdfLink}: ${pdfErr.message}`);
+          console.error(`[${productName}] Error processing PDF ${pdfFileName} from ${pdfLink}: ${pdfErr.message}`);
           // Continue with next PDF instead of failing the whole product
         }
       }
 
+      // Mark this product as processed in our progress tracker
+      if (!progress[domain].processed.includes(productUrl)) {
+        progress[domain].processed.push(productUrl);
+        // Save progress after each product completes
+        fs.writeFileSync(progressFile, JSON.stringify(progress, null, 2));
+      }
+
       const endTime = Date.now();
       const duration = ((endTime - startTime) / 1000).toFixed(2);
-      console.log(`Completed ${productName} in ${duration} seconds`);
+      console.log(`✅ Completed all PDFs for ${productName} in ${duration} seconds`);
       
       try {
         await sendNotification(productName, duration);
