@@ -81,18 +81,30 @@ def process_page(page_info, temp_dir, qr_detector=None):
     temp_filename = os.path.join(temp_dir, f"page_{page_num}.png")
     
     try:
+        # First, make sure our temp directory exists
+        os.makedirs(temp_dir, exist_ok=True)
+        
         # Convert PDF page to an image and save it directly
         # Use a higher resolution (300 DPI) for better QR detection
         pix = page.get_pixmap(matrix=fitz.Matrix(300/72, 300/72))
         
         # Save the pixmap directly to our controlled temp directory
+        # Add more debug info
+        print(f"Saving page {page_num} image to {temp_filename}")
         pix.save(temp_filename)
         
         # Verify the file was created and has content
-        if not os.path.exists(temp_filename) or os.path.getsize(temp_filename) == 0:
-            error_msg = f"Failed to create valid image file at {temp_filename}"
+        if not os.path.exists(temp_filename):
+            error_msg = f"Failed to create image file at {temp_filename}"
             print(error_msg)
             raise Exception(error_msg)
+            
+        if os.path.getsize(temp_filename) == 0:
+            error_msg = f"Created image file is empty at {temp_filename}"
+            print(error_msg)
+            raise Exception(error_msg)
+            
+        print(f"Successfully saved image for page {page_num} (size: {os.path.getsize(temp_filename)} bytes)")
         
         # Add a small delay to ensure the file is fully written
         time.sleep(0.1)
@@ -101,13 +113,20 @@ def process_page(page_info, temp_dir, qr_detector=None):
         img = cv2.imread(temp_filename)
         
         if img is None:
-            error_msg = f"Failed to load image for page {page_num + 1}"
+            error_msg = f"Failed to load image for page {page_num + 1} with OpenCV"
             print(error_msg)
+            
+            # Check if file still exists before trying PIL
+            if not os.path.exists(temp_filename):
+                error_msg = f"Image file disappeared before PIL could read it: {temp_filename}"
+                print(error_msg)
+                raise Exception(error_msg)
             
             # Try alternative approach with PIL and convert to OpenCV format
             try:
                 from PIL import Image
                 import numpy as np
+                print(f"Attempting to load with PIL: {temp_filename}")
                 pil_img = Image.open(temp_filename)
                 img = cv2.cvtColor(np.array(pil_img), cv2.COLOR_RGB2BGR)
                 print(f"Successfully loaded image using PIL fallback for page {page_num + 1}")
@@ -303,14 +322,22 @@ def extract_qr_positions_from_pdf(pdf_path, max_workers=None):
     results = []
     errors = []
     
-    # Create a temporary directory that we control
-    temp_dir = os.path.join(tempfile.gettempdir(), f"qr_extract_{int(time.time())}")
-    os.makedirs(temp_dir, exist_ok=True)
+    # Create a temporary directory that we control - use a directory in the app folder
+    # instead of system temp to avoid permission issues
+    temp_dir = os.path.join(os.getcwd(), "temp", f"qr_extract_{int(time.time())}")
+    try:
+        os.makedirs(temp_dir, exist_ok=True)
+        print(f"Created temporary directory: {temp_dir}")
+    except Exception as e:
+        error_msg = f"Failed to create temporary directory: {e}"
+        print(error_msg)
+        raise Exception(error_msg)
     
     try:
         # Open the PDF file
         try:
             pdf_document = fitz.open(pdf_path)
+            print(f"Successfully opened PDF with {len(pdf_document)} pages")
         except Exception as e:
             error_msg = f"Failed to open PDF document: {e}"
             print(error_msg)
@@ -323,7 +350,12 @@ def extract_qr_positions_from_pdf(pdf_path, max_workers=None):
         # Create QR detector to share among workers
         qr_detector = cv2.QRCodeDetector()
         
-        # Process pages in parallel
+        # Process pages in parallel - limit max workers to avoid too many concurrent file operations
+        if max_workers is None:
+            max_workers = min(os.cpu_count() or 4, 4)  # Limit to max 4 workers
+            
+        print(f"Processing PDF with {max_workers} worker threads")
+        
         with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
             # Create a partial function with the temp_dir and detector
             process_func = partial(process_page, temp_dir=temp_dir, qr_detector=qr_detector)
@@ -358,6 +390,7 @@ def extract_qr_positions_from_pdf(pdf_path, max_workers=None):
         # Clean up the temp directory at the end, with error handling
         try:
             shutil.rmtree(temp_dir, ignore_errors=True)
+            print(f"Cleaned up temporary directory: {temp_dir}")
         except Exception as e:
             print(f"Warning: Could not remove temp directory {temp_dir}: {e}")
     
@@ -371,9 +404,15 @@ def extract_qr_with_contours(pdf_path, max_workers=None):
     results = []
     errors = []
     
-    # Create a temporary directory
-    temp_dir = os.path.join(tempfile.gettempdir(), f"qr_extract_alt_{int(time.time())}")
-    os.makedirs(temp_dir, exist_ok=True)
+    # Create a temporary directory in the application's root folder instead of system temp
+    temp_dir = os.path.join(os.getcwd(), "temp", f"qr_extract_alt_{int(time.time())}")
+    try:
+        os.makedirs(temp_dir, exist_ok=True)
+        print(f"Created alternative method temporary directory: {temp_dir}")
+    except Exception as e:
+        error_msg = f"Failed to create temporary directory for alternative method: {e}"
+        print(error_msg)
+        raise Exception(error_msg)
     
     try:
         # Open the PDF file
@@ -452,9 +491,10 @@ def extract_qr_with_contours(pdf_path, max_workers=None):
         print(error_msg)
         raise Exception(error_msg)
     finally:
-        # Clean up
+        # Clean up with better error handling
         try:
             shutil.rmtree(temp_dir, ignore_errors=True)
+            print(f"Cleaned up alternative method temporary directory: {temp_dir}")
         except Exception as e:
             print(f"Warning: Could not remove temp directory {temp_dir}: {e}")
     
@@ -519,4 +559,15 @@ def main():
         print(f"ERROR: Failed to process PDF: {e}")
 
 if __name__ == "__main__":
+    # Ensure temp directories exist
+    os.makedirs(os.path.join(os.getcwd(), "temp"), exist_ok=True)
+    os.makedirs(os.path.join(os.getcwd(), "uploads"), exist_ok=True)
+    
+    # Set permissions on directories if possible
+    try:
+        os.chmod(os.path.join(os.getcwd(), "temp"), 0o777)
+        os.chmod(os.path.join(os.getcwd(), "uploads"), 0o777)
+    except:
+        print("Warning: Could not set permissions on temp directories")
+    
     app.run(host='0.0.0.0', port=3001)  # Run the Flask app
