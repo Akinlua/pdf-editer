@@ -970,99 +970,241 @@ async function sendNotification(productName, duration) {
 
 // Main function to process each product
 async function processProducts() {
+  // Record overall start time
+  const overallStartTime = Date.now();
+  console.log(`Starting overall process at ${new Date(overallStartTime).toLocaleString()}`);
+  
   const downloadDir = 'downloaded_pdfs';
   const outputDir = 'output_pdfs';
   fs.mkdirSync(downloadDir, { recursive: true });
   fs.mkdirSync(outputDir, { recursive: true });
 
+  // Create a progress tracker file
+  const progressFile = 'progress.json';
+  let progress = {};
+  if (fs.existsSync(progressFile)) {
+    try {
+      progress = JSON.parse(fs.readFileSync(progressFile, 'utf8'));
+    } catch (err) {
+      console.error(`Error reading progress file: ${err.message}`);
+    }
+  }
+
   // Create a cluster with concurrency options
   const cluster = await Cluster.launch({
-    concurrency: Cluster.CONCURRENCY_CONTEXT,
-    maxConcurrency: 20, // Limit to 5 concurrent browser contexts
+    concurrency: Cluster.CONCURRENCY_PAGE, // Change to PAGE mode instead of CONTEXT
+    maxConcurrency: 5, // Reduced from 20 to 5 for stability
     puppeteerOptions: {
-      executablePath: CHROME_PATH,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    }
+      // Use default Chromium from puppeteer instead of system Chrome
+      // Remove the executablePath option
+      args: [
+        '--no-sandbox', 
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage', // Add this to prevent crashes in Docker/Linux
+        '--disable-gpu',           // Disable GPU hardware acceleration
+        '--disable-features=IsolateOrigins,site-per-process' // Disable site isolation
+      ],
+      timeout: 60000 // Set timeout to 60 seconds (default is 30)
+    },
+    // Add these options for better error handling and recovery
+    retryLimit: 3,
+    retryDelay: 5000,
+    // Add monitor to track cluster status and errors
+    monitor: true
   });
 
-  // Define the task to process a product
+  // Task to process a product - improved error handling
   await cluster.task(async ({ page, data: { productUrl, domain, domainData } }) => {
     const startTime = Date.now();
+    console.log(`Starting processing: ${productUrl}`);
 
-    await page.goto(productUrl, { waitUntil: 'networkidle2', timeout: 30000000 });
-    console.log(`Navigated to ${productUrl}`);
+    try {
+      // Set longer timeouts for navigation
+      page.setDefaultNavigationTimeout(120000); // 2 minutes
+      page.setDefaultTimeout(120000);
 
-    // const productName = await getProductName(page, domainData.selector);
-    const productName = await page.$eval(domainData.selector, el => el.innerText.trim());
-    console.log("Product name ", productName)
-    // const pdfLinks = await fetchPdfLinks(page, domainData.fileselector);
-    const pdflink_selector = domainData.fileselector
-    const pdfLinks = await page.evaluate((pdflink_selector) => {
-        // Find the specified selector
-        const container = document.querySelector(pdflink_selector);
-        if (!container) return []; // Return an empty array if the selector is not found
+      await page.goto(productUrl, { 
+        waitUntil: 'networkidle2', 
+        timeout: 120000 // 2 minutes timeout for navigation
+      });
+      console.log(`Navigated to ${productUrl}`);
 
-        // Collect all PDF links within the specified container, case insensitive
-        const links = Array.from(container.querySelectorAll('a[href$=".pdf"], a[href$=".PDF"]'));
-        const uniqueLinks = [...new Set(links.map(link => link.href))]; // Remove duplicates
-        return uniqueLinks;
-    }, pdflink_selector); // Pass the selector to the page context
-    console.log(`Downloading PDFs for ${productUrl}:`, pdfLinks);
+      // Try to get product name with better error handling
+      let productName;
+      try {
+        productName = await page.$eval(domainData.selector, el => el.innerText.trim());
+        // Sanitize product name for filesystem
+        productName = productName.replace(/[\/\\:*?"<>|]/g, '_');
+      } catch (err) {
+        console.error(`Failed to get product name for ${productUrl}: ${err.message}`);
+        productName = `product_${Date.now()}`; // Fallback name
+      }
+      console.log(`Product name: ${productName}`);
 
-    // Create directories for domain and product
-    const productDir = path.join(downloadDir, domain, productName);
-    const outputProductDir = path.join(outputDir, domain, productName);
-    fs.mkdirSync(productDir, { recursive: true });
-    fs.mkdirSync(outputProductDir, { recursive: true });
+      // Get PDF links with better error handling
+      let pdfLinks = [];
+      try {
+        pdfLinks = await page.evaluate((pdflink_selector) => {
+          const container = document.querySelector(pdflink_selector);
+          if (!container) {
+            console.error('PDF selector container not found');
+            return [];
+          }
+          const links = Array.from(container.querySelectorAll('a[href$=".pdf"], a[href$=".PDF"]'));
+          return [...new Set(links.map(link => link.href))];
+        }, domainData.fileselector);
+      } catch (err) {
+        console.error(`Failed to get PDF links for ${productUrl}: ${err.message}`);
+      }
 
-    // Process all PDF links in parallel
-    await Promise.all(pdfLinks.map(async (pdfLink, pdfCounter) => {
-      const pdfFileName = `${productName} ${pdfCounter + 1}.pdf`;
-      const pdfFilePath = path.join(productDir, pdfFileName);
-      const outputPdfPath = path.join(outputProductDir, pdfFileName);
+      console.log(`Found ${pdfLinks.length} PDF links for ${productName}`);
+      
+      if (pdfLinks.length === 0) {
+        console.warn(`No PDF links found for ${productUrl}`);
+        return; // Skip processing if no PDFs
+      }
 
-      await downloadPdf(pdfLink, pdfFilePath);
-      await modifyPdf(pdfFilePath, outputPdfPath, 'cover_page.png', domainData.sensitiveText);
-    }));
+      // Create directories
+      const productDir = path.join(downloadDir, domain, productName);
+      const outputProductDir = path.join(outputDir, domain, productName);
+      fs.mkdirSync(productDir, { recursive: true });
+      fs.mkdirSync(outputProductDir, { recursive: true });
 
-    const endTime = Date.now();
-    const duration = ((endTime - startTime) / 1000).toFixed(2);
+      // Process PDFs with improved error handling
+      for (let i = 0; i < pdfLinks.length; i++) {
+        const pdfLink = pdfLinks[i];
+        const pdfFileName = `${productName}_${i + 1}.pdf`;
+        const pdfFilePath = path.join(productDir, pdfFileName);
+        const outputPdfPath = path.join(outputProductDir, pdfFileName);
 
-    await sendNotification(productName, duration);
+        try {
+          console.log(`Downloading PDF ${i + 1}/${pdfLinks.length}: ${pdfLink}`);
+          await downloadPdf(pdfLink, pdfFilePath);
+          await modifyPdf(pdfFilePath, outputPdfPath, 'cover_page.png', domainData.sensitiveText);
+          console.log(`✅ Successfully processed ${pdfFileName}`);
+        } catch (pdfErr) {
+          console.error(`Error processing PDF ${pdfFileName} from ${pdfLink}: ${pdfErr.message}`);
+          // Continue with next PDF instead of failing the whole product
+        }
+      }
+
+      const endTime = Date.now();
+      const duration = ((endTime - startTime) / 1000).toFixed(2);
+      console.log(`Completed ${productName} in ${duration} seconds`);
+      
+      try {
+        await sendNotification(productName, duration);
+      } catch (notifyErr) {
+        console.error(`Failed to send notification: ${notifyErr.message}`);
+      }
+      
+    } catch (error) {
+      console.error(`❌ Error processing product ${productUrl}: ${error.message}`);
+      try {
+        await sendNotification(`Error: ${productUrl}`, error.message);
+      } catch (notifyErr) {
+        console.error(`Failed to send error notification: ${notifyErr.message}`);
+      }
+    }
   });
 
   try {
-    const startTime = Date.now();
-
-    // Queue all products from all domains with batch processing
+    // Queue all products with better tracking
+    let queuedCount = 0;
     for (const [domain, domainData] of Object.entries(productsByDomain)) {
-      // Process products in batches
-      const PRODUCT_BATCH_SIZE = 20; // Process 10 products at a time
-      const productBatches = batchArray(domainData.products, PRODUCT_BATCH_SIZE);
-      
-      for (const productBatch of productBatches) {
-        // Queue each product in the batch
-        for (const productUrl of productBatch) {
-          cluster.queue({ productUrl, domain, domainData });
-        }
-        
-        // Wait for the current batch to complete before starting the next
-        await cluster.idle();
+      // Check if domain already processed
+      if (progress[domain] && progress[domain].completed) {
+        console.log(`Skipping completed domain: ${domain}`);
+        continue;
       }
+
+      console.log(`Processing domain: ${domain} with ${domainData.products.length} products`);
+      progress[domain] = progress[domain] || { 
+        processed: [], 
+        total: domainData.products.length 
+      };
+
+      // Queue each product that hasn't been processed yet
+      for (const productUrl of domainData.products) {
+        if (!progress[domain].processed.includes(productUrl)) {
+          cluster.queue({ productUrl, domain, domainData });
+          queuedCount++;
+        }
+      }
+
+      // Update progress after each domain is queued
+      fs.writeFileSync(progressFile, JSON.stringify(progress, null, 2));
     }
+
+    console.log(`Queued ${queuedCount} products for processing`);
 
     // Wait for all tasks to complete
     await cluster.idle();
-    const endTime = Date.now();
-    const duration = ((endTime - startTime) / 1000).toFixed(2);
-    await sendNotification("ALL PRODUCTS", duration);
+    
+    // Calculate total time after processing is complete
+    const overallEndTime = Date.now();
+    const totalDurationSeconds = (overallEndTime - overallStartTime) / 1000;
+    const hours = Math.floor(totalDurationSeconds / 3600);
+    const minutes = Math.floor((totalDurationSeconds % 3600) / 60);
+    const seconds = Math.floor(totalDurationSeconds % 60);
+    
+    const formattedDuration = `${hours}h ${minutes}m ${seconds}s`;
+    
+    console.log(`✅ ALL PROCESSING COMPLETE! Total time: ${formattedDuration}`);
+    console.log(`Started: ${new Date(overallStartTime).toLocaleString()}`);
+    console.log(`Finished: ${new Date(overallEndTime).toLocaleString()}`);
+
+    // Send final notification email about completion
+    await sendFinalNotification(queuedCount, formattedDuration);
+
+    // Mark all domains as completed
+    for (const domain in progress) {
+      progress[domain].completed = true;
+    }
+    fs.writeFileSync(progressFile, JSON.stringify(progress, null, 2));
 
   } catch (error) {
-    await sendNotification('Error Occurred', error.message);
-    console.error('Error occurred:', error);
+    console.error('Error in main process:', error);
+    
+    // Calculate partial duration even if error occurs
+    const partialDuration = ((Date.now() - overallStartTime) / 1000).toFixed(2);
+    await sendNotification('Process Error', `Process failed after ${partialDuration} seconds: ${error.message}`);
   } finally {
     await cluster.close();
   }
+}
+
+// New function to send final notification email
+async function sendFinalNotification(totalProducts, duration) {
+  // Create a transporter object using your email service
+  const transporter = nodemailer.createTransport({
+    service: 'gmail', // Use your email service
+    auth: {
+      user: 'akinluaolorunfunminiyi', 
+      pass: 'qnswilhynzsybrrp'
+    }
+  });
+
+  // Email options
+  const mailOptions = {
+    from: 'akinluaolorunfunminiyi@gmail.com',
+    to: 'olorunfunminiyiakinlua@student.oauife.edu.ng',
+    subject: '🎉 COMPLETE: PDF Processing Job Finished',
+    html: `
+      <h2>PDF Processing Complete!</h2>
+      <p>The entire PDF processing job has been completed:</p>
+      <ul>
+        <li><strong>Total Products Processed:</strong> ${totalProducts}</li>
+        <li><strong>Total Duration:</strong> ${duration}</li>
+        <li><strong>Completion Time:</strong> ${new Date().toLocaleString()}</li>
+      </ul>
+      <p>All modified PDFs have been saved to the output directory.</p>
+    `,
+  };
+
+  // Send the email
+  await transporter.sendMail(mailOptions);
+  console.log(`Final completion notification sent!`);
 }
 
 // Function to get product name from the page using the selector
