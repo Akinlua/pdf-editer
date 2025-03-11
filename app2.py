@@ -61,19 +61,41 @@ def process_page(page_info, temp_dir, qr_detector=None):
     
     try:
         # Convert PDF page to an image and save it directly
-        # Use a lower resolution (200 DPI) for better performance while still detecting QR codes
-        pix = page.get_pixmap(matrix=fitz.Matrix(200/72, 200/72))
+        # Use a higher resolution (300 DPI) for better QR detection
+        pix = page.get_pixmap(matrix=fitz.Matrix(300/72, 300/72))
         
         # Save the pixmap directly to our controlled temp directory
         pix.save(temp_filename)
         
-        # Read the image with OpenCV
+        # Verify the file was created and has content
+        if not os.path.exists(temp_filename) or os.path.getsize(temp_filename) == 0:
+            raise Exception(f"Failed to create valid image file at {temp_filename}")
+        
+        # Add a small delay to ensure the file is fully written
+        time.sleep(0.1)
+        
+        # Read the image with OpenCV with explicit error handling
         img = cv2.imread(temp_filename)
         
         if img is None:
             print(f"Failed to load image for page {page_num + 1}")
-            return []
+            
+            # Try alternative approach with PIL and convert to OpenCV format
+            try:
+                from PIL import Image
+                import numpy as np
+                pil_img = Image.open(temp_filename)
+                img = cv2.cvtColor(np.array(pil_img), cv2.COLOR_RGB2BGR)
+                print(f"Successfully loaded image using PIL fallback for page {page_num + 1}")
+            except Exception as pil_err:
+                print(f"PIL fallback also failed: {pil_err}")
+                return []
         
+        # Check image dimensions
+        if img.size == 0:
+            print(f"Image for page {page_num + 1} has zero size")
+            return []
+            
         # Convert to grayscale for better QR code detection
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         
