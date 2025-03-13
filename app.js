@@ -1367,20 +1367,24 @@ async function extractTextFromPdf(inputPdfPath) {
 
 async function ocrExtractText(pdfBuffer) {
     const formData = new FormData();
-    formData.append('files', new Blob([pdfBuffer], { type: 'application/pdf' }));
+    // formData.append('files', new Blob([pdfBuffer], { type: 'application/pdf' }));
+    formData.append('file', Buffer.from(pdfBuffer));
 
     const response = await axios.post('http://194.31.150.41:4000/api/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
     });
 
-    console.log("collected")
+    console.log("collected");
     if (response.data.success) {
-        return response.data.success.flatMap(result => result.pages).map(page => ({
-            text: page.text,
-            words: page.words,
-            page_height: page.page_height,
-            page_width: page.page_width,
-        }));
+        return {
+            ocrResults: response.data.success.flatMap(result => result.pages).map(page => ({
+                text: page.text,
+                words: page.words,
+                page_height: page.page_height,
+                page_width: page.page_width,
+            })),
+            qrResults: response.data.success.qrResults // Extract QR results from the response
+        };
     } else {
         throw new Error('OCR extraction failed');
     }
@@ -1638,10 +1642,7 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
       const pdfDoc = await PDFDocument.load(existingPdfBytes);
   
       // OCR the entire PDF and fetch QR code results in parallel
-      const [ocrResults, qrResults] = await Promise.all([
-          ocrExtractText(existingPdfBytes),
-          fetchQrResults(existingPdfBytes) // New function to fetch QR results
-      ]);
+      const { ocrResults, qrResults } = await ocrExtractText(existingPdfBytes); // Updated to destructure results
   
       const pdfData = new Uint8Array(fs.readFileSync(inputPdfPath));
       const loadingTask = pdfjsLib.getDocument({ data: pdfData });
@@ -1710,7 +1711,9 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
 // New function to fetch QR results
 async function fetchQrResults(pdfBuffer) {
     const formData = new FormData();
-    formData.append('file', new Blob([pdfBuffer], { type: 'application/pdf' }));
+    // formData.append('file', new Blob([pdfBuffer], { type: 'application/pdf' }));
+    formData.append('file', Buffer.from(pdfBuffer));
+
 
     const response = await axios.post('http://194.31.150.41:3001/extract_qr', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
