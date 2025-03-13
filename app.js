@@ -1367,8 +1367,8 @@ async function extractTextFromPdf(inputPdfPath) {
 
 async function ocrExtractText(pdfBuffer) {
     const formData = new FormData();
-    // formData.append('files', new Blob([pdfBuffer], { type: 'application/pdf' }));
-    formData.append('file', Buffer.from(pdfBuffer));
+    formData.append('files', new Blob([pdfBuffer], { type: 'application/pdf' }));
+    
 
     const response = await axios.post('http://194.31.150.41:4000/api/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -1383,7 +1383,7 @@ async function ocrExtractText(pdfBuffer) {
                 page_height: page.page_height,
                 page_width: page.page_width,
             })),
-            qrResults: response.data.success.qrResults // Extract QR results from the response
+            qrResults: response.data.success[0].allqrResults // Extract QR results from the response
         };
     } else {
         throw new Error('OCR extraction failed');
@@ -1684,7 +1684,7 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
                   x1: qr.bbox.x2,
                   y1: qr.bbox.y2
               };
-              drawRedaction(page, width, height, box, 1);
+              drawRedaction(page, width, height, box, 2);
   
           });
       }

@@ -144,7 +144,8 @@ async function extractTextFromPdf(inputPdfPath) {
 
 async function ocrExtractText(pdfBuffer) {
     const formData = new FormData();
-    formData.append('files', Buffer.from(pdfBuffer));
+    formData.append('files', new Blob([pdfBuffer], { type: 'application/pdf' }));
+    // formData.append('files', Buffer.from(pdfBuffer));
 
     const response = await axios.post('http://194.31.150.41:4000/api/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -152,15 +153,18 @@ async function ocrExtractText(pdfBuffer) {
 
     console.log("collected")
     if (response.data.success) {
-        return response.data.success.flatMap(result => result.pages).map(page => ({
-            text: page.text,
-            words: page.words,
-            page_height: page.page_height,
-            page_width: page.page_width,
-        }));
-    } else {
-        throw new Error('OCR extraction failed');
-    }
+      return {
+          ocrResults: response.data.success.flatMap(result => result.pages).map(page => ({
+              text: page.text,
+              words: page.words,
+              page_height: page.page_height,
+              page_width: page.page_width,
+          })),
+          qrResults: response.data.success[0].allqrResults // Extract QR results from the response
+      };
+  } else {
+      throw new Error('OCR extraction failed');
+  }
 }
 
 
@@ -411,13 +415,12 @@ function combineBoundingBoxes(words) {
 async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
   const existingPdfBytes = fs.readFileSync(inputPdfPath);
   const pdfDoc = await PDFDocument.load(existingPdfBytes);
+  // console.log(pdfDoc.)
 
   // OCR the entire PDF and fetch QR code results in parallel
-  const [ocrResults, qrResults] = await Promise.all([
-      ocrExtractText(existingPdfBytes),
-      fetchQrResults(existingPdfBytes) // New function to fetch QR results
-  ]);
+  const { ocrResults, qrResults } = await ocrExtractText(existingPdfBytes); // Updated to destructure results
   console.log("DONE")
+  // console.log(ocrResults)
   // console.log(qrResults)
 
   const pdfData = new Uint8Array(fs.readFileSync(inputPdfPath));
@@ -460,7 +463,7 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
               x1: qr.bbox.x2,
               y1: qr.bbox.y2
           };
-          drawRedaction(page, width, height, box, 1);
+          drawRedaction(page, width, height, box, 2);
       });
   }
 
@@ -502,4 +505,4 @@ async function fetchQrResults(pdfBuffer) {
     "www.omegamotor.com.tr"
   ];
 
-modifyPdf("./3M0SA3E-09LK21CT0 3.pdf", "output.pdf", "cover_page.png", SENSITIVE_PHRASES);
+modifyPdf("./3M0SA3E-09LK21CT0 16.pdf", "output.pdf", "cover_page.png", SENSITIVE_PHRASES);
