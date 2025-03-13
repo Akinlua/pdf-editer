@@ -969,7 +969,7 @@ async function sendNotification(productName, duration) {
 }
 
 // Helper function to limit concurrency of promises
-async function throttledPromiseAll(tasks, concurrency = 3) {
+async function throttledPromiseAll(tasks, concurrency = 1) {
   const results = [];
   const running = new Set();
   
