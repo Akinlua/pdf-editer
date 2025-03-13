@@ -1053,7 +1053,7 @@ async function processProducts() {
   // Create a cluster with concurrency options
   const cluster = await Cluster.launch({
     concurrency: Cluster.CONCURRENCY_PAGE, // Change to PAGE mode instead of CONTEXT
-    maxConcurrency: 5, // Reduced from 20 to 5 for stability
+    maxConcurrency: 1, // Reduced from 20 to 5 for stability
     puppeteerOptions: {
       // Use default Chromium from puppeteer instead of system Chrome
       // Remove the executablePath option
@@ -1083,11 +1083,32 @@ async function processProducts() {
       page.setDefaultNavigationTimeout(120000); // 2 minutes
       page.setDefaultTimeout(120000);
 
-      await page.goto(productUrl, { 
-        waitUntil: 'networkidle2', 
-        timeout: 120000 // 2 minutes timeout for navigation
-      });
-      console.log(`Navigated to ${productUrl}`);
+      // Retry logic for navigation
+      const maxRetries = 3;
+      let navigationSuccess = false;
+
+      for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+          await page.goto(productUrl, { 
+            waitUntil: 'networkidle2', 
+            timeout: 120000 // 2 minutes timeout for navigation
+          });
+          console.log(`Navigated to ${productUrl}`);
+          navigationSuccess = true;
+          break; // Exit the loop if navigation is successful
+        } catch (error) {
+          console.error(`Attempt ${attempt} to navigate to ${productUrl} failed: ${error.message}`);
+          if (attempt < maxRetries) {
+            console.log(`Retrying navigation to ${productUrl}...`);
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Wait before retrying
+          }
+        }
+      }
+
+      if (!navigationSuccess) {
+        console.warn(`Failed to navigate to ${productUrl} after ${maxRetries} attempts. Skipping this product.`);
+        return; // Skip processing this product
+      }
 
       // Try to get product name with better error handling
       let productName;
@@ -1155,7 +1176,7 @@ async function processProducts() {
         });
         
         // Run tasks with limited concurrency
-        const results = await throttledPromiseAll(tasks, 3); // Process 3 PDFs at a time
+        const results = await throttledPromiseAll(tasks, 1); // Process 3 PDFs at a time
         
         // Count successes and failures
         const successCount = results.filter(result => result === true).length;
