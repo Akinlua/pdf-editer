@@ -1052,17 +1052,19 @@ async function processProducts() {
 
   // Create a cluster with concurrency options
   const cluster = await Cluster.launch({
-    concurrency: Cluster.CONCURRENCY_PAGE, // Change to PAGE mode instead of CONTEXT
+    concurrency: Cluster.CONCURRENCY_CONTEXT, // Change to PAGE mode instead of CONTEXT
     maxConcurrency: 1, // Reduced from 20 to 5 for stability
     puppeteerOptions: {
       // Use default Chromium from puppeteer instead of system Chrome
       // Remove the executablePath option
+      executablePath: process.env.CHROME_PATH,
+      headless: 'new',
       args: [
         '--no-sandbox', 
         '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage', // Add this to prevent crashes in Docker/Linux
-        '--disable-gpu',           // Disable GPU hardware acceleration
-        '--disable-features=IsolateOrigins,site-per-process' // Disable site isolation
+        // '--disable-dev-shm-usage', // Add this to prevent crashes in Docker/Linux
+        // '--disable-gpu',           // Disable GPU hardware acceleration
+        // '--disable-features=IsolateOrigins,site-per-process' // Disable site isolation
       ],
       timeout: 60000 // Set timeout to 60 seconds (default is 30)
     },
@@ -1080,8 +1082,8 @@ async function processProducts() {
 
     try {
       // Set longer timeouts for navigation
-      page.setDefaultNavigationTimeout(120000); // 2 minutes
-      page.setDefaultTimeout(120000);
+      // page.setDefaultNavigationTimeout(120000); // 2 minutes
+      // page.setDefaultTimeout(120000);
 
       // Retry logic for navigation
       const maxRetries = 3;
@@ -1090,7 +1092,7 @@ async function processProducts() {
       for (let attempt = 1; attempt <= maxRetries; attempt++) {
         try {
           await page.goto(productUrl, { 
-            waitUntil: 'networkidle2', 
+            waitUntil: 'networkidle0', 
             timeout: 120000 // 2 minutes timeout for navigation
           });
           console.log(`Navigated to ${productUrl}`);
