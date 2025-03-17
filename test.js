@@ -382,6 +382,7 @@ function combineBoundingBoxes(words) {
 
   function findPhraseMatches2(ocrWords, phrase) {
     const phraseTokens = phrase.split(/\s+/); // ["omega", "digital", "the", "best"]
+    console.log(phraseTokens)
     const matches = [];
     const totalWords = ocrWords.length;
     const phraseLen = phraseTokens.length;
@@ -390,6 +391,8 @@ function combineBoundingBoxes(words) {
       let match = true;
       for (let j = 0; j < phraseLen; j++) {
         // Compare text in lower case
+        console.log(ocrWords[i + j].text.toLowerCase(), "||||", phraseTokens[j].toLowerCase())
+        console.log(ocrWords[i + j].text.toLowerCase() == phraseTokens[j].toLowerCase())
         if (
           ocrWords[i + j].text.toLowerCase() !== phraseTokens[j].toLowerCase()
         ) {
@@ -442,6 +445,7 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
       if (!ocrPageData) continue; // No OCR for this page?
 
       // Draw rectangles for OCR matches
+      // console.log(ocrPageData.words)
       for (const phrase of phrases) {
           const matches = findPhraseMatches2(ocrPageData.words, phrase);
           if (matches.length > 0) {
@@ -502,7 +506,14 @@ async function fetchQrResults(pdfBuffer) {
     "Telephone : +90 216 266 32 80",
     "Fax : +90 216 266 32 99",
     "E - mail : info@omegamotor.com.tr",
-    "www.omegamotor.com.tr"
+    "www.omegamotor.com.tr",
+    "TECHNICAL DATASHEET",
+    "Ω OMEGA MOTOR",
+    "OMEGA Motor Sanayi A.Ş.'nin izni olmadan üçüncü şahıslara verilemez . OMEGA imzalı ve mühürlü olmayan resimler geçersizdir . Bütün hakları saklı ve gizlidir ."
   ];
 
-modifyPdf("./3M0SA3E-09LK21CT0 16.pdf", "output.pdf", "cover_page.png", SENSITIVE_PHRASES);
+modifyPdf("./A-90L-B35-T.pdf", "output.pdf", "cover_page.png", SENSITIVE_PHRASES);
+// console.log("izni"=="izni")
+
+
+// OMEGA Motor Sanayi A.Ş.'nin izni olmadan üçüncü şahıslara verilemez . OMEGA imzalı ve mühürlü olmayan resimler geçersizdir . Bütün hakları saklı ve gizlidir .

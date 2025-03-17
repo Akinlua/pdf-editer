@@ -2,3 +2,8 @@ node_modules/
 downloaded_pdfs/
 output_pdfs/
 old/
+failed_pdfs.json
+failed_pdfs_Editer.json
+title_mapping.json
+progress_pdf.json
+progress.json
