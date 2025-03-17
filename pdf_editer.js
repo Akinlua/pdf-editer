@@ -144,28 +144,56 @@ async function extractTextFromPdf(inputPdfPath) {
   return pagesText;
 }
 
-async function ocrExtractText(pdfBuffer) {
+async function ocrExtractText(pdfBuffer, filename) {
   const formData = new FormData();
   formData.append('files', new Blob([pdfBuffer], { type: 'application/pdf' }));
   
+  // Get the title from the mapping file based on the filename
+  let title = '';
+  try {
+    const titleMappingPath = path.join(__dirname, 'title_mapping.json');
+    if (fs.existsSync(titleMappingPath)) {
+      const titleMapping = JSON.parse(fs.readFileSync(titleMappingPath, 'utf8'));
+      
+      // Extract domain from filename path
+      const pathParts = filename.split(path.sep);
+      const domainIndex = pathParts.indexOf('downloaded_pdfs') + 1;
+      const domain = pathParts[domainIndex] || '';
+      
+      // Get the base filename without path
+      const baseFilename = path.basename(filename);
+      
+      // Look up the title in the mapping
+      if (titleMapping[domain] && titleMapping[domain][baseFilename]) {
+        title = domain + '_' + titleMapping[domain][baseFilename];
+      }
+    }
+  } catch (error) {
+    console.error('Error reading title mapping:', error);
+  }
 
-  const response = await axios.post('http://194.31.150.41:4000/api/upload', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+  // Add the title as an ID parameter in the URL
+  const url = title ? 
+    `http://194.31.150.41:4000/api/upload?id=${encodeURIComponent(title)}` : 
+    'http://194.31.150.41:4000/api/upload';
+
+  const response = await axios.post(url, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
   });
 
   console.log("collected");
   if (response.data.success) {
-      return {
-          ocrResults: response.data.success.flatMap(result => result.pages).map(page => ({
-              text: page.text,
-              words: page.words,
-              page_height: page.page_height,
-              page_width: page.page_width,
-          })),
-          qrResults: response.data.success[0].allqrResults // Extract QR results from the response
-      };
+    return {
+      ocrResults: response.data.success.flatMap(result => result.pages).map(page => ({
+        text: page.text,
+        words: page.words,
+        page_height: page.page_height,
+        page_width: page.page_width,
+      })),
+      qrResults: response.data.success[0].allqrResults // Extract QR results from the response
+    };
   } else {
-      throw new Error('OCR extraction failed');
+    throw new Error('OCR extraction failed');
   }
 }
 
@@ -442,7 +470,7 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
 
     // OCR the entire PDF and fetch QR code results in parallel
-    const { ocrResults, qrResults } = await ocrExtractText(existingPdfBytes); // Updated to destructure results
+    const { ocrResults, qrResults } = await ocrExtractText(existingPdfBytes, inputPdfPath);
 
     const pdfData = new Uint8Array(fs.readFileSync(inputPdfPath));
     const loadingTask = pdfjsLib.getDocument({ data: pdfData });
