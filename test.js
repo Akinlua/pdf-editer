@@ -1,13 +1,12 @@
 const fs = require('fs');
 const axios = require('axios');
-const { createCanvas } = require('canvas');
+const { createCanvas, loadImage} = require('canvas');
 const { PDFDocument, rgb } = require('pdf-lib');
 const jsQR = require('jsqr');
 const pdfjsLib = require('pdfjs-dist/legacy/build/pdf.js');
 const path = require('path');
 const puppeteer = require('puppeteer-core'); // Use Puppeteer Core
 const { match } = require('assert');
-
 // Define the path to your Chromium or Chrome executable
 const CHROME_PATH = 'C:/Program Files/Google/Chrome/Application/chrome.exe'; // Update this path
 
@@ -147,7 +146,7 @@ async function ocrExtractText(pdfBuffer) {
     formData.append('files', new Blob([pdfBuffer], { type: 'application/pdf' }));
     // formData.append('files', Buffer.from(pdfBuffer));
 
-    const response = await axios.post('http://194.31.150.41:4000/api/upload', formData, {
+    const response = await axios.post('http://127.0.0.1:4000/api/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
     });
 
@@ -197,11 +196,11 @@ function combineBoundingBoxes(words) {
   }
 
   
-  function drawRedaction(page, pdfWidth, pdfHeight, box, divide=2) {
+  function drawRedaction(page, pdfWidth, pdfHeight, box, divide=2, backgroundColor ) {
     // If your OCR was done on a certain dimension, adjust if needed
     // But let's assume 1:1 for simplicity:
   
-    const padding = 2;
+    const padding = 3;
     const x = (box.x0)/divide - padding;
     const width = (box.x1 - box.x0)/divide + padding * 2;
   
@@ -210,14 +209,142 @@ function combineBoundingBoxes(words) {
     const y = pdfHeight - (box.y1)/divide - padding;
     const height = (box.y1 - box.y0)/divide + padding * 2;
   
+    // Sample the surrounding area to determine background color
+    // We'll use a slightly larger area around the box to sample from
+     // Use the provided background color or fallback to light gray
+    const color = backgroundColor || rgb(0.95, 0.95, 0.95);
+    console.log("COLOR")
+    console.log(color)
     page.drawRectangle({
       x,
       y,
       width,
       height,
-      color: rgb(1, 1, 1) // White fill
+      color: color // Use the detected surrounding color
     });
   }
+
+  async function getSurroundingColor(pdfPath, pageNumber, box, divide = 2) {
+    // Set up the PDF.js worker
+    const pdfjsWorker = require('pdfjs-dist/legacy/build/pdf.worker.js');
+    pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+    
+    // Load the PDF document
+    const data = new Uint8Array(fs.readFileSync(pdfPath));
+    const loadingTask = pdfjsLib.getDocument({ data });
+    const pdfDocument = await loadingTask.promise;
+    
+    // Get the specific page
+    const page = await pdfDocument.getPage(pageNumber);
+    const viewport = page.getViewport({ scale: 1.0 });
+    
+    // Create a canvas with the page dimensions
+    const canvas = createCanvas(viewport.width, viewport.height);
+    const context = canvas.getContext('2d');
+    
+    // Render the PDF page to the canvas
+    const renderContext = {
+      canvasContext: context,
+      viewport: viewport
+    };
+    
+    await page.render(renderContext).promise;
+    
+    // Define the area to sample (around the box, not inside it)
+    const x = Math.floor(box.x0 / divide);
+    const y = Math.floor(box.y0 / divide);
+    const width = Math.floor((box.x1 - box.x0) / divide);
+    const height = Math.floor((box.y1 - box.y0) / divide);
+    
+    // Define sampling points around the box
+    const sampleSize = 5; // Size of the sampling area
+    const samplingPoints = [
+      // Top edge
+      { x: x, y: y - sampleSize, width: width, height: sampleSize },
+      // Bottom edge
+      { x: x, y: y + height, width: width, height: sampleSize },
+      // Left edge
+      { x: x - sampleSize, y: y, width: sampleSize, height: height },
+      // Right edge
+      { x: x + width, y: y, width: sampleSize, height: height }
+    ];
+    
+    // Filter out areas that are outside the page boundaries
+    const validSamplingAreas = samplingPoints.filter(area => 
+      area.x >= 0 && area.x + area.width <= viewport.width &&
+      area.y >= 0 && area.y + area.height <= viewport.height
+    );
+    
+    // If no valid sampling areas, use a default color
+    if (validSamplingAreas.length === 0) {
+      return { type: 'RGB', red: 1, green: 1, blue: 1 }; // White
+    }
+    
+    // Collect color samples from all valid areas
+    let colorSamples = [];
+    for (const area of validSamplingAreas) {
+      const imageData = context.getImageData(area.x, area.y, area.width, area.height);
+      const pixels = imageData.data;
+      
+      // Process pixels in the area
+      for (let i = 0; i < pixels.length; i += 4) {
+        const r = pixels[i] / 255;
+        const g = pixels[i + 1] / 255;
+        const b = pixels[i + 2] / 255;
+        const a = pixels[i + 3] / 255;
+        
+        // Only include non-transparent pixels
+        if (a > 0.5) {
+          colorSamples.push({ r, g, b });
+        }
+      }
+    }
+    
+    // If no valid color samples, use a default color
+    if (colorSamples.length === 0) {
+      return { type: 'RGB', red: 1, green: 1, blue: 1 }; // White
+    }
+    
+    // Use a histogram approach to find the most common color
+    const colorBuckets = {};
+    const bucketPrecision = 0.05; // Adjust this for color precision
+    
+    colorSamples.forEach(color => {
+      // Round colors to reduce the number of buckets
+      const roundedR = Math.round(color.r / bucketPrecision) * bucketPrecision;
+      const roundedG = Math.round(color.g / bucketPrecision) * bucketPrecision;
+      const roundedB = Math.round(color.b / bucketPrecision) * bucketPrecision;
+      
+      const colorKey = `${roundedR},${roundedG},${roundedB}`;
+      colorBuckets[colorKey] = (colorBuckets[colorKey] || 0) + 1;
+    });
+    
+    // Find the most common color
+    let mostCommonColor = null;
+    let maxCount = 0;
+    
+    for (const [colorKey, count] of Object.entries(colorBuckets)) {
+      if (count > maxCount) {
+        maxCount = count;
+        const [r, g, b] = colorKey.split(',').map(Number);
+        mostCommonColor = { r, g, b };
+      }
+    }
+    
+    // Convert to PDF-lib RGB color format
+    return {
+      type: 'RGB',
+      red: mostCommonColor.r,
+      green: mostCommonColor.g,
+      blue: mostCommonColor.b
+    };
+  }
+  
+  // Helper function to create PDF-lib RGB color
+  function rgb_(r, g, b) {
+    return { type: 'RGB', red: r, green: g, blue: b };
+  }
+
   function findPhraseMatches(ocrWords, phrase, options = {}) {
     // Default options
     const {
@@ -382,7 +509,6 @@ function combineBoundingBoxes(words) {
 
   function findPhraseMatches2(ocrWords, phrase) {
     const phraseTokens = phrase.split(/\s+/); // ["omega", "digital", "the", "best"]
-    console.log(phraseTokens)
     const matches = [];
     const totalWords = ocrWords.length;
     const phraseLen = phraseTokens.length;
@@ -390,9 +516,9 @@ function combineBoundingBoxes(words) {
     for (let i = 0; i <= totalWords - phraseLen; i++) {
       let match = true;
       for (let j = 0; j < phraseLen; j++) {
-        // Compare text in lower case
-        console.log(ocrWords[i + j].text.toLowerCase(), "||||", phraseTokens[j].toLowerCase())
-        console.log(ocrWords[i + j].text.toLowerCase() == phraseTokens[j].toLowerCase())
+        // // Compare text in lower case
+        // console.log(ocrWords[i + j].text.toLowerCase(), "||||", phraseTokens[j].toLowerCase())
+        // console.log(ocrWords[i + j].text.toLowerCase() == phraseTokens[j].toLowerCase())
         if (
           ocrWords[i + j].text.toLowerCase() !== phraseTokens[j].toLowerCase()
         ) {
@@ -430,6 +556,7 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
   const loadingTask = pdfjsLib.getDocument({ data: pdfData });
   const pdfDocument = await loadingTask.promise;
   
+  
   let added_width;
   let added_height;
   for (let i = 0; i < pdfDoc.getPageCount(); i++) {
@@ -451,31 +578,45 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
           if (matches.length > 0) {
               console.log(`Page ${i + 1}: Found phrase "${phrase}" ${matches.length} time(s).`);
               for (const matchWords of matches) {
-                console.log(matchWords)
-                  const box = combineBoundingBoxes(matchWords);
-                  drawRedaction(page, width, height, box);
+                // console.log(matchWords)
+                  const box = combineBoundingBoxes(matchWords);   
+                  
+                  // Get the surrounding color
+                  const backgroundColor = await getSurroundingColor(inputPdfPath, i + 1, box, 2);
+                  console.log(`Detected background color: R=${backgroundColor.red.toFixed(2)}, G=${backgroundColor.green.toFixed(2)}, B=${backgroundColor.blue.toFixed(2)}`);
+
+                  
+                  // Pass the background color to drawRedaction
+                  drawRedaction(page, width, height, box, 2, backgroundColor);
               }
           }
       }
 
       // Draw rectangles for QR results
       const qrPageData = qrResults.filter(qr => qr.page === (i + 1)); // Filter QR results for the current page
-      qrPageData.forEach(qr => {
+      for (const qr of qrPageData) {
           const box = {
               x0: qr.bbox.x1,
               y0: qr.bbox.y1,
               x1: qr.bbox.x2,
               y1: qr.bbox.y2
           };
-          drawRedaction(page, width, height, box, 2);
-      });
+          const backgroundColor = await getSurroundingColor(inputPdfPath, i + 1, box, 2);
+          // const backgroundColor = rgb(0.9, 0.9, 0.9)
+          console.log(`Detected Qr background color: R=${backgroundColor.red.toFixed(2)}, G=${backgroundColor.green.toFixed(2)}, B=${backgroundColor.blue.toFixed(2)}`);
+          await drawRedaction(page, width, height, box, 2, backgroundColor);
+      }
   }
 
   const coverImageBytes = fs.readFileSync(coverImagePath);
   const coverImage = await pdfDoc.embedPng(coverImageBytes);
+  console.log(added_width, added_height)
+  if(added_height < added_width) {
+    added_width = 1190
+    added_height = 1684
+  }
   const coverPage = pdfDoc.addPage([added_width, added_height]);
   coverPage.drawImage(coverImage, { x: 0, y: 0, width: added_width, height: added_height });
-
   pdfDoc.removePage(pdfDoc.getPageCount() - 1);
   pdfDoc.insertPage(0, coverPage);
 
