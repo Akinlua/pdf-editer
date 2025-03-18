@@ -5,6 +5,8 @@ const FormData = require('form-data');
 const nodemailer = require('nodemailer');
 const { PDFDocument, rgb } = require('pdf-lib');
 const pdfjsLib = require('pdfjs-dist/legacy/build/pdf.js');
+const { createCanvas, loadImage} = require('canvas');
+
 
 
 // Define sensitive phrases by domain
@@ -177,8 +179,8 @@ async function ocrExtractText(pdfBuffer, filename) {
 
   // Add the title as an ID parameter in the URL
   const url = title ? 
-    `http://127.0.0.1:4000/api/upload?id=${encodeURIComponent(title)}` : 
-    'http://127.0.0.1:4000/api/upload';
+    `http://194.31.150.41:4000/api/upload?id=${encodeURIComponent(title)}` : 
+    'http://194.31.150.41:4000/api/upload';
 
   const response = await axios.post(url, formData, {
     headers: formData.getHeaders(),
