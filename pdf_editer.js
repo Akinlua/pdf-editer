@@ -37,8 +37,8 @@ async function sendNotification(productName, duration, isComplete = false, total
   const transporter = nodemailer.createTransport({
       service: 'gmail', // Use your email service (e.g., Gmail)
       auth: {
-          user: 'akinluaolorunfunminiyi', // Your email address
-          pass: 'qnswilhynzsybrrp' // Your email password or app password
+          user: 'olorunfunminiyiakinlua@student.oauife.edu.ng', // Your email address
+          pass: 'wtnhtyylsflevyti' // Your email password or app password
       }
   });
 
@@ -54,8 +54,8 @@ async function sendNotification(productName, duration, isComplete = false, total
 
   // Email options
   const mailOptions = {
-      from: 'akinluaolorunfunminiyi@gmail.com', // Sender address
-      to: 'olorunfunminiyiakinlua@student.oauife.edu.ng', // List of recipients
+      from: 'olorunfunminiyiakinlua@student.oauife.edu.ng', // Sender address
+      to: 'akinluaolorunfunminiyi@gmail.com', // List of recipients
       subject: subject,
       text: text,
   };
@@ -665,7 +665,7 @@ async function modifyPdf(inputPdfPath, outputPdfPath, coverImagePath, phrases) {
     
     // Send notification for individual PDF completion
     const fileName = path.basename(inputPdfPath);
-    await sendNotification(fileName, duration);
+    // await sendNotification(fileName, duration);
     
     return true;
   } catch (error) {
