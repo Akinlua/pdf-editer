@@ -14,6 +14,7 @@
     "@zxing/library": "^0.21.3",
     "axios": "^1.7.9",
     "canvas": "^3.1.0",
+    "express": "^4.21.2",
     "jimp": "0.16.1",
     "jsqr": "^1.4.0",
     "node-fetch": "^3.3.2",
@@ -24,6 +25,7 @@
     "puppeteer-cluster": "^0.24.0",
     "puppeteer-core": "^24.2.1",
     "qrcode-reader": "^1.0.4",
+    "serve-index": "^1.9.1",
     "tesseract.js": "^6.0.0"
   }
 }
